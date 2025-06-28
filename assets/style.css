@@ -1,4 +1,4 @@
-/* assets/style.css - REVISI TOTAL */
+/* assets/style.css - REVISI TOTAL (FINAL UNTUK LAYOUT) */
 
 /* Import Google Fonts (optional, but good for consistent typography) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -11,13 +11,14 @@ html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+    overflow-x: hidden; /* Mencegah scrollbar horizontal yang tidak diinginkan */
 }
 
 /* Streamlit Main Container Styling */
 .stApp {
-    max-width: 1200px;
-    margin: auto;
-    padding: 2rem;
+    max-width: 100%; /* Ubah dari 1200px menjadi 100% untuk full width */
+    margin: 0; /* Hapus margin auto untuk menghilangkan pemusatan */
+    padding: 2rem 5%; /* Tambahkan padding horizontal agar konten tidak menempel ke tepi layar */
     box-sizing: border-box;
 }
 
@@ -43,14 +44,17 @@ h2 {
     padding-bottom: 0.5rem;
 }
 
+/* h3 untuk judul kolom analisis (Poin Jual Utama, Saran Peningkatan) */
 h3 {
     color: #34495E; /* Medium Blue Gray */
     font-weight: 600;
     font-size: 1.8rem;
     margin-top: 1.5rem;
     margin-bottom: 0.8rem;
+    text-align: center; /* Pusat judul kolom */
 }
 
+/* h4 untuk judul di dalam info-card */
 h4 {
     color: #1ABC9C; /* Teal Green */
     font-weight: 700;
@@ -96,6 +100,7 @@ strong {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Streamlit Input Fields (Text, Text Area, Number, Date, etc.) */
 /* This targets the main div wrapping the input */
@@ -337,4 +342,3 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 .stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .info-card, .output-card {
     animation: fadeIn 0.8s ease-out;
 }
-/* More specific animations can be added if desired */
