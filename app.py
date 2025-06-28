@@ -19,8 +19,9 @@ except Exception as e:
     st.stop()
 
 # --- Streamlit UI Setup ---
+# Set page_title agar "Beranda Utama" muncul di sidebar navigasi Streamlit
 st.set_page_config(
-    page_title="Nusantara Story AI: Kisah Budaya & Potensi Wisata Lokal",
+    page_title="Beranda Utama", # Nama ini akan muncul di sidebar Streamlit
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -32,7 +33,7 @@ def load_css(file_name):
 
 load_css('assets/style.css') # Load CSS file here
 
-# --- Sidebar (konten khusus app.py) ---
+# --- Sidebar (konten tambahan di sidebar, navigasi otomatis oleh Streamlit) ---
 with st.sidebar:
     # st.image("https://i.imgur.com/example_logo.png", use_column_width=True) # Placeholder for a potential logo
     st.header("Nusantara Story AI 🇮🇩")
@@ -53,25 +54,40 @@ with st.sidebar:
 
 # --- Main Content for app.py (Homepage) ---
 st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")
-st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-2.5 Flash**.")
+st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-1.5 Flash**.")
 st.markdown("---")
 
 # --- Input Section ---
 st.header("Ceritakan Kekayaan Budaya/Wisata Lokal Anda ✍️")
 
-# Custom HTML/CSS for input fields to control spacing
+# Custom HTML/CSS for input fields to control spacing and help text
+# Ini akan membuat setiap input box memiliki label di atasnya, dan help text di bawahnya,
+# tanpa spasi aneh karena icon help Streamlit bawaan.
 st.markdown("""
 <style>
     .stTextInput, .stSelectbox, .stTextArea {
         margin-bottom: 20px; /* Space between input groups */
     }
-    .custom-label-container {
-        margin-bottom: 5px; /* Space between label+help and input box */
+    /* Mengatasi jarak antara label dan input box bawaan Streamlit */
+    div[data-testid="stTextInput"] label,
+    div[data-testid="stSelectbox"] label,
+    div[data-testid="stTextArea"] label {
+        margin-bottom: 5px; /* Kurangi margin bawaan Streamlit */
+    }
+    /* Posisi ikon help Streamlit bawaan, kita akan sembunyikan atau pindah agar tidak mengganggu layout */
+    .stHelpInline {
+        display: none; /* Sembunyikan ikon help bawaan Streamlit */
     }
     .custom-help-text {
         font-size: 0.85rem;
         color: #777777;
-        margin-top: 5px;
+        margin-top: 5px; /* Spasi antara input box dan help text kustom */
+        margin-bottom: 15px; /* Spasi di bawah help text sebelum elemen berikutnya */
+    }
+    /* Pastikan warna label input default Streamlit sesuai */
+    .st-emotion-cache-10q20q p { /* Selector untuk teks label di Streamlit */
+        font-weight: 600;
+        color: #555555;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -79,28 +95,33 @@ st.markdown("""
 col_input1, col_input2 = st.columns(2)
 
 with col_input1:
-    st.markdown('<div class="custom-label-container"><label class="st-b8">Nama Objek Budaya/Wisata <span style="color:red">*</span></label></div>', unsafe_allow_html=True)
-    judul_objek = st.text_input("", placeholder="Contoh: Kopi Gayo, Tari Saman, Candi Prambanan", key="input_judul")
+    # 1. Nama Objek Budaya/Wisata *
+    st.markdown('<p style="font-weight: 600; color: #555555; margin-bottom: 5px;">Nama Objek Budaya/Wisata <span style="color:red">*</span></p>', unsafe_allow_html=True)
+    judul_objek = st.text_input("", placeholder="Contoh: Kopi Gayo, Tari Saman, Candi Prambanan", key="input_judul", label_visibility="collapsed")
     st.markdown('<p class="custom-help-text">Nama spesifik objek yang ingin Anda ceritakan atau promosikan.</p>', unsafe_allow_html=True)
 
-    st.markdown('<div class="custom-label-container"><label class="st-b8">Lokasi Obyek (Kota/Kabupaten/Provinsi) <span style="color:red">*</span></label></div>', unsafe_allow_html=True)
-    lokasi_objek = st.text_input("", placeholder="Contoh: Aceh Tengah, Sumatra Utara, Bondowoso", key="input_lokasi")
+    # 2. Lokasi Obyek (Kota/Kabupaten/Provinsi) *
+    st.markdown('<p style="font-weight: 600; color: #555555; margin-bottom: 5px;">Lokasi Obyek (Kota/Kabupaten/Provinsi) <span style="color:red">*</span></p>', unsafe_allow_html=True)
+    lokasi_objek = st.text_input("", placeholder="Contoh: Aceh Tengah, Sumatra Utara, Bondowoso", key="input_lokasi", label_visibility="collapsed")
     st.markdown('<p class="custom-help-text">Lokasi geografis di mana objek ini berada.</p>', unsafe_allow_html=True)
 
 
 with col_input2:
-    st.markdown('<div class="custom-label-container"><label class="st-b8">Pilih Gaya Bahasa Narasi (Opsional)</label></div>', unsafe_allow_html=True)
-    gaya_bahasa = st.selectbox("", ["Pilih Gaya", "Edukasi", "Promosi", "Cerita Rakyat", "Puitis", "Informatif", "Inspiratif"], key="select_gaya")
+    # 4. Pilih Gaya Bahasa Narasi (Opsional)
+    st.markdown('<p style="font-weight: 600; color: #555555; margin-bottom: 5px;">Pilih Gaya Bahasa Narasi (Opsional)</p>', unsafe_allow_html=True)
+    gaya_bahasa = st.selectbox("", ["Pilih Gaya", "Edukasi", "Promosi", "Cerita Rakyat", "Puitis", "Informatif", "Inspiratif"], key="select_gaya", label_visibility="collapsed")
     st.markdown('<p class="custom-help-text">Pilih nuansa dan gaya penulisan yang Anda inginkan untuk narasi.</p>', unsafe_allow_html=True)
 
-    st.markdown('<div class="custom-label-container"><label class="st-b8">Target Audiens Utama (Opsional)</label></div>', unsafe_allow_html=True)
-    target_audiens = st.text_input("", value="", placeholder="Contoh: Wisatawan Keluarga, Pecinta Sejarah, Penggemar Kopi", key="input_target")
+    # 5. Target Audiens Utama (Opsional)
+    st.markdown('<p style="font-weight: 600; color: #555555; margin-bottom: 5px;">Target Audiens Utama (Opsional)</p>', unsafe_allow_html=True)
+    target_audiens = st.text_input("", value="", placeholder="Contoh: Wisatawan Keluarga, Pecinta Sejarah, Penggemar Kopi", key="input_target", label_visibility="collapsed")
     st.markdown('<p class="custom-help-text">Siapa target utama pesan promosi ini? (Misal: anak muda, keluarga, turis asing).</p>', unsafe_allow_html=True)
 
-st.markdown('<div class="custom-label-container"><label class="st-b8">Deskripsi Singkat / Poin-poin Kunci / Fakta Sejarah <span style="color:red">*</span></label></div>', unsafe_allow_html=True)
+# 3. Deskripsi Singkat / Poin-poin Kunci / Fakta Sejarah *
+st.markdown('<p style="font-weight: 600; color: #555555; margin-bottom: 5px;">Deskripsi Singkat / Poin-poin Kunci / Fakta Sejarah <span style="color:red">*</span></p>', unsafe_allow_html=True)
 deskripsi_kunci = st.text_area("", height=150,
                                placeholder="Sebutkan detail penting, fragmen cerita, lokasi, tradisi, keunikan, atau fakta sejarah obyek ini. Semakin detail dan spesifik, semakin baik hasil yang akan AI berikan!",
-                               key="input_deskripsi")
+                               key="input_deskripsi", label_visibility="collapsed")
 st.markdown('<p class="custom-help-text">Ini adalah informasi inti untuk AI merangkai cerita. Beri detail sebanyak mungkin!</p>', unsafe_allow_html=True)
 
 
@@ -127,11 +148,11 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
             gemini_model, judul_objek, lokasi_objek, deskripsi_kunci, target_audiens, gaya_bahasa
         )
 
-        if generated_narration:
-            narasi_placeholder.markdown(f"<div class='output-card'><p>{generated_narration}</p></div>", unsafe_allow_html=True)
-            st.session_state.generated_narration = generated_narration
+        if generated_naration:
+            narasi_placeholder.markdown(f"<div class='output-card'><p>{generated_naration}</p></div>", unsafe_allow_html=True)
+            st.session_state.generated_narration = generated_naration
 
-            pdf_bytes = generate_pdf_from_text(generated_narration, f"Narasi_{judul_objek}")
+            pdf_bytes = generate_pdf_from_text(generated_naration, f"Narasi_{judul_objek}")
             if pdf_bytes:
                 download_narasi_placeholder.download_button(
                     label="Unduh Naskah Cerita (PDF) ⬇️",
@@ -145,7 +166,7 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
             st.session_state.generated_narration = ""
 
     # --- Tahap 2: Analisis & Optimasi oleh Gemini ---
-    if generated_narration: # Pastikan narasi sudah ada sebelum analisis
+    if generated_naration: # Pastikan narasi sudah ada sebelum analisis
         st.markdown("---")
         st.subheader("💡 Wawasan & Optimasi Promosi dari Gemini AI")
         analisis_output_container = st.container()

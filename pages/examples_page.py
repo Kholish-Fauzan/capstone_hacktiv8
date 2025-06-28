@@ -12,9 +12,9 @@ load_css('assets/style.css')
 
 # --- Streamlit UI Setup for this specific page ---
 st.set_page_config(
-    page_title="Contoh & Inspirasi",
+    page_title="Contoh & Inspirasi", # Ini akan muncul di sidebar Streamlit
     layout="wide",
-    initial_sidebar_state="expanded" # Keep sidebar expanded
+    initial_sidebar_state="expanded"
 )
 
 # Konten utama halaman ini
@@ -30,7 +30,7 @@ st.write("""
 **Lokasi:** Taman Nasional Bromo Tengger Semeru, Jawa Timur
 **Deskripsi Kunci:** Gunung berapi aktif dengan kawah berasap, pemandangan matahari terbit yang ikonik, pasir berbisik, suku Tengger, upacara Yadnya Kasada.
 
-Tersembunyi di jantung Taman Nasional Bromo Tengger Semeru, Jawa Timur, Gunung Bromo bukan sekadar gunung berapi, melainkan lanskap magis yang menggetarkan jiwa. Puncaknya yang diselimuti asap belerang seolah memanggil para petualang untuk menyaksikan keajaiban alam yang tak terlupakan. Setiap fajar menyingsing, lautan kabut menyelimuti kaldera raksasa, perlahan tersingkap oleh semburat jingga keemasan yang muncul dari balik punggung gunung. Pemandangan matahari terbit di Bromo adalah orkestra warna yang memukau, di mana langit berubah dari kelam menjadi palet warna pastel yang lembut, diselingi siluet Gunung Semeru yang gagah di kejauhan.
+Tersembunyi di jantung Taman Nasional Bromo Tengger Semeru, Jawa Timur, Gunung Bromo bukan sekadar gunung berapi, melainkan lanskap magis yang menggetarkan jiwa. Puncaknya yang diselimuti asap belerang seolah memanggil para petualang untuk menyaksikan keajaiban alam yang tak terlupakan. Setiap fajar menyingsung, lautan kabut menyelimuti kaldera raksasa, perlahan tersingkap oleh semburat jingga keemasan yang muncul dari balik punggung gunung. Pemandangan matahari terbit di Bromo adalah orkestra warna yang memukau, di mana langit berubah dari kelam menjadi palet warna pastel yang lembut, diselingi siluet Gunung Semeru yang gagah di kejauhan.
 
 Bukan hanya pesona visual, Bromo juga kaya akan narasi budaya. Di lerengnya, suku Tengger, penduduk asli yang gigih, hidup harmonis dengan alam dan menjaga tradisi leluhur. Upacara Yadnya Kasada, ritual persembahan hasil bumi ke kawah Bromo, adalah manifestasi keyakinan mendalam mereka yang telah diwariskan turun-temurun. Saat melangkah di Lautan Pasir yang membentang luas, hembusan angin seolah membisikkan kisah-kisah kuno, membawa kita pada perjalanan spiritual yang menyatukan manusia dengan alam semesta. Bromo adalah simfoni keindahan, ketenangan, dan kearifan lokal yang abadi.
 """)

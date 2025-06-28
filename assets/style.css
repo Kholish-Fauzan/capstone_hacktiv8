@@ -143,17 +143,24 @@ h4 {
 }
 
 /* --- INPUT FIELDS & LABELS --- */
-/* Target Streamlit's internal label and input container */
-div[data-testid="stForm"] .stTextInput label,
-div[data-testid="stForm"] .stTextArea label,
-div[data-testid="stForm"] .stSelectbox label,
-.st-b8 { /* Fallback for direct label targeting if needed */
+/* Sembunyikan ikon help bawaan Streamlit untuk input teks dan selectbox */
+.stHelpInline {
+    display: none !important;
+}
+
+/* Atur margin bawah untuk label bawaan Streamlit agar tidak ada celah besar */
+div[data-testid="stTextInput"] label,
+div[data-testid="stSelectbox"] label,
+div[data-testid="stTextArea"] label {
+    margin-bottom: 5px !important;
+}
+
+/* Pastikan warna label input default Streamlit sesuai */
+.st-emotion-cache-10q20q p { /* Selector untuk teks label di Streamlit */
     font-weight: 600;
     color: #555555;
-    margin-bottom: 5px; /* Minimal margin below label */
-    display: block; /* Ensure label is on its own line */
-    font-size: 0.95rem;
 }
+
 
 .stTextInput>div>div>input,
 .stTextArea>div>div>textarea,
@@ -177,14 +184,12 @@ div[data-testid="stForm"] .stSelectbox label,
 }
 
 /* Custom classes for spacing and help text */
-.custom-label-container {
-    margin-bottom: 5px; /* Space between label+help and input box */
-}
-.custom-help-text {
+/* Gunakan p.custom-help-text untuk pesan di bawah input */
+p.custom-help-text {
     font-size: 0.85rem;
     color: #7F8C8D; /* Muted gray for help text */
-    margin-top: 5px;
-    margin-bottom: 15px; /* Space below help text before next label */
+    margin-top: 5px; /* Spasi antara input box dan help text kustom */
+    margin-bottom: 15px; /* Spasi di bawah help text sebelum elemen berikutnya */
     line-height: 1.4;
 }
 
@@ -225,57 +230,18 @@ div[data-testid="stForm"] .stSelectbox label,
     color: #666666;
 }
 
-/* Sidebar Radio Button Navigation (NOT USED WITH NATIVE STREAMLIT MULTIPAGE) */
-/* The styles below for stRadio will not be directly applicable
-   if Streamlit's native multipage feature is used.
-   They are kept here in case you want to revert to manual navigation,
-   but for native multipage, Streamlit handles this UI. */
-.stRadio > label {
-    font-weight: 600;
-    color: #34495E;
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
+/* Streamlit Native Multipage Navigation (automatically styled) */
+/* This part is mostly handled by Streamlit itself, but you can override general link styles */
+.st-emotion-cache-1jm69l1.e1gri0o21 { /* Selector for the navigation links in sidebar */
+    font-size: 1.1rem; /* Adjust font size of navigation links */
+    font-weight: 500;
+    color: #34495E; /* Default color for links */
 }
 
-.stRadio div[role="radiogroup"] {
-    margin-top: 10px;
-}
-
-.stRadio div[role="radiogroup"] label {
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    transition: background-color 0.2s, color 0.2s;
-    font-size: 1.05rem;
-    font-weight: normal; /* Override default bold */
-    color: #555555;
-    cursor: pointer;
-}
-
-.stRadio div[role="radiogroup"] label:hover {
-    background-color: #DDEEEE; /* Light hover background */
+.st-emotion-cache-1jm69l1.e1gri0o21:hover {
     color: #1ABC9C; /* Primary Teal on hover */
-}
-
-/* Selected Radio Button */
-.stRadio div[role="radiogroup"] label[data-baseweb="radio"] > div > div[data-testid="stMarkdownContainer"] p {
-    color: inherit !important; /* Ensure the text color changes with parent label */
-}
-
-/* Style for the actual radio button when checked */
-.stRadio div[role="radiogroup"] input:checked + div {
-    background-color: #1ABC9C !important; /* Primary Teal background for selected */
-    color: white !important; /* White text for selected */
-    font-weight: 600;
-    box-shadow: 0 2px 5px rgba(26,188,156,0.3);
-}
-
-.stRadio div[role="radiogroup"] input:checked + div:hover {
-    background-color: #16A085 !important; /* Darker teal on hover for selected */
-}
-
-.stRadio div[role="radiogroup"] input:checked + div > div > div[data-testid="stMarkdownContainer"] p {
-    color: white !important; /* Ensure the actual text is white when selected */
+    background-color: #E8F6F3; /* Light background on hover */
+    border-radius: 8px;
 }
 
 /* Adjust Streamlit's info box */
