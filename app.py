@@ -21,8 +21,8 @@ except Exception as e:
 
 # --- Streamlit UI Setup ---
 st.set_page_config(
-    page_title="Beranda Utama",
-    layout="wide", # Pastikan ini tetap "wide"
+    page_title="Nusantara Story AI",
+    layout="wide",
     initial_sidebar_state="expanded"
 )
 
