@@ -2,14 +2,14 @@
 
 /* --- GENERAL STYLES --- */
 body {
-    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #F8F8F8; /* Light gray for soft background */
-    color: #333333; /* Darker text for readability */
+    font-family: 'Inter', 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FDFDFD; /* Slightly off-white for a warm feel */
+    color: #2C3E50; /* Darker blue-gray for main text */
 }
 
 /* Streamlit Main Container Adjustments */
 .stApp {
-    background-color: #F8F8F8;
+    background-color: #FDFDFD;
 }
 
 div.block-container {
@@ -17,40 +17,46 @@ div.block-container {
     padding-bottom: 2.5rem;
     padding-left: 3rem;
     padding-right: 3rem;
+    max-width: 1200px; /* Limit content width for better readability */
+    margin: auto; /* Center the content */
 }
 
 /* --- TYPOGRAPHY --- */
 h1 {
-    color: #00796B; /* Deep Teal - Primary color */
+    color: #1ABC9C; /* Stronger Teal/Turquoise - Primary color */
     text-align: center;
     font-weight: 800;
     margin-bottom: 1rem;
-    font-size: 2.5rem;
+    font-size: 2.8rem; /* Slightly larger */
     line-height: 1.2;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
 }
 
 h2 {
-    color: #004D40; /* Darker Teal */
+    color: #2C3E50; /* Darker Blue-Gray */
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 2.2rem; /* Slightly larger */
     margin-top: 2.5rem;
     margin-bottom: 1.5rem;
+    border-bottom: 2px solid #ECF0F1; /* Subtle underline */
+    padding-bottom: 0.5rem;
 }
 
 h3 {
-    color: #00695C; /* Medium Teal */
+    color: #34495E; /* Medium Blue-Gray */
     font-weight: 600;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
 h4 {
-    color: #4CAF50; /* Green accent for card titles */
-    font-weight: 600;
-    font-size: 1.2rem;
+    color: #16A085; /* Darker Teal for card titles */
+    font-weight: 700;
+    font-size: 1.3rem;
     margin-bottom: 0.8rem;
+    border-bottom: 1px dashed #E0E0E0; /* Dashed line for subtle separation */
+    padding-bottom: 5px;
 }
 
 
@@ -58,65 +64,70 @@ h4 {
 .stMarkdown {
     font-size: 1.05rem;
     line-height: 1.7;
-    color: #444444;
+    color: #333333;
 }
 
 /* --- BUTTON STYLING --- */
 .stButton>button {
     background-color: #FF7043; /* Vibrant Orange - CTA color */
     color: white;
-    padding: 0.9em 2.2em;
+    padding: 1.0em 2.5em; /* Slightly larger padding */
     border: none;
-    border-radius: 10px; /* More rounded */
+    border-radius: 12px; /* More rounded */
     cursor: pointer;
-    font-size: 1.15rem;
+    font-size: 1.2rem; /* Larger font */
     font-weight: 700;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 12px rgba(255,112,67,0.3); /* Softer, warmer shadow */
-    margin-top: 1.5rem;
-    letter-spacing: 0.5px;
+    box-shadow: 0 8px 18px rgba(255,112,67,0.4); /* Stronger, warmer shadow */
+    margin-top: 2rem; /* More space */
+    letter-spacing: 0.8px;
+    text-transform: uppercase; /* Make text uppercase */
 }
 
 .stButton>button:hover {
     background-color: #F4511E; /* Darker orange on hover */
-    transform: translateY(-3px); /* Lift effect */
-    box-shadow: 0 8px 16px rgba(255,112,67,0.4);
+    transform: translateY(-4px); /* More pronounced lift effect */
+    box-shadow: 0 10px 22px rgba(255,112,67,0.5);
 }
 
 .stButton>button:active {
     background-color: #BF360C; /* Even darker on active */
     transform: translateY(0); /* Press down effect */
-    box-shadow: 0 3px 6px rgba(255,112,67,0.2);
+    box-shadow: 0 4px 8px rgba(255,112,67,0.3);
 }
 
 /* Download Button specific styles (blue) */
 .stDownloadButton > button {
-    background-color: #2196F3; /* Blue for download button */
-    box-shadow: 0 4px 8px rgba(33,150,243,0.3);
+    background-color: #3498DB; /* Brighter Blue for download button */
+    box-shadow: 0 5px 10px rgba(52,152,219,0.3);
+    font-size: 1.1rem; /* Adjust font size */
+    padding: 0.9em 2.2em; /* Adjust padding */
+    margin-top: 1.5rem; /* Adjust margin */
 }
 .stDownloadButton > button:hover {
-    background-color: #1976D2;
-    box-shadow: 0 6px 12px rgba(33,150,243,0.4);
+    background-color: #2980B9;
+    box-shadow: 0 7px 14px rgba(52,152,219,0.4);
 }
 .stDownloadButton > button:active {
-    background-color: #1565C0;
-    box-shadow: 0 2px 4px rgba(33,150,243,0.2);
+    background-color: #21618C;
+    box-shadow: 0 3px 6px rgba(52,152,219,0.2);
 }
 
-/* --- CARD DESIGN (Replacing Glassmorphism) --- */
+
+/* --- CARD DESIGN --- */
 .info-card, .output-card {
     background: #FFFFFF; /* Pure white background */
-    border-radius: 15px; /* Moderately rounded corners */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Soft, subtle shadow for depth */
-    padding: 25px 30px;
-    margin-bottom: 25px; /* Space between cards */
+    border-radius: 18px; /* Softer, more rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Stronger, more defined shadow */
+    padding: 30px 35px; /* More padding */
+    margin-bottom: 30px; /* More space between cards */
     transition: all 0.3s ease-in-out;
     border: 1px solid #E0E0E0; /* Light border */
 }
 
 .info-card:hover, .output-card:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12); /* Slightly more prominent shadow */
+    transform: translateY(-7px); /* More pronounced lift effect on hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Slightly more prominent shadow */
 }
 
 .info-card h4 {
@@ -127,71 +138,154 @@ h4 {
 
 .output-card p {
     font-size: 1.05rem;
-    line-height: 1.7;
+    line-height: 1.8; /* Increased line height for better readability */
     white-space: pre-wrap; /* Preserve whitespace and line breaks from model output */
 }
 
-/* --- INPUT FIELDS --- */
+/* --- INPUT FIELDS & LABELS --- */
+/* Target Streamlit's internal label and input container */
+div[data-testid="stForm"] .stTextInput label,
+div[data-testid="stForm"] .stTextArea label,
+div[data-testid="stForm"] .stSelectbox label,
+.st-b8 { /* Fallback for direct label targeting if needed */
+    font-weight: 600;
+    color: #555555;
+    margin-bottom: 5px; /* Minimal margin below label */
+    display: block; /* Ensure label is on its own line */
+    font-size: 0.95rem;
+}
+
 .stTextInput>div>div>input,
 .stTextArea>div>div>textarea,
-.stSelectbox>div>div>div>div { /* Target selectbox styling */
-    border-radius: 8px;
-    border: 1px solid #CCCCCC;
-    padding: 10px 15px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+.stSelectbox>div>div>div>div {
+    border-radius: 10px; /* Softer corners */
+    border: 1px solid #BDC3C7; /* Softer gray border */
+    padding: 12px 18px; /* More padding */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Softer inner shadow */
     background-color: #FFFFFF;
     transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 1rem; /* Consistent font size */
+    color: #34495E; /* Text color inside input */
 }
 
 .stTextInput>div>div>input:focus,
 .stTextArea>div>div>textarea:focus,
 .stSelectbox>div>div>div>div:focus {
-    border-color: #00796B; /* Teal border on focus */
-    box-shadow: 0 0 0 2px rgba(0,121,107,0.2); /* Soft focus ring */
+    border-color: #1ABC9C; /* Primary Teal border on focus */
+    box-shadow: 0 0 0 3px rgba(26,188,156,0.3); /* Stronger, more visible focus ring */
     outline: none;
 }
 
-.stTextInput>label,
-.stTextArea>label,
-.stSelectbox>label {
-    font-weight: 600;
-    color: #555555;
-    margin-bottom: 0.6rem;
-    display: block; /* Ensure label is on its own line */
-    font-size: 0.95rem;
+/* Custom classes for spacing and help text */
+.custom-label-container {
+    margin-bottom: 5px; /* Space between label+help and input box */
+}
+.custom-help-text {
+    font-size: 0.85rem;
+    color: #7F8C8D; /* Muted gray for help text */
+    margin-top: 5px;
+    margin-bottom: 15px; /* Space below help text before next label */
+    line-height: 1.4;
 }
 
 /* --- SIDEBAR STYLING --- */
 .stSidebar > div:first-child {
-    background-color: #F0F0F0; /* Slightly darker sidebar background */
+    background-color: #ECF0F1; /* Lighter gray for sidebar background */
     padding-top: 2rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.05); /* Subtle shadow on sidebar edge */
+    box-shadow: 3px 0 15px rgba(0,0,0,0.07); /* More pronounced shadow on sidebar edge */
+    border-right: 1px solid #DEDEDE; /* Subtle border on the right */
 }
 
 .stSidebar h2 {
-    color: #00695C;
-    font-size: 1.6rem;
+    color: #2C3E50;
+    font-size: 1.8rem;
     margin-top: 0;
     margin-bottom: 1rem;
+    border-bottom: none; /* Remove underline for sidebar h2 */
+    padding-bottom: 0;
+}
+
+.stSidebar h3 {
+    color: #34495E;
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .stSidebar p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #666666;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .stSidebar .stMarkdown {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #666666;
+}
+
+/* Sidebar Radio Button Navigation */
+.stRadio > label {
+    font-weight: 600;
+    color: #34495E;
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+.stRadio div[role="radiogroup"] {
+    margin-top: 10px;
+}
+
+.stRadio div[role="radiogroup"] label {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.2s, color 0.2s;
+    font-size: 1.05rem;
+    font-weight: normal; /* Override default bold */
+    color: #555555;
+    cursor: pointer;
+}
+
+.stRadio div[role="radiogroup"] label:hover {
+    background-color: #DDEEEE; /* Light hover background */
+    color: #1ABC9C; /* Primary Teal on hover */
+}
+
+/* Selected Radio Button */
+.stRadio div[role="radiogroup"] label[data-baseweb="radio"] > div > div[data-testid="stMarkdownContainer"] p {
+    color: inherit !important; /* Ensure the text color changes with parent label */
+}
+
+/* Style for the actual radio button when checked */
+.stRadio div[role="radiogroup"] input:checked + div {
+    background-color: #1ABC9C !important; /* Primary Teal background for selected */
+    color: white !important; /* White text for selected */
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(26,188,156,0.3);
+}
+
+.stRadio div[role="radiogroup"] input:checked + div:hover {
+    background-color: #16A085 !important; /* Darker teal on hover for selected */
+}
+
+.stRadio div[role="radiogroup"] input:checked + div > div > div[data-testid="stMarkdownContainer"] p {
+    color: white !important; /* Ensure the actual text is white when selected */
+}
+
+/* Adjust Streamlit's info box */
+.stAlert {
+    border-radius: 10px;
+    background-color: #E8F6F3; /* Lighter teal/mint green for info */
+    color: #1ABC9C; /* Darker teal for info text */
+    border: 1px solid #1ABC9C;
 }
 
 /* --- FOOTER STYLING --- */
 .stMarkdown hr {
-    margin-top: 2.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     border-top: 1px solid #DEDEDE; /* Lighter divider */
 }
 
@@ -199,32 +293,4 @@ h4 {
     text-align: center;
     color: #888888;
     font-size: 0.85rem;
-}
-
-/* Custom styling for the download button after content */
-/* (This targets buttons not specifically handled by stButton styles, like download buttons) */
-.stDownloadButton > button {
-    background-color: #2196F3; /* Blue for download button */
-    color: white;
-    padding: 0.8em 2em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.0rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    margin-top: 1rem;
-}
-
-.stDownloadButton > button:hover {
-    background-color: #1976D2; /* Darker blue on hover */
-    transform: translateY(-2px); /* Lift effect */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-
-.stDownloadButton > button:active {
-    background-color: #1565C0; /* Even darker on active */
-    transform: translateY(0); /* Press down effect */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
