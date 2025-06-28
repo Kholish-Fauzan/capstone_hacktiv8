@@ -1,150 +1,230 @@
 /* assets/style.css */
 
-/* General Body Styling */
+/* --- GENERAL STYLES --- */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #e0e0e0; /* Light grey background */
-    color: #333;
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F8F8F8; /* Light gray for soft background */
+    color: #333333; /* Darker text for readability */
 }
 
 /* Streamlit Main Container Adjustments */
 .stApp {
-    background-color: #e0e0e0; /* Match body background */
+    background-color: #F8F8F8;
 }
 
 div.block-container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
-/* Header Styling */
+/* --- TYPOGRAPHY --- */
 h1 {
-    color: #4CAF50; /* A pleasant green */
+    color: #00796B; /* Deep Teal - Primary color */
     text-align: center;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 1rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    font-size: 2.5rem;
+    line-height: 1.2;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
-h2, h3, h4, h5, h6 {
-    color: #333;
+h2 {
+    color: #004D40; /* Darker Teal */
+    font-weight: 700;
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    color: #00695C; /* Medium Teal */
     font-weight: 600;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
-/* Markdown styling (for general text) */
+h4 {
+    color: #4CAF50; /* Green accent for card titles */
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+
+/* General Markdown text */
 .stMarkdown {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #444444;
 }
 
-/* --- Interactive Button Styling --- */
+/* --- BUTTON STYLING --- */
 .stButton>button {
-    background-color: #4CAF50; /* Green */
+    background-color: #FF7043; /* Vibrant Orange - CTA color */
     color: white;
-    padding: 0.8em 2em;
+    padding: 0.9em 2.2em;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px; /* More rounded */
     cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    margin-top: 1rem;
+    box-shadow: 0 6px 12px rgba(255,112,67,0.3); /* Softer, warmer shadow */
+    margin-top: 1.5rem;
+    letter-spacing: 0.5px;
 }
 
 .stButton>button:hover {
-    background-color: #45a049; /* Darker green on hover */
-    transform: translateY(-2px); /* Lift effect */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    background-color: #F4511E; /* Darker orange on hover */
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 8px 16px rgba(255,112,67,0.4);
 }
 
 .stButton>button:active {
-    background-color: #3e8e41; /* Even darker on active */
+    background-color: #BF360C; /* Even darker on active */
     transform: translateY(0); /* Press down effect */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 6px rgba(255,112,67,0.2);
 }
 
-/* --- Glassmorphism Effect for Analysis Boxes --- */
-.glass-card {
-    background: rgba(255, 255, 255, 0.2); /* Translucent white */
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    backdrop-filter: blur(8px); /* The key to glassmorphism */
-    -webkit-backdrop-filter: blur(8px); /* Safari support */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
-    padding: 20px;
-    margin-bottom: 20px; /* Space between cards */
-    transition: all 0.3s ease;
+/* Download Button specific styles (blue) */
+.stDownloadButton > button {
+    background-color: #2196F3; /* Blue for download button */
+    box-shadow: 0 4px 8px rgba(33,150,243,0.3);
+}
+.stDownloadButton > button:hover {
+    background-color: #1976D2;
+    box-shadow: 0 6px 12px rgba(33,150,243,0.4);
+}
+.stDownloadButton > button:active {
+    background-color: #1565C0;
+    box-shadow: 0 2px 4px rgba(33,150,243,0.2);
 }
 
-.glass-card:hover {
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15); /* Slightly more prominent shadow on hover */
-    transform: translateY(-3px); /* Subtle lift */
+/* --- CARD DESIGN (Replacing Glassmorphism) --- */
+.info-card, .output-card {
+    background: #FFFFFF; /* Pure white background */
+    border-radius: 15px; /* Moderately rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Soft, subtle shadow for depth */
+    padding: 25px 30px;
+    margin-bottom: 25px; /* Space between cards */
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #E0E0E0; /* Light border */
 }
 
-/* Ensure subheaders and text within glass cards look good */
-.glass-card h3 {
-    color: #2c3e50; /* Darker color for headings within glass */
-    font-size: 1.3rem;
+.info-card:hover, .output-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12); /* Slightly more prominent shadow */
+}
+
+.info-card h4 {
     margin-top: 0;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
     padding-bottom: 10px;
+    border-bottom: 1px solid #EAEAEA; /* Light separator */
 }
 
-.glass-card p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 10px;
+.output-card p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks from model output */
 }
 
-.glass-card strong {
-    color: #4CAF50; /* Highlight important points */
-}
-
-/* Line separator within glass card */
-.glass-card hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    margin: 20px 0;
-}
-
-/* Streamlit specific elements for input fields */
+/* --- INPUT FIELDS --- */
 .stTextInput>div>div>input,
-.stTextArea>div>div>textarea {
+.stTextArea>div>div>textarea,
+.stSelectbox>div>div>div>div { /* Target selectbox styling */
     border-radius: 8px;
-    border: 1px solid #ccc;
-    padding: 10px;
+    border: 1px solid #CCCCCC;
+    padding: 10px 15px;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+    background-color: #FFFFFF;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.stTextInput>div>div>input:focus,
+.stTextArea>div>div>textarea:focus,
+.stSelectbox>div>div>div>div:focus {
+    border-color: #00796B; /* Teal border on focus */
+    box-shadow: 0 0 0 2px rgba(0,121,107,0.2); /* Soft focus ring */
+    outline: none;
 }
 
 .stTextInput>label,
 .stTextArea>label,
 .stSelectbox>label {
     font-weight: 600;
-    color: #555;
-    margin-bottom: 0.5rem;
+    color: #555555;
+    margin-bottom: 0.6rem;
+    display: block; /* Ensure label is on its own line */
+    font-size: 0.95rem;
 }
 
-/* Footer Styling */
-.stMarkdown p {
-    font-size: 0.85rem;
-    color: #777;
+/* --- SIDEBAR STYLING --- */
+.stSidebar > div:first-child {
+    background-color: #F0F0F0; /* Slightly darker sidebar background */
+    padding-top: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05); /* Subtle shadow on sidebar edge */
 }
 
-/* Ensure the hr (divider) for footer is also styled nicely */
-.stMarkdown hr {
-    margin-top: 2rem;
+.stSidebar h2 {
+    color: #00695C;
+    font-size: 1.6rem;
+    margin-top: 0;
     margin-bottom: 1rem;
-    border-top: 1px solid #ccc;
+}
+
+.stSidebar p {
+    font-size: 0.9rem;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.stSidebar .stMarkdown {
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+/* --- FOOTER STYLING --- */
+.stMarkdown hr {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid #DEDEDE; /* Lighter divider */
+}
+
+.footer-text {
+    text-align: center;
+    color: #888888;
+    font-size: 0.85rem;
 }
 
 /* Custom styling for the download button after content */
+/* (This targets buttons not specifically handled by stButton styles, like download buttons) */
 .stDownloadButton > button {
-    background-color: #007BFF; /* Blue for download button */
+    background-color: #2196F3; /* Blue for download button */
+    color: white;
+    padding: 0.8em 2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.0rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-top: 1rem;
 }
+
 .stDownloadButton > button:hover {
-    background-color: #0056b3;
+    background-color: #1976D2; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.stDownloadButton > button:active {
+    background-color: #1565C0; /* Even darker on active */
+    transform: translateY(0); /* Press down effect */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

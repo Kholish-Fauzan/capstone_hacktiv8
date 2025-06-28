@@ -4,6 +4,7 @@ import google.generativeai as genai
 import os
 
 # Google Gemini API Key
+# Mengambil dari Streamlit Cloud Secrets atau environment variable lokal
 try:
     GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 except KeyError:
