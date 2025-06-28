@@ -225,7 +225,11 @@ div[data-testid="stForm"] .stSelectbox label,
     color: #666666;
 }
 
-/* Sidebar Radio Button Navigation */
+/* Sidebar Radio Button Navigation (NOT USED WITH NATIVE STREAMLIT MULTIPAGE) */
+/* The styles below for stRadio will not be directly applicable
+   if Streamlit's native multipage feature is used.
+   They are kept here in case you want to revert to manual navigation,
+   but for native multipage, Streamlit handles this UI. */
 .stRadio > label {
     font-weight: 600;
     color: #34495E;
