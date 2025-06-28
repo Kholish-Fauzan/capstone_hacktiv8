@@ -27,7 +27,7 @@ def generate_narrative(model, judul_objek, lokasi_objek, deskripsi_kunci, target
         response_narasi = model.generate_content(
             prompt_narasi,
             generation_config={
-                "max_output_tokens": 4000,
+                "max_output_tokens": 6000,
                 "temperature": 0.6,
                 "top_p": 0.9,
                 "top_k": 50
@@ -86,7 +86,7 @@ def generate_analysis_data(model, lokasi_objek, generated_narration, max_retries
             response_analisis = model.generate_content(
                 prompt_analisis,
                 generation_config={
-                    "max_output_tokens": 4000,
+                    "max_output_tokens": 6000,
                     "temperature": 0.4,
                     # response_mime_type dan response_schema DIHAPUS di sini
                 }
