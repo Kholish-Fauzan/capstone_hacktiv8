@@ -133,15 +133,24 @@ def generate_analysis_pdf(analysis_data, filename_prefix="analysis"):
         return None
 
 # --- Streamlit UI Setup ---
-st.set_page_config(layout="wide", page_title="Jelajah Kisah & Potensi Lokal Berbasis AI")
+# Mengubah Page Title
+st.set_page_config(layout="wide", page_title="Nusantara Story AI - Eksplorasi Budaya & Wisata Lokal")
 
-st.title("Jelajah Kisah: Pengenalan Budaya & Pariwisata Lokal Berbasis AI")
-st.markdown("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-2.5 Flash**.")
+# Mengubah Main Title
+st.title("Nusantara Story AI: Kisah Budaya & Potensi Wisata Lokal")
+st.markdown("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata favorit Anda menggunakan **Gemini-2.5 Flash**.")
 st.markdown("---")
 
 # --- Sidebar ---
 st.sidebar.header("Tentang Aplikasi Ini")
-st.sidebar.info("Memanfaatkan Gemini-2.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya lokal.")
+# Mengubah deskripsi sidebar
+st.sidebar.markdown("""
+### Bagaimana Aplikasi Ini Bekerja? 🚀
+1.  **Input Data**: Isi detail objek budaya/wisata Anda (nama, lokasi, deskripsi kunci, target audiens, gaya bahasa).
+2.  **Generate Kisah**: Klik tombol 'Generate Kisah & Promosi Wisata' untuk merangkai narasi awal oleh **Gemini AI**. ✨
+3.  **Analisis & Optimasi**: Gemini akan menganalisis narasi Anda dan memberikan wawasan promosi serta potensi ekonomi lokal. 📈
+4.  **Output**: Lihat hasil narasi dan analisis promosi langsung di aplikasi! 📊
+""")
 st.sidebar.markdown("---")
 st.sidebar.write("Dibuat oleh Kholish Fauzan")
 st.sidebar.markdown("---")
@@ -213,7 +222,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             response_narasi = gemini_model.generate_content(
                 prompt_narasi,
                 generation_config={
-                    "max_output_tokens": 4000,
+                    "max_output_tokens": 3000,
                     "temperature": 0.6,
                     "top_p": 0.9,
                     "top_k": 50
@@ -249,12 +258,11 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
     if st.session_state.generated_narration:
         st.markdown("---")
         st.subheader("💡 Wawasan & Optimasi Promosi dari Gemini AI")
-        analisis_output_container = st.container() # Container untuk menampung output analisis
-        download_analisis_placeholder = st.empty() # Placeholder untuk tombol download
+        analisis_output_container = st.container()
+        download_analisis_placeholder = st.empty()
 
         with st.spinner("Saya sedang menganalisis & mengoptimasi promosi..."):
             try:
-                # Prompt yang sama dari iterasi sebelumnya, meminta JSON dengan "poin" dan "deskripsi"
                 prompt_analisis = f"""
                 Anda adalah seorang konsultan pemasaran pariwisata dan pengembang ekonomi lokal untuk wilayah {lokasi_objek}.
                 Analisis narasi budaya/pariwisata berikut secara mendalam untuk mengekstrak wawasan kunci dan menyarankan optimasi yang konkret dan terperinci untuk dampak ekonomi dan promosi pariwisata.
@@ -284,7 +292,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                 response_analisis = gemini_model.generate_content(
                     prompt_analisis,
                     generation_config={
-                        "max_output_tokens": 4000,
+                        "max_output_tokens": 3000,
                         "temperature": 0.5,
                         "response_mime_type": "application/json",
                         "response_schema": {
@@ -370,18 +378,15 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                         analysis_data = json.loads(gemini_analysis_raw_text)
                         st.session_state.analysis_data = analysis_data
 
-                        # === LAYOUT ANALISIS BARU YANG CIMA! ===
                         with analisis_output_container:
                             col_analysis1, col_analysis2 = st.columns(2)
 
-                            # Poin-poin untuk Kolom 1
                             col1_keys = [
                                 "Poin Jual Utama",
                                 "Segmen Wisatawan Ideal",
                                 "Ide Monetisasi & Produk Pariwisata"
                             ]
 
-                            # Poin-poin untuk Kolom 2
                             col2_keys = [
                                 "Saran Peningkatan Pesan Promosi",
                                 "Potensi Kolaborasi Lokal"
@@ -394,7 +399,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                                         for item in analysis_data[key]:
                                             st.markdown(f"**{item['poin']}**")
                                             st.write(item['deskripsi'])
-                                        st.markdown("---") # Garis pemisah antar sub-bagian
+                                        st.markdown("---")
 
                             for key in col2_keys:
                                 if key in analysis_data:
@@ -403,10 +408,9 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                                         for item in analysis_data[key]:
                                             st.markdown(f"**{item['poin']}**")
                                             st.write(item['deskripsi'])
-                                        st.markdown("---") # Garis pemisah antar sub-bagian
+                                        st.markdown("---")
 
 
-                        # Tombol Unduh PDF Analisis (di luar kolom agar lebar penuh)
                         pdf_bytes_analysis = generate_analysis_pdf(analysis_data, f"Analisis_{judul_objek}")
                         if pdf_bytes_analysis:
                             download_analisis_placeholder.download_button(
@@ -427,11 +431,6 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             except Exception as e:
                 st.error(f"Terjadi kesalahan saat analisis promosi dengan Gemini: {e}. Coba periksa prompt dan input.")
 
-# --- Sidebar Explanation ---
-st.sidebar.markdown("""
-### Bagaimana Aplikasi Ini Bekerja?
-1.  **Input Data**: Masukkan nama objek, **lokasi objek**, deskripsi kunci, serta informasi tentang target audiens dan gaya bahasa yang diinginkan di bagian utama.
-2.  **Generate Kisah**: Tekan tombol 'Generate Kisah & Promosi Wisata'. Aplikasi akan memanggil Google Gemini untuk menciptakan narasi awal.
-3.  **Analisis & Optimasi**: Setelah narasi dihasilkan, Gemini akan dipanggil lagi untuk menganalisis narasi tersebut dan memberikan wawasan serta saran promosi yang berfokus pada potensi ekonomi lokal.
-4.  **Output**: Hasil narasi dan analisis promosi akan terlihat di bagian utama aplikasi.
-""")
+# --- Footer Copyright ---
+st.markdown("---") # Garis pemisah untuk footer
+st.markdown(f"<p style='text-align: center; color: grey;'>© {2024} Nusantara Story AI. All rights reserved.</p>", unsafe_allow_html=True)
