@@ -12,25 +12,25 @@ except KeyError:
 
 try:
     # Menggunakan Gemini-1.5 Flash sesuai permintaan
-    gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 except Exception as e:
-    st.error(f"Gagal menginisialisasi model Gemini-1.5 Flash: {e}")
+    st.error(f"Gagal menginisialisasi model Gemini-2.5 Flash: {e}")
     st.stop()
 
 # --- Streamlit UI Setup ---
-st.set_page_config(layout="wide", page_title="Jelajah Bondowoso AI")
+st.set_page_config(layout="wide", page_title="Jelajah Cerita Pariwisata dan Budaya melalui AI")
 
-st.title("Jelajah Bondowoso: Kisah Budaya & Promosi Pariwisata Berbasis AI")
-st.write("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata Bondowoso pakai **Gemini-1.5 Flash AI**.")
+st.title("Jelajah Kisah: Pengenalan Budaya &  Pariwisata Lokal Berbasis AI")
+st.write("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-2.5 Flash**.")
 
 # --- Sidebar ---
 st.sidebar.header("Tentang Aplikasi Ini")
-st.sidebar.write("Manfaatkan Gemini-1.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya Bondowoso.")
+st.sidebar.write("Manfaatkan Gemini-2.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya lokal.")
 st.sidebar.write("---")
-st.sidebar.write("Dibuat dengan ❤️")
+st.sidebar.write("Dibuat oleh Kholish Fauzan")
 
 # --- Input Section ---
-st.header("Ceritakan Kekayaan Budaya/Wisata Bondowoso Anda")
+st.header("Ceritakan Kekayaan Budaya/Wisata Lokal Anda")
 
 col1, col2 = st.columns(2)
 
@@ -49,22 +49,22 @@ deskripsi_kunci = st.text_area("Deskripsi Singkat / Poin-poin Kunci / Fakta Seja
 
 target_audiens = st.text_input("Target Audiens Utama (opsional)",
                                 value="", # Kosongkan default agar bisa dikontrol di prompt
-                                placeholder="Contoh: Wisatawan Keluarga, Pecinta Sejarah, Penggemar Kopi.")
+                                placeholder="Contoh: Wisatawan Keluarga, Pecinta Sejarah, Penggemar Kopi, dll.")
 
 
 # --- Tombol Generate ---
-if st.button("Generate Kisah & Promosi dengan AI", type="primary"):
+if st.button("Generate Kisah & Promosi Wisata", type="primary"):
     if not judul_objek or not deskripsi_kunci:
         st.warning("Judul Objek dan Deskripsi Kunci wajib diisi ya!")
         st.stop()
 
     # --- Tahap 1: Generasi Narasi oleh Gemini ---
-    with st.spinner("Gemini AI lagi merangkai kisah..."):
+    with st.spinner("Saya sedang merangkai kisahnya..."):
         try:
             # === PERHATIAN: Prompt Narasi Ditingkatkan ===
             prompt_narasi = f"""
-            Anda adalah seorang pencerita ulung dan promotor pariwisata yang sangat mengenal kekayaan budaya Bondowoso, Jawa Timur.
-            Tugas Anda adalah menciptakan sebuah narasi atau skrip promosi yang sangat menarik, detail, dan komprehensif (minimal 300 kata) berdasarkan informasi berikut.
+            Anda adalah seorang pencerita ulung dan promotor pariwisata yang sangat mengenal kekayaan budaya Indonesia yang begitu luas.
+            Tugas Anda adalah menciptakan sebuah narasi atau skrip promosi yang sangat menarik, detail, dan komprehensif (minimal 500 kata) berdasarkan informasi berikut.
             Pastikan narasi ini cukup panjang dan kaya akan detail deskriptif yang memukau pembaca.
 
             Nama Objek Budaya/Pariwisata: {judul_objek}
@@ -84,7 +84,7 @@ if st.button("Generate Kisah & Promosi dengan AI", type="primary"):
                 prompt_narasi,
                 generation_config={
                     "max_output_tokens": 1000, # Meningkatkan batas token output
-                    "temperature": 0.8,        # Sedikit lebih tinggi untuk kreativitas
+                    "temperature": 0.7,        # Sedikit lebih tinggi untuk kreativitas
                     "top_p": 0.95,
                     "top_k": 60
                 }
@@ -115,7 +115,7 @@ if st.button("Generate Kisah & Promosi dengan AI", type="primary"):
             try:
                 # === PERHATIAN: Prompt Analisis Ditingkatkan ===
                 prompt_analisis = f"""
-                Sebagai konsultan pemasaran pariwisata dan pengembang ekonomi lokal untuk wilayah seperti Bondowoso, analisis narasi budaya/pariwisata berikut secara mendalam untuk mengekstrak wawasan kunci dan menyarankan optimasi yang konkret dan terperinci untuk dampak ekonomi dan promosi pariwisata.
+                Sebagai konsultan pemasaran pariwisata dan pengembang ekonomi lokal untuk wilayah seperti {judul_objek}, analisis narasi budaya/pariwisata berikut secara mendalam untuk mengekstrak wawasan kunci dan menyarankan optimasi yang konkret dan terperinci untuk dampak ekonomi dan promosi pariwisata.
 
                 Narasi yang Dihasilkan:
                 ---
@@ -127,7 +127,7 @@ if st.button("Generate Kisah & Promosi dengan AI", type="primary"):
                 2.  **Segmen Wisatawan Ideal:** Jelaskan 2-3 segmen wisatawan spesifik yang paling mungkin tertarik berdasarkan isi narasi, berikan alasan singkat.
                 3.  **Ide Monetisasi & Produk Pariwisata Konkret:** Sarankan 2-3 cara konkret objek ini dapat menghasilkan nilai ekonomi. Contoh: "Paket tur petualangan Blue Fire 3 hari 2 malam dengan akomodasi lokal", "Produk kopi Bondowoso premium yang diintegrasikan ke pengalaman wisata", "Festival budaya tahunan dengan tiket masuk".
                 4.  **Saran Peningkatan Pesan Promosi:** Berikan 2-3 tips atau frasa yang direvisi untuk membuat pesan promosi lebih menarik dan persuasif di berbagai media (sosial media, brosur).
-                5.  **Potensi Kolaborasi Lokal di Bondowoso:** Sarankan 2-3 jenis bisnis atau komunitas lokal di Bondowoso (misal: pengrajin batik, petani kopi, kelompok seni tari tradisional, pengelola homestay) yang dapat berkolaborasi dengan inisiatif ini untuk meningkatkan daya tarik dan jangkauan ekonomi.
+                5.  **Potensi Kolaborasi Lokal di {judul_objek}:** Sarankan 2-3 jenis bisnis atau komunitas lokal di {judul_objek} (misal: pengrajin batik, petani kopi, kelompok seni tari tradisional, pengelola homestay) yang dapat berkolaborasi dengan inisiatif ini untuk meningkatkan daya tarik dan jangkauan ekonomi.
                 """
                 # === Perhatikan: max_output_tokens diatur lebih tinggi untuk analisis ===
                 response_analisis = gemini_model.generate_content(
