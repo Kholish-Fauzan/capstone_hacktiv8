@@ -19,6 +19,13 @@ except Exception as e:
     st.error(f"Maaf, kami mengalami masalah teknis. Gagal menghubungkan ke kecerdasan AI. Silakan coba lagi nanti atau hubungi pengembang.")
     st.stop()
 
+# --- Streamlit UI Setup ---
+st.set_page_config(
+    page_title="Beranda Utama",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 # --- Load Custom CSS ---
 def load_css(file_name):
     with open(file_name) as f:
@@ -28,7 +35,7 @@ load_css('assets/style.css')
 
 # --- Sidebar ---
 with st.sidebar:
-    st.header("Nusantara Story AI")
+    st.header("Nusantara Story AI 🇮🇩")
     render_custom_sidebar_content()
     # render_sidebar_expander_content() # Aktifkan jika ingin menambahkan expander
 
