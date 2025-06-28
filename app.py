@@ -225,7 +225,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             response_narasi = gemini_model.generate_content(
                 prompt_narasi,
                 generation_config={
-                    "max_output_tokens": 2000, # Batas token lebih tinggi
+                    "max_output_tokens": 6000, # Batas token lebih tinggi
                     "temperature": 0.6,
                     "top_p": 0.9,
                     "top_k": 50
@@ -288,7 +288,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                 response_analisis = gemini_model.generate_content(
                     prompt_analisis,
                     generation_config={
-                        "max_output_tokens": 1000, # Cukup 1000 untuk JSON singkat
+                        "max_output_tokens": 6000, # Cukup 1000 untuk JSON singkat
                         "temperature": 0.5, # Lebih rendah untuk objektivitas
                         "response_mime_type": "application/json", # Minta respons dalam JSON
                         "response_schema": { # Definisi skema JSON yang diharapkan
