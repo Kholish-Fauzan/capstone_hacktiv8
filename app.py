@@ -19,11 +19,9 @@ except KeyError:
     st.stop()
 
 try:
-    # Model tetap 1.5 Flash sesuai input terakhir yang valid Anda berikan
-    # Jika Anda ingin menguji 2.5 Flash lagi, pastikan modelnya tersedia
-    gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 except Exception as e:
-    st.error(f"Gagal menginisialisasi model Gemini-1.5 Flash: {e}")
+    st.error(f"Gagal menginisialisasi model Gemini-2.5 Flash: {e}")
     st.stop()
 
 # --- Fungsi Pembantu untuk Generasi PDF ---
@@ -138,12 +136,12 @@ def generate_analysis_pdf(analysis_data, filename_prefix="analysis"):
 st.set_page_config(layout="wide", page_title="Jelajah Kisah & Potensi Lokal Berbasis AI")
 
 st.title("Jelajah Kisah: Pengenalan Budaya & Pariwisata Lokal Berbasis AI")
-st.markdown("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-1.5 Flash**.")
+st.markdown("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-2.5 Flash**.")
 st.markdown("---")
 
 # --- Sidebar ---
 st.sidebar.header("Tentang Aplikasi Ini")
-st.sidebar.info("Memanfaatkan Gemini-1.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya lokal.")
+st.sidebar.info("Memanfaatkan Gemini-2.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya lokal.")
 st.sidebar.markdown("---")
 st.sidebar.write("Dibuat oleh Kholish Fauzan")
 st.sidebar.markdown("---")
