@@ -67,12 +67,6 @@ h2, h3, h4, h5, h6 {
 }
 
 /* --- Glassmorphism Effect for Analysis Boxes --- */
-/* Target the specific div holding the analysis content */
-/* We need to target the parent div created by st.columns or st.container */
-/* This is a bit tricky with Streamlit's dynamic class names,
-   but we can try to target content within the columns */
-
-/* General card/box styling that will act as glassmorphism base */
 .glass-card {
     background: rgba(255, 255, 255, 0.2); /* Translucent white */
     border-radius: 16px;

@@ -1,6 +1,9 @@
 # utils/gemini_utils.py
+
 import streamlit as st
 import json
+import time
+import re # Import the regular expression module
 
 def generate_narrative(model, judul_objek, lokasi_objek, deskripsi_kunci, target_audiens, gaya_bahasa):
     """Menghasilkan narasi menggunakan model Gemini."""
@@ -24,7 +27,7 @@ def generate_narrative(model, judul_objek, lokasi_objek, deskripsi_kunci, target
         response_narasi = model.generate_content(
             prompt_narasi,
             generation_config={
-                "max_output_tokens": 3000,
+                "max_output_tokens": 4000,
                 "temperature": 0.6,
                 "top_p": 0.9,
                 "top_k": 50
@@ -44,121 +47,84 @@ def generate_narrative(model, judul_objek, lokasi_objek, deskripsi_kunci, target
         st.error(f"Terjadi kesalahan saat generasi narasi dengan Gemini: {e}. Coba periksa prompt dan input.")
         return ""
 
-def generate_analysis_data(model, lokasi_objek, generated_narration):
-    """Menghasilkan data analisis menggunakan model Gemini."""
-    try:
-        prompt_analisis = f"""
-        Anda adalah seorang konsultan pemasaran pariwisata dan pengembang ekonomi lokal untuk wilayah {lokasi_objek}.
-        Analisis narasi budaya/pariwisata berikut secara mendalam untuk mengekstrak wawasan kunci dan menyarankan optimasi yang konkret dan terperinci untuk dampak ekonomi dan promosi pariwisata.
+def generate_analysis_data(model, lokasi_objek, generated_narration, max_retries=3):
+    """Menghasilkan data analisis menggunakan model Gemini dengan mekanisme retry dan ekstraksi JSON yang lebih robust."""
 
-        Berikan respons Anda dalam format JSON. Objek JSON harus memiliki 5 kunci utama berikut, di mana setiap kunci memiliki nilai berupa ARRAY OBJEK. Setiap objek dalam array tersebut harus memiliki dua properti: "poin" (nama singkat dari strategi/ide) dan "deskripsi" (penjelasan singkat namun padat tentang strategi tersebut).
+    prompt_analisis = f"""
+    Anda adalah seorang konsultan pemasaran pariwisata dan pengembang ekonomi lokal untuk wilayah {lokasi_objek}.
+    Analisis narasi budaya/pariwisata berikut secara mendalam untuk mengekstrak wawasan kunci dan menyarankan optimasi yang konkret dan terperinci untuk dampak ekonomi dan promosi pariwisata.
 
-        Contoh struktur untuk satu poin:
-        {{
-          "Poin Jual Utama": [
-            {{ "poin": "Pemandangan Kawah Ijen", "deskripsi": "Keunikan kawah dengan api biru dan danau asam belerang, menarik wisatawan petualangan dan fotografi." }}
-          ],
-          "Segmen Wisatawan Ideal": [
-            {{ "poin": "Wisatawan Minat Khusus (Kopi)", "deskripsi": "Mereka mencari pengalaman otentik dan edukatif tentang proses dan cita rasa kopi lokal." }}
-          ]
-        }}
+    Berikan respons Anda dalam format JSON. Objek JSON harus memiliki 5 kunci utama berikut, di mana setiap kunci memiliki nilai berupa ARRAY OBJEK. Setiap objek dalam array tersebut harus memiliki dua properti: "poin" (nama singkat dari strategi/ide) dan "deskripsi" (penjelasan singkat namun padat tentang strategi tersebut).
 
-        Pastikan setiap "deskripsi" cukup informatif sehingga pengguna memahami strategi atau potensi di baliknya, tidak hanya daftar poin.
+    Contoh struktur untuk satu poin:
+    {{
+      "Poin Jual Utama": [
+        {{ "poin": "Pemandangan Kawah Ijen", "deskripsi": "Keunikan kawah dengan api biru dan danau asam belerang, menarik wisatawan petualangan dan fotografi." }}
+      ],
+      "Segmen Wisatawan Ideal": [
+        {{ "poin": "Wisatawan Minat Khusus (Kopi)", "deskripsi": "Mereka mencari pengalaman otentik dan edukatif tentang proses dan cita rasa kopi lokal." }}
+      ]
+    }}
 
-        Narasi yang Dihasilkan:
-        ---
-        {generated_narration}
-        ---
-        """
+    Pastikan setiap "deskripsi" cukup informatif sehingga pengguna memahami strategi atau potensi di baliknya, tidak hanya daftar poin.
+    Sangat penting: Berikan HANYA objek JSON yang valid. Bungkus seluruh objek JSON Anda di dalam blok kode Markdown seperti ini:
+    ```json
+    {{
+      "key": "value"
+    }}
+    ```
+    Jangan tambahkan teks lain di luar blok kode JSON tersebut.
 
-        response_analisis = model.generate_content(
-            prompt_analisis,
-            generation_config={
-                "max_output_tokens": 5000,
-                "temperature": 0.5,
-                "response_mime_type": "application/json",
-                "response_schema": {
-                    "type": "OBJECT",
-                    "properties": {
-                        "Poin Jual Utama": {
-                            "type": "ARRAY",
-                            "items": {
-                                "type": "OBJECT",
-                                "properties": {
-                                    "poin": {"type": "STRING"},
-                                    "deskripsi": {"type": "STRING"}
-                                },
-                                "required": ["poin", "deskripsi"]
-                            }
-                        },
-                        "Segmen Wisatawan Ideal": {
-                            "type": "ARRAY",
-                            "items": {
-                                "type": "OBJECT",
-                                "properties": {
-                                    "poin": {"type": "STRING"},
-                                    "deskripsi": {"type": "STRING"}
-                                },
-                                "required": ["poin", "deskripsi"]
-                            }
-                        },
-                        "Ide Monetisasi & Produk Pariwisata": {
-                            "type": "ARRAY",
-                            "items": {
-                                "type": "OBJECT",
-                                "properties": {
-                                    "poin": {"type": "STRING"},
-                                    "deskripsi": {"type": "STRING"}
-                                },
-                                "required": ["poin", "deskripsi"]
-                            }
-                        },
-                        "Saran Peningkatan Pesan Promosi": {
-                            "type": "ARRAY",
-                            "items": {
-                                "type": "OBJECT",
-                                "properties": {
-                                    "poin": {"type": "STRING"},
-                                    "deskripsi": {"type": "STRING"}
-                                },
-                                "required": ["poin", "deskripsi"]
-                            }
-                        },
-                        "Potensi Kolaborasi Lokal": {
-                            "type": "ARRAY",
-                            "items": {
-                                "type": "OBJECT",
-                                "properties": {
-                                    "poin": {"type": "STRING"},
-                                    "deskripsi": {"type": "STRING"}
-                                },
-                                "required": ["poin", "deskripsi"]
-                            }
-                        }
-                    },
-                    "required": [
-                        "Poin Jual Utama",
-                        "Segmen Wisatawan Ideal",
-                        "Ide Monetisasi & Produk Pariwisata",
-                        "Saran Peningkatan Pesan Promosi",
-                        "Potensi Kolaborasi Lokal"
-                    ]
+    Narasi yang Dihasilkan:
+    ---
+    {generated_narration}
+    ---
+    """
+
+    for attempt in range(max_retries):
+        try:
+            response_analisis = model.generate_content(
+                prompt_analisis,
+                generation_config={
+                    "max_output_tokens": 4000,
+                    "temperature": 0.4,
+                    # response_mime_type dan response_schema DIHAPUS di sini
                 }
-            }
-        )
+            )
 
-        if response_analisis.parts:
-            return json.loads(response_analisis.text)
-        elif response_analisis.candidates and response_analisis.candidates[0].finish_reason:
-            st.warning(f"Gemini tidak dapat menghasilkan analisis. Finish reason: {response_analisis.candidates[0].finish_reason.name}. Coba sesuaikan prompt atau input.")
-            return None
-        else:
-            st.warning("Gemini tidak dapat menghasilkan analisis. Respons kosong atau tidak terduga. Coba sesuaikan prompt atau input.")
-            return None
+            gemini_analysis_raw_text = ""
+            if response_analisis.parts:
+                gemini_analysis_raw_text = response_analisis.text
+            elif response_analisis.candidates and response_analisis.candidates[0].finish_reason:
+                st.warning(f"Percobaan {attempt + 1}/{max_retries}: Gemini tidak dapat menghasilkan analisis. Finish reason: {response_analisis.candidates[0].finish_reason.name}. Mencoba lagi...")
+                time.sleep(1)
+                continue
+            else:
+                st.warning(f"Percobaan {attempt + 1}/{max_retries}: Gemini tidak dapat menghasilkan analisis. Respons kosong atau tidak terduga. Mencoba lagi...")
+                time.sleep(1)
+                continue
 
-    except json.JSONDecodeError as json_err:
-        st.error(f"Gagal memparsing respons JSON dari Gemini: {json_err}. Coba periksa prompt dan input.")
-        return None
-    except Exception as e:
-        st.error(f"Terjadi kesalahan saat analisis promosi dengan Gemini: {e}. Coba periksa prompt dan input.")
-        return None
+            # --- Ekstraksi JSON dari teks mentah ---
+            # Cari blok kode JSON yang dibungkus dengan ```json ... ```
+            json_match = re.search(r"```json\s*(\{.*\})\s*```", gemini_analysis_raw_text, re.DOTALL)
+
+            if json_match:
+                json_string = json_match.group(1) # Ambil konten di dalam blok json
+                return json.loads(json_string) # Coba parse JSON yang sudah diekstrak
+            else:
+                st.warning(f"Percobaan {attempt + 1}/{max_retries}: Tidak dapat menemukan blok JSON yang valid dalam respons Gemini. Respons mentah:\n```\n{gemini_analysis_raw_text}\n```\nMencoba lagi...")
+                time.sleep(1)
+                continue
+
+        except json.JSONDecodeError as json_err:
+            st.warning(f"Percobaan {attempt + 1}/{max_retries}: Gagal memparsing respons JSON dari Gemini: {json_err}. Respons mentah:\n```json\n{json_string if 'json_string' in locals() else gemini_analysis_raw_text}\n```\nMencoba lagi...")
+            time.sleep(1)
+            continue
+        except Exception as e:
+            st.warning(f"Percobaan {attempt + 1}/{max_retries}: Terjadi kesalahan umum saat analisis promosi dengan Gemini: {e}. Mencoba lagi...")
+            time.sleep(1)
+            continue
+
+    # Jika semua percobaan gagal
+    st.error(f"Semua {max_retries} percobaan untuk mendapatkan analisis valid gagal.")
+    return None

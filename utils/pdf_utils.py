@@ -1,10 +1,9 @@
 # utils/pdf_utils.py
 import io
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.lib import colors
 import streamlit as st # Masih perlu untuk st.session_state dan st.error
 
 def generate_pdf_from_text(text_content, filename_prefix="document"):
@@ -24,7 +23,6 @@ def generate_pdf_from_text(text_content, filename_prefix="document"):
     title_style.alignment = 1
 
     story = []
-    # Mengambil judul objek dari session_state jika ada
     if "judul_objek" in st.session_state and st.session_state.judul_objek:
         story.append(Paragraph(st.session_state.judul_objek, title_style))
         story.append(Spacer(1, 0.2 * inch))
