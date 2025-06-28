@@ -35,7 +35,8 @@ load_css('assets/style.css')
 
 # --- Sidebar ---
 with st.sidebar:
-    st.header("Nusantara Story AI 🇮🇩")
+    st.header("Nusantara Story AI")
+    st.sidebar.success("Panduan & Tips")
     render_custom_sidebar_content()
     # render_sidebar_expander_content() # Aktifkan jika ingin menambahkan expander
 
