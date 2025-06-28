@@ -1,0 +1,156 @@
+/* assets/style.css */
+
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #e0e0e0; /* Light grey background */
+    color: #333;
+}
+
+/* Streamlit Main Container Adjustments */
+.stApp {
+    background-color: #e0e0e0; /* Match body background */
+}
+
+div.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* Header Styling */
+h1 {
+    color: #4CAF50; /* A pleasant green */
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h2, h3, h4, h5, h6 {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Markdown styling (for general text) */
+.stMarkdown {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- Interactive Button Styling --- */
+.stButton>button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 0.8em 2em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-top: 1rem;
+}
+
+.stButton>button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.stButton>button:active {
+    background-color: #3e8e41; /* Even darker on active */
+    transform: translateY(0); /* Press down effect */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* --- Glassmorphism Effect for Analysis Boxes --- */
+/* Target the specific div holding the analysis content */
+/* We need to target the parent div created by st.columns or st.container */
+/* This is a bit tricky with Streamlit's dynamic class names,
+   but we can try to target content within the columns */
+
+/* General card/box styling that will act as glassmorphism base */
+.glass-card {
+    background: rgba(255, 255, 255, 0.2); /* Translucent white */
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    backdrop-filter: blur(8px); /* The key to glassmorphism */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+    padding: 20px;
+    margin-bottom: 20px; /* Space between cards */
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15); /* Slightly more prominent shadow on hover */
+    transform: translateY(-3px); /* Subtle lift */
+}
+
+/* Ensure subheaders and text within glass cards look good */
+.glass-card h3 {
+    color: #2c3e50; /* Darker color for headings within glass */
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 10px;
+}
+
+.glass-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.glass-card strong {
+    color: #4CAF50; /* Highlight important points */
+}
+
+/* Line separator within glass card */
+.glass-card hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    margin: 20px 0;
+}
+
+/* Streamlit specific elements for input fields */
+.stTextInput>div>div>input,
+.stTextArea>div>div>textarea {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.stTextInput>label,
+.stTextArea>label,
+.stSelectbox>label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+/* Footer Styling */
+.stMarkdown p {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* Ensure the hr (divider) for footer is also styled nicely */
+.stMarkdown hr {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-top: 1px solid #ccc;
+}
+
+/* Custom styling for the download button after content */
+.stDownloadButton > button {
+    background-color: #007BFF; /* Blue for download button */
+}
+.stDownloadButton > button:hover {
+    background-color: #0056b3;
+}

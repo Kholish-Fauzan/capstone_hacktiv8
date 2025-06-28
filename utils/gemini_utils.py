@@ -74,7 +74,7 @@ def generate_analysis_data(model, lokasi_objek, generated_narration):
         response_analisis = model.generate_content(
             prompt_analisis,
             generation_config={
-                "max_output_tokens": 3000,
+                "max_output_tokens": 5000,
                 "temperature": 0.5,
                 "response_mime_type": "application/json",
                 "response_schema": {

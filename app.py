@@ -2,7 +2,7 @@
 import streamlit as st
 import json
 import pandas as pd
-from datetime import datetime # Untuk copyright year
+from datetime import datetime
 
 # Import dari file konfigurasi
 from config import GOOGLE_API_KEY, get_gemini_model
@@ -20,6 +20,13 @@ except Exception as e:
 
 # --- Streamlit UI Setup ---
 st.set_page_config(layout="wide", page_title="Nusantara Story AI - Eksplorasi Budaya & Wisata Lokal")
+
+# --- Load Custom CSS ---
+def load_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+load_css('assets/style.css')
 
 st.title("Nusantara Story AI: Kisah Budaya & Potensi Wisata Lokal")
 st.markdown("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-2.5 Flash**.")
@@ -133,24 +140,30 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                         "Potensi Kolaborasi Lokal"
                     ]
 
+                    # Apply glass-card styling to each analysis section
                     for key in col1_keys:
                         if key in analysis_data:
                             with col_analysis1:
+                                # Wrap content in a div with the custom class
+                                st.markdown(f'<div class="glass-card">', unsafe_allow_html=True)
                                 st.subheader(key)
                                 for item in analysis_data[key]:
                                     st.markdown(f"**{item['poin']}**")
                                     st.write(item['deskripsi'])
-                                st.markdown("---")
+                                st.markdown('</div>', unsafe_allow_html=True)
+                                # st.markdown("---") # Removed this here, glass card has its own padding/margin
 
                     for key in col2_keys:
                         if key in analysis_data:
                             with col_analysis2:
+                                # Wrap content in a div with the custom class
+                                st.markdown(f'<div class="glass-card">', unsafe_allow_html=True)
                                 st.subheader(key)
                                 for item in analysis_data[key]:
                                     st.markdown(f"**{item['poin']}**")
                                     st.write(item['deskripsi'])
-                                st.markdown("---")
-
+                                st.markdown('</div>', unsafe_allow_html=True)
+                                # st.markdown("---") # Removed this here
 
                 pdf_bytes_analysis = generate_analysis_pdf(analysis_data, f"Analisis_{judul_objek}")
                 if pdf_bytes_analysis:
