@@ -1,17 +1,24 @@
-/* assets/style.css */
+/* assets/style.css - REVISI TOTAL */
 
-/* General Body Styling */
-body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+/* Import Google Fonts (optional, but good for consistent typography) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* General Body Styling & Font */
+html, body {
+    font-family: 'Poppins', sans-serif;
     color: #333;
     background-color: #f0f2f6; /* Light gray background */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
 }
 
-/* Main Container Styling */
+/* Streamlit Main Container Styling */
 .stApp {
     max-width: 1200px;
     margin: auto;
     padding: 2rem;
+    box-sizing: border-box;
 }
 
 /* Custom Headers */
@@ -23,6 +30,7 @@ h1 {
     text-align: center;
     line-height: 1.2;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-out; /* Optional: fade in animation */
 }
 
 h2 {
@@ -63,17 +71,19 @@ strong {
     color: #2C3E50;
 }
 
-/* Buttons */
+/* Streamlit Button Styling */
 .stButton>button {
     background-color: #1ABC9C; /* Teal Green */
-    color: white;
+    color: white !important; /* !important to override Streamlit's default */
     font-weight: bold;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     border: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: auto; /* Ensure button width adapts to content */
+    display: inline-block; /* Allow text-align if needed */
 }
 
 .stButton>button:hover {
@@ -87,38 +97,81 @@ strong {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Streamlit Input Fields (Text, Text Area, Number, Date, etc.) */
+/* This targets the main div wrapping the input */
+div[data-testid="stTextInput"],
+div[data-testid="stSelectbox"],
+div[data-testid="stTextArea"],
+div[data-testid="stDateInput"],
+div[data-testid="stNumberInput"] {
+    margin-bottom: 15px; /* Consistent spacing between input groups */
+}
 
-/* Text Inputs and Text Areas */
-.stTextInput>div>div>input, .stTextArea>div>div>textarea {
+/* Styling the actual input/textarea elements */
+div[data-testid="stTextInput"] input,
+div[data-testid="stTextArea"] textarea,
+div[data-testid="stNumberInput"] input,
+div[data-testid="stDateInput"] input {
     border-radius: 0.5rem;
     border: 1px solid #BDC3C7; /* Light Gray */
     padding: 0.75rem 1rem;
     font-size: 1rem;
     color: #333;
+    width: 100%; /* Make inputs fill their container */
+    box-sizing: border-box; /* Include padding/border in width */
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.stTextInput>div>div>input:focus, .stTextArea>div>div>textarea:focus {
+/* Focus state for input/textarea */
+div[data-testid="stTextInput"] input:focus,
+div[data-testid="stTextArea"] textarea:focus,
+div[data-testid="stNumberInput"] input:focus,
+div[data-testid="stDateInput"] input:focus {
     border-color: #1ABC9C; /* Teal Green on focus */
     box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
     outline: none;
 }
 
-/* Selectbox */
-.stSelectbox>div>div {
+/* Styling the Selectbox dropdown itself */
+div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n { /* This targets the actual selectbox container */
     border-radius: 0.5rem;
     border: 1px solid #BDC3C7;
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem;
-    color: #333;
     background-color: white;
+    box-sizing: border-box;
 }
-
-.stSelectbox>div>div:focus-within {
+div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n:focus-within {
     border-color: #1ABC9C;
     box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
     outline: none;
 }
+div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g3y { /* Dropdown text inside selectbox */
+    color: #333;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+}
+
+
+/* Input Labels and Help Text */
+/* Custom label styles applied via markdown in Python (as Streamlit's default label p is harder to override consistently) */
+.st-emotion-cache-10q20q p { /* This targets the default Streamlit label text within its container */
+    font-weight: 600;
+    color: #555555;
+    margin-bottom: 5px; /* Reduce default margin below label */
+}
+
+.custom-help-text {
+    font-size: 0.85rem;
+    color: #777777;
+    margin-top: 5px; /* Space between input box and custom help text */
+    margin-bottom: 15px; /* Space below help text before next element */
+    line-height: 1.4;
+}
+
+/* Hide Streamlit's default help icon/text for cleaner look if custom help is used */
+.stHelpInline {
+    display: none;
+}
+
 
 /* Custom Card Styling for Outputs/Info */
 .info-card {
@@ -164,39 +217,66 @@ strong {
     color: white;
     padding-top: 2rem;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    /* Make sidebar stick to top */
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Make it full height */
+    overflow-y: auto; /* Enable scrolling if content overflows */
 }
 
-[data-testid="stSidebar"] .st-emotion-cache-16txtle { /* Selector for markdown in sidebar */
-    color: #ECF0F1; /* Lighter text color */
+/* All text within sidebar */
+[data-testid="stSidebar"] *,
+[data-testid="stSidebar"] p {
+    color: #ECF0F1 !important; /* Lighter text color for all elements */
 }
 
-[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3, [data-testid="stSidebar"] h4, [data-testid="stSidebar"] p {
-    color: #ECF0F1; /* Ensure all text in sidebar is light */
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: #ECF0F1 !important; /* Ensure headers also use light color */
 }
 
-[data-testid="stSidebar"] .st-emotion-cache-vk330y { /* Specific selector for default sidebar nav list */
+/* Streamlit's default navigation list in sidebar */
+.st-emotion-cache-vk330y { /* This is the div containing the actual page list */
     background-color: #2C3E50; /* Match sidebar background */
     color: #ECF0F1; /* Text color for nav items */
 }
 
-[data-testid="stSidebar"] .st-emotion-cache-1p5i3j { /* Nav item hover/selected background */
-    background-color: #34495E; /* Slightly lighter blue gray */
-    color: #1ABC9C; /* Highlight selected text */
+/* Individual navigation items (pages) */
+.st-emotion-cache-1p5i3j { /* Specific selector for default sidebar nav list items */
+    background-color: transparent !important; /* Ensure no residual background */
+    color: #ECF0F1 !important; /* Text color */
+    border-radius: 0.5rem;
+    margin-bottom: 0.2rem;
+    padding: 0.75rem 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-[data-testid="stSidebar"] .st-emotion-cache-1p5i3j:hover {
-    background-color: #49688a; /* Even lighter on hover */
+/* Navigation item hover state */
+.st-emotion-cache-1p5i3j:hover {
+    background-color: #34495E !important; /* Slightly lighter blue gray on hover */
+    color: #1ABC9C !important; /* Highlight text on hover */
+}
+
+/* Selected navigation item state */
+.st-emotion-cache-1p5i3j.st-emotion-cache-1oe58v3 { /* Add the specific class for selected state */
+    background-color: #1ABC9C !important; /* Teal green for selected item */
+    color: white !important; /* White text for selected item */
+    font-weight: 600;
 }
 
 
-[data-testid="stSidebar"] .st-emotion-cache-1pxaz8s { /* Style for the default Streamlit "Navigasi" label */
-    color: #1ABC9C; /* Teal for "Navigasi" header */
+/* Streamlit's default "Navigasi" label or similar group labels in sidebar */
+[data-testid="stSidebar"] .st-emotion-cache-1pxaz8s {
+    color: #1ABC9C !important; /* Teal for "Navigasi" header */
     font-weight: bold;
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
+    margin-top: 1rem; /* Add some space above */
 }
 
-/* Expander in Sidebar (if used) */
+
+/* Expander in Sidebar */
 [data-testid="stSidebarExpander"] {
     background-color: #34495E; /* Darker background for expander */
     border-radius: 0.5rem;
@@ -204,7 +284,7 @@ strong {
 }
 
 [data-testid="stSidebarExpander"] div[role="button"] p {
-    color: #ECF0F1; /* Text color for expander header */
+    color: #ECF0F1 !important; /* Text color for expander header */
     font-weight: bold;
 }
 
@@ -212,26 +292,49 @@ strong {
     padding-left: 1rem; /* Indent content inside expander */
 }
 
-/* Info Box */
+/* Alerts */
 .stAlert > div {
-    background-color: #D6EAF8; /* Light blue for info alerts */
-    color: #2874A6; /* Dark blue text */
-    border-left: 5px solid #3498DB; /* Blue border */
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
-/* Warning Box */
-.stAlert.st-emotion-cache-r8x5j1 > div { /* Specific selector for warning */
-    background-color: #FCF3CF; /* Light yellow for warning alerts */
+/* Info Alert */
+.stAlert > div[data-testid="stMarkdownContainer"] { /* Targeting the inner markdown container for info */
+    background-color: #D6EAF8; /* Light blue */
+    color: #2874A6; /* Dark blue text */
+    border-left: 5px solid #3498DB; /* Blue border */
+}
+
+/* Warning Alert */
+.stAlert > div[data-testid="stMarkdownContainer"].st-emotion-cache-r8x5j1 { /* Specific selector for warning */
+    background-color: #FCF3CF; /* Light yellow */
     color: #B7950B; /* Dark yellow text */
     border-left: 5px solid #F1C40F; /* Yellow border */
 }
 
-/* Error Box */
-.stAlert.st-emotion-cache-j4c9x8 > div { /* Specific selector for error */
-    background-color: #FADBD8; /* Light red for error alerts */
+/* Error Alert */
+.stAlert > div[data-testid="stMarkdownContainer"].st-emotion-cache-j4c9x8 { /* Specific selector for error */
+    background-color: #FADBD8; /* Light red */
     color: #C0392B; /* Dark red text */
     border-left: 5px solid #E74C3C; /* Red border */
 }
+
+/* Optional: Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Apply animation to elements */
+.stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .info-card, .output-card {
+    animation: fadeIn 0.8s ease-out;
+}
+/* More specific animations can be added if desired */
