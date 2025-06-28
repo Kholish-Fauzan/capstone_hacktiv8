@@ -84,7 +84,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             response_narasi = gemini_model.generate_content(
                 prompt_narasi,
                 generation_config={
-                    "max_output_tokens": 2000,
+                    "max_output_tokens": 10000,
                     "temperature": 0.6,
                     "top_p": 0.9,
                     "top_k": 50
@@ -135,7 +135,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                 response_analisis = gemini_model.generate_content(
                     prompt_analisis,
                     generation_config={
-                        "max_output_tokens": 1500,
+                        "max_output_tokens": 10000,
                         "temperature": 0.6,
                         "top_p": 0.9,
                         "top_k": 40
