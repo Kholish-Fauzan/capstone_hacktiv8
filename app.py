@@ -79,7 +79,7 @@ if st.button("Generate Kisah & Promosi dengan AI", type="primary"):
 
             response_narasi = gemini_model.generate_content(
                 prompt_narasi,
-                generation_config={"max_output_tokens": 500, "temperature": 0.7, "top_p": 0.95}
+                generation_config={"max_output_tokens": 500, "temperature": 0.2, "top_p": 0.6}
             )
             generated_narration = response_narasi.text
             st.subheader("📝 Kisah & Narasi dari Gemini AI")
