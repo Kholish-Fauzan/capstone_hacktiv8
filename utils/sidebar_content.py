@@ -2,6 +2,8 @@
 import streamlit as st
 
 def render_custom_sidebar_content():
+    st.sidebar.success("Pilih Satu Halaman di Atas")
+
     """
     Fungsi ini berisi semua elemen UI kustom yang Anda inginkan di sidebar,
     yang akan muncul di bawah navigasi otomatis Streamlit.
