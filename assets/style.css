@@ -1,4 +1,4 @@
-/* assets/style.css - REVISI TOTAL (FINAL UNTUK LAYOUT) */
+/* assets/style.css - REVISI TOTAL (FINAL UNTUK LAYOUT & STYLING) */
 
 /* Import Google Fonts (optional, but good for consistent typography) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -45,6 +45,8 @@ h2 {
 }
 
 /* h3 untuk judul kolom analisis (Poin Jual Utama, Saran Peningkatan) */
+/* Catatan: Ini tidak lagi digunakan untuk judul kolom terpisah di app.py,
+   tapi tetap relevan jika digunakan di halaman lain atau untuk struktur PDF. */
 h3 {
     color: #34495E; /* Medium Blue Gray */
     font-weight: 600;
@@ -54,7 +56,7 @@ h3 {
     text-align: center; /* Pusat judul kolom */
 }
 
-/* h4 untuk judul di dalam info-card */
+/* h4 untuk judul di dalam info-card (misal: Poin Jual Utama, Segmen Wisatawan Ideal, dll.) */
 h4 {
     color: #1ABC9C; /* Teal Green */
     font-weight: 700;
@@ -342,3 +344,4 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 .stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .info-card, .output-card {
     animation: fadeIn 0.8s ease-out;
 }
+/* More specific animations can be added if desired */

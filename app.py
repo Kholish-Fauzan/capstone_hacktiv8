@@ -41,7 +41,7 @@ with st.sidebar:
 
 # --- Main Content for app.py (Homepage) ---
 st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")
-st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-2.5 Flash**.")
+st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-1.5 Flash**.")
 st.markdown("---")
 
 # --- Input Section ---
@@ -146,8 +146,7 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
     if generated_narration: # Pastikan narasi sudah ada sebelum analisis
         st.markdown("---")
         st.subheader("💡 Wawasan & Optimasi Promosi dari Gemini AI")
-        # --- PERUBAHAN DI SINI UNTUK MENEMPATKAN JUDUL ANALISIS DENGAN BENAR ---
-        download_analisis_placeholder = st.empty()
+        # download_analisis_placeholder = st.empty() # Ini akan dipindahkan ke bawah agar tombolnya di atas kolom
 
         with st.spinner("AI sedang menganalisis potensi tak terbatas destinasi Anda... Mohon tunggu! 🚀"):
             analysis_data = generate_analysis_data(gemini_model, lokasi_objek, st.session_state.generated_narration)
@@ -155,10 +154,14 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
             if analysis_data:
                 st.session_state.analysis_data = analysis_data
 
+                # Pindahkan placeholder download ke sini agar tombol muncul di atas kolom analisis
+                download_analisis_placeholder = st.empty()
+
                 col_analysis1, col_analysis2 = st.columns(2)
 
                 with col_analysis1:
-                    st.markdown("<h3>Poin Jual Utama</h3>", unsafe_allow_html=True) # Judul untuk kolom ini
+                    # >>> BARIS INI DIHAPUS UNTUK MENGHINDARI DUPLIKASI DAN PENEMPATAN DI LUAR KOTAK <<<
+                    # st.markdown("<h3>Poin Jual Utama</h3>", unsafe_allow_html=True)
                     col1_keys = [
                         "Poin Jual Utama",
                         "Segmen Wisatawan Ideal",
@@ -167,14 +170,15 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
                     for key in col1_keys:
                         if key in analysis_data and analysis_data[key]:
                             st.markdown(f'<div class="info-card">', unsafe_allow_html=True)
-                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True)
+                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True) # Ini adalah judul yang masuk ke dalam kotak
                             for item in analysis_data[key]:
                                 st.markdown(f"**👉 {item['poin']}**")
                                 st.write(item['deskripsi'])
                             st.markdown('</div>', unsafe_allow_html=True)
 
                 with col_analysis2:
-                    st.markdown("<h3>Saran Peningkatan Pesan Promosi</h3>", unsafe_allow_html=True) # Judul untuk kolom ini
+                    # >>> BARIS INI DIHAPUS UNTUK MENGHINDARI DUPLIKASI DAN PENEMPATAN DI LUAR KOTAK <<<
+                    # st.markdown("<h3>Saran Peningkatan Pesan Promosi</h3>", unsafe_allow_html=True)
                     col2_keys = [
                         "Saran Peningkatan Pesan Promosi",
                         "Potensi Kolaborasi Lokal"
@@ -182,12 +186,13 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
                     for key in col2_keys:
                         if key in analysis_data and analysis_data[key]:
                             st.markdown(f'<div class="info-card">', unsafe_allow_html=True)
-                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True)
+                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True) # Ini adalah judul yang masuk ke dalam kotak
                             for item in analysis_data[key]:
                                 st.markdown(f"**👉 {item['poin']}**")
                                 st.write(item['deskripsi'])
                             st.markdown('</div>', unsafe_allow_html=True)
 
+                # Tombol download di sini, setelah kolom analisis dibuat
                 pdf_bytes_analysis = generate_analysis_pdf(analysis_data, f"Analisis_{judul_objek}")
                 if pdf_bytes_analysis:
                     download_analisis_placeholder.download_button(
