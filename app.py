@@ -11,20 +11,20 @@ except KeyError:
     st.stop()
 
 try:
-    gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash')
 except Exception as e:
-    st.error(f"Gagal menginisialisasi model Gemini-1.5 Flash: {e}")
+    st.error(f"Gagal menginisialisasi model Gemini-2.5 Flash: {e}")
     st.stop()
 
 # --- Streamlit UI Setup ---
-st.set_page_config(layout="wide", page_title="Jelajah Kisah Lokal AI")
+st.set_page_config(layout="wide", page_title="Jelajah Kisah & Potensi Lokal Berbasis AI")
 
 st.title("Jelajah Kisah: Pengenalan Budaya & Pariwisata Lokal Berbasis AI")
-st.write("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-1.5 Flash**.")
+st.write("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-2.5 Flash**.")
 
 # --- Sidebar ---
 st.sidebar.header("Tentang Aplikasi Ini")
-st.sidebar.write("Manfaatkan Gemini-1.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya lokal.")
+st.sidebar.write("Memanfaatkan Gemini-2.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya lokal.")
 st.sidebar.write("---")
 st.sidebar.write("Dibuat oleh Kholish Fauzan")
 
