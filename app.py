@@ -11,6 +11,11 @@ if not GOOGLE_API_KEY:
 
 # Configure Google Gemini AI
 genai.configure(api_key=GOOGLE_API_KEY)
+try:
+    gemini_model = genai.GenerativeModel('gemini-2.5-flash')
+except Exception as e:
+    st.error(f"Gagal menginisialisasi model Gemini: {e}")
+    st.stop()
 
 # Streamlit UI setup
 st.title("Jelajah Bondowoso: Kisah Budaya & Promosi Pariwisata Berbasis AI")
