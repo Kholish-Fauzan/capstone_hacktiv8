@@ -22,11 +22,11 @@ except Exception as e:
 st.set_page_config(layout="wide", page_title="Jelajah Bondowoso AI")
 
 st.title("Jelajah Bondowoso: Kisah Budaya & Promosi Pariwisata Berbasis AI")
-st.write("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata Bondowoso pakai **Gemini-1.5 Flash AI**.")
+st.write("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata Bondowoso pakai **Gemini-2.5 Flash AI**.")
 
 # --- Sidebar ---
 st.sidebar.header("Tentang Aplikasi Ini")
-st.sidebar.write("Manfaatkan Gemini-1.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya Bondowoso.")
+st.sidebar.write("Manfaatkan Gemini-2.5 Flash untuk bikin cerita dan analisis promosi obyek wisata/budaya Bondowoso.")
 st.sidebar.write("---")
 st.sidebar.write("Dibuat dengan ❤️")
 
