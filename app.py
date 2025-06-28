@@ -1,14 +1,14 @@
 import streamlit as st
 import google.generativeai as genai
 import os
-import json # Untuk parsing JSON dari Gemini
-import pandas as pd # Untuk menampilkan tabel
-from reportlab.lib.pagesizes import letter # Untuk PDF
+import json
+import pandas as pd
+from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.lib import colors
-import io # Untuk membuat file di memori
+import io
 
 # --- Konfigurasi API ---
 try:
@@ -34,28 +34,24 @@ def generate_pdf_from_text(text_content, filename_prefix="document"):
                             topMargin=inch, bottomMargin=inch)
     styles = getSampleStyleSheet()
 
-    # Style untuk paragraf normal
     normal_style = styles['Normal']
     normal_style.fontSize = 10
-    normal_style.leading = 14 # Jarak antar baris
+    normal_style.leading = 14
 
-    # Style untuk judul
     title_style = styles['h1']
     title_style.fontSize = 18
-    title_style.alignment = 1 # Center
+    title_style.alignment = 1
 
     story = []
-    # Tambahkan judul jika ada
     if "judul_objek" in st.session_state and st.session_state.judul_objek:
         story.append(Paragraph(st.session_state.judul_objek, title_style))
         story.append(Spacer(1, 0.2 * inch))
 
-    # Pisahkan teks ke paragraf berdasarkan baris baru ganda
     paragraphs = text_content.split('\n\n')
     for para_text in paragraphs:
         if para_text.strip():
             story.append(Paragraph(para_text.replace('\n', '<br/>'), normal_style))
-            story.append(Spacer(1, 0.1 * inch)) # Spasi antar paragraf
+            story.append(Spacer(1, 0.1 * inch))
 
     try:
         doc.build(story)
@@ -75,60 +71,73 @@ def generate_analysis_pdf(analysis_data, filename_prefix="analysis"):
 
     title_style = styles['h1']
     title_style.fontSize = 18
-    title_style.alignment = 1 # Center
+    title_style.alignment = 1
 
-    # Style untuk tabel
-    table_style_header = ParagraphStyle('TableHeader',
+    table_header_style = ParagraphStyle('TableHeader',
                                         parent=styles['Normal'],
                                         fontName='Helvetica-Bold',
                                         fontSize=10,
-                                        alignment=1, # Center
-                                        backColor=colors.HexColor('#F0F2F6')) # Warna latar belakang header Streamlit default
+                                        alignment=1,
+                                        backColor=colors.HexColor('#F0F2F6'))
 
-    table_style_cell = ParagraphStyle('TableCell',
+    table_cell_style = ParagraphStyle('TableCell',
                                        parent=styles['Normal'],
                                        fontSize=9)
-
 
     story = []
     story.append(Paragraph("Wawasan & Optimasi Promosi dari Gemini AI", title_style))
     story.append(Spacer(1, 0.2 * inch))
 
     if analysis_data:
-        # Siapkan data untuk tabel
-        table_headers = ["Fitur Analisis", "Wawasan/Saran"]
-        table_data = [table_headers]
+        table_headers = ["Fitur Analisis", "Wawasan/Saran Strategi"]
+        table_data = [
+            [Paragraph(table_headers[0], table_header_style), Paragraph(table_headers[1], table_header_style)]
+        ]
 
-        # Mapping kunci ke nama yang lebih rapi untuk tampilan
-        key_mapping = {
-            "Poin Jual Utama": "Poin Jual Utama",
-            "Segmen Wisatawan Ideal": "Segmen Wisatawan Ideal",
-            "Ide Monetisasi & Produk": "Ide Monetisasi & Produk Pariwisata Konkret",
-            "Saran Peningkatan Promosi": "Saran Peningkatan Pesan Promosi",
-            "Potensi Kolaborasi Lokal": "Potensi Kolaborasi Lokal"
-        }
+        # Order of keys as they should appear
+        ordered_keys = [
+            "Poin Jual Utama",
+            "Segmen Wisatawan Ideal",
+            "Ide Monetisasi & Produk Pariwisata",
+            "Saran Peningkatan Pesan Promosi",
+            "Potensi Kolaborasi Lokal"
+        ]
 
-        for key, display_name in key_mapping.items():
-            value = analysis_data.get(key, "N/A")
-            if isinstance(value, list):
-                # Ubah list menjadi string berpoin untuk cell tabel
-                formatted_value = "<br/>".join([f"• {item}" for item in value])
-            else:
-                formatted_value = str(value)
-            table_data.append([Paragraph(display_name, table_style_header), Paragraph(formatted_value, table_style_cell)])
+        for key in ordered_keys:
+            if key in analysis_data:
+                items = analysis_data[key]
+                # Each item is an object { "poin": "...", "deskripsi": "..." }
+                formatted_items = []
+                for item in items:
+                    if "poin" in item and "deskripsi" in item:
+                        formatted_items.append(f"<b>{item['poin']}</b>: {item['deskripsi']}")
+                    elif "deskripsi" in item: # fallback if only description is present
+                        formatted_items.append(f"• {item['deskripsi']}")
+                    else: # fallback to just the item if neither are perfect
+                        formatted_items.append(f"• {str(item)}")
 
-        table = Table(table_data, colWidths=[2*inch, 4.5*inch]) # Lebar kolom
+                table_data.append([
+                    Paragraph(key, table_cell_style),
+                    Paragraph("<br/><br/>".join(formatted_items), table_cell_style)
+                ])
+
+        table = Table(table_data, colWidths=[2*inch, 4.5*inch])
         table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#F0F2F6')), # Header background
-            ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#31333F')), # Header text color
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#F0F2F6')),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#31333F')),
             ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
             ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, 0), 10),
+            ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'), # Only bold first column
+            ('FONTNAME', (1, 0), (-1, -1), 'Helvetica'), # Regular for second column
+            ('FONTSIZE', (0, 0), (-1, -1), 9),
             ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
             ('BACKGROUND', (0, 0), (-1, -1), colors.white),
             ('GRID', (0,0), (-1,-1), 0.5, colors.grey),
             ('BOX', (0,0), (-1,-1), 1, colors.black),
+            ('LEFTPADDING', (0,0), (-1,-1), 6),
+            ('RIGHTPADDING', (0,0), (-1,-1), 6),
+            ('TOPPADDING', (0,0), (-1,-1), 6),
+            ('BOTTOMPADDING', (0,0), (-1,-1), 6),
         ]))
         story.append(table)
     else:
@@ -142,13 +151,12 @@ def generate_analysis_pdf(analysis_data, filename_prefix="analysis"):
         st.error(f"Gagal membuat PDF analisis: {e}")
         return None
 
-
 # --- Streamlit UI Setup ---
 st.set_page_config(layout="wide", page_title="Jelajah Kisah & Potensi Lokal Berbasis AI")
 
 st.title("Jelajah Kisah: Pengenalan Budaya & Pariwisata Lokal Berbasis AI")
 st.markdown("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-2.5 Flash**.")
-st.markdown("---") # Garis pemisah visual
+st.markdown("---")
 
 # --- Sidebar ---
 st.sidebar.header("Tentang Aplikasi Ini")
@@ -191,7 +199,6 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
         st.warning("Judul Objek, Lokasi Obyek, dan Deskripsi Kunci wajib diisi ya!")
         st.stop()
 
-    # Simpan input ke session_state agar bisa diakses oleh tombol download
     st.session_state.judul_objek = judul_objek
     st.session_state.lokasi_objek = lokasi_objek
     st.session_state.deskripsi_kunci = deskripsi_kunci
@@ -225,7 +232,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             response_narasi = gemini_model.generate_content(
                 prompt_narasi,
                 generation_config={
-                    "max_output_tokens": 6000, # Batas token lebih tinggi
+                    "max_output_tokens": 6000,
                     "temperature": 0.6,
                     "top_p": 0.9,
                     "top_k": 50
@@ -235,7 +242,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             if response_narasi.parts:
                 generated_narration = response_narasi.text
                 narasi_placeholder.markdown(generated_narration)
-                st.session_state.generated_narration = generated_narration # Simpan ke session state
+                st.session_state.generated_narration = generated_narration
 
                 pdf_bytes = generate_pdf_from_text(generated_narration, f"Narasi_{judul_objek}")
                 if pdf_bytes:
@@ -258,7 +265,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             st.session_state.generated_narration = ""
 
     # --- Tahap 2: Analisis & Optimasi oleh Gemini ---
-    if st.session_state.generated_narration: # Lanjutkan hanya jika narasi berhasil digenerate
+    if st.session_state.generated_narration:
         st.markdown("---")
         st.subheader("💡 Wawasan & Optimasi Promosi dari Gemini AI")
         analisis_placeholder = st.empty()
@@ -266,39 +273,96 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
 
         with st.spinner("Saya sedang menganalisis & mengoptimasi promosi..."):
             try:
-                # === Prompt Analisis dengan Permintaan JSON ===
-                # Penting: Menginstruksikan format JSON dengan kunci spesifik
                 prompt_analisis = f"""
                 Anda adalah seorang konsultan pemasaran pariwisata dan pengembang ekonomi lokal untuk wilayah {lokasi_objek}.
                 Analisis narasi budaya/pariwisata berikut secara mendalam untuk mengekstrak wawasan kunci dan menyarankan optimasi yang konkret dan terperinci untuk dampak ekonomi dan promosi pariwisata.
 
-                Berikan respons Anda dalam format JSON. Objek JSON harus memiliki 5 kunci berikut, dengan nilai berupa array string atau string singkat dan padat:
-                - "Poin Jual Utama" (3-5 poin unik)
-                - "Segmen Wisatawan Ideal" (2-3 segmen dengan alasan singkat)
-                - "Ide Monetisasi & Produk Pariwisata" (2-3 ide konkret, misal: "Paket Wisata A", "Produk Souvenir B")
-                - "Saran Peningkatan Pesan Promosi" (2-3 saran singkat atau frasa kunci)
-                - "Potensi Kolaborasi Lokal" (2-3 jenis bisnis/komunitas lokal yang relevan dengan {lokasi_objek})
+                Berikan respons Anda dalam format JSON. Objek JSON harus memiliki 5 kunci utama berikut, di mana setiap kunci memiliki nilai berupa ARRAY OBJEK. Setiap objek dalam array tersebut harus memiliki dua properti: "poin" (nama singkat dari strategi/ide) dan "deskripsi" (penjelasan singkat namun padat tentang strategi tersebut).
+
+                Contoh struktur untuk satu poin:
+                {{
+                  "Poin Jual Utama": [
+                    {{ "poin": "Pemandangan Kawah Ijen", "deskripsi": "Keunikan kawah dengan api biru dan danau asam belerang, menarik wisatawan petualangan dan fotografi." }},
+                    {{ "poin": "Tradisi Kopi Bondowoso", "deskripsi": "Pengalaman langsung dari kebun hingga cangkir, menawarkan tur edukasi dan workshop kopi." }}
+                  ],
+                  "Segmen Wisatawan Ideal": [
+                    {{ "poin": "Wisatawan Minat Khusus (Kopi)", "deskripsi": "Mereka mencari pengalaman otentik dan edukatif tentang proses dan cita rasa kopi lokal." }}
+                  ]
+                  // ... dan seterusnya untuk kunci lainnya
+                }}
+
+                Pastikan setiap "deskripsi" cukup informatif sehingga pengguna memahami strategi atau potensi di baliknya, tidak hanya daftar poin.
 
                 Narasi yang Dihasilkan:
                 ---
                 {st.session_state.generated_narration}
                 ---
                 """
-                
+
                 response_analisis = gemini_model.generate_content(
                     prompt_analisis,
                     generation_config={
-                        "max_output_tokens": 6000, # Cukup 1000 untuk JSON singkat
-                        "temperature": 0.5, # Lebih rendah untuk objektivitas
-                        "response_mime_type": "application/json", # Minta respons dalam JSON
-                        "response_schema": { # Definisi skema JSON yang diharapkan
+                        "max_output_tokens": 6000, # Sedikit lebih tinggi karena deskripsi lebih panjang
+                        "temperature": 0.5,
+                        "response_mime_type": "application/json",
+                        "response_schema": {
                             "type": "OBJECT",
                             "properties": {
-                                "Poin Jual Utama": { "type": "ARRAY", "items": { "type": "STRING" } },
-                                "Segmen Wisatawan Ideal": { "type": "ARRAY", "items": { "type": "STRING" } },
-                                "Ide Monetisasi & Produk Pariwisata": { "type": "ARRAY", "items": { "type": "STRING" } },
-                                "Saran Peningkatan Pesan Promosi": { "type": "ARRAY", "items": { "type": "STRING" } },
-                                "Potensi Kolaborasi Lokal": { "type": "ARRAY", "items": { "type": "STRING" } }
+                                "Poin Jual Utama": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "OBJECT",
+                                        "properties": {
+                                            "poin": {"type": "STRING"},
+                                            "deskripsi": {"type": "STRING"}
+                                        },
+                                        "required": ["poin", "deskripsi"]
+                                    }
+                                },
+                                "Segmen Wisatawan Ideal": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "OBJECT",
+                                        "properties": {
+                                            "poin": {"type": "STRING"},
+                                            "deskripsi": {"type": "STRING"}
+                                        },
+                                        "required": ["poin", "deskripsi"]
+                                    }
+                                },
+                                "Ide Monetisasi & Produk Pariwisata": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "OBJECT",
+                                        "properties": {
+                                            "poin": {"type": "STRING"},
+                                            "deskripsi": {"type": "STRING"}
+                                        },
+                                        "required": ["poin", "deskripsi"]
+                                    }
+                                },
+                                "Saran Peningkatan Pesan Promosi": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "OBJECT",
+                                        "properties": {
+                                            "poin": {"type": "STRING"},
+                                            "deskripsi": {"type": "STRING"}
+                                        },
+                                        "required": ["poin", "deskripsi"]
+                                    }
+                                },
+                                "Potensi Kolaborasi Lokal": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "OBJECT",
+                                        "properties": {
+                                            "poin": {"type": "STRING"},
+                                            "deskripsi": {"type": "STRING"}
+                                        },
+                                        "required": ["poin", "deskripsi"]
+                                    }
+                                }
                             },
                             "required": [
                                 "Poin Jual Utama",
@@ -319,27 +383,38 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                 else:
                     analisis_placeholder.warning("Gemini tidak dapat menghasilkan analisis. Respons kosong atau tidak terduga. Coba sesuaikan prompt atau input.")
 
-
                 if gemini_analysis_raw_text:
                     try:
-                        # Parsing JSON dari respons
                         analysis_data = json.loads(gemini_analysis_raw_text)
-                        
-                        # Mengubah data analisis menjadi DataFrame untuk tampilan tabel
-                        # Mengubah format untuk st.dataframe
+
                         table_data = []
-                        for key, value in analysis_data.items():
-                            if isinstance(value, list):
-                                table_data.append({"Fitur Analisis": key, "Wawasan/Saran": "\n- " + "\n- ".join(value)})
-                            else:
-                                table_data.append({"Fitur Analisis": key, "Wawasan/Saran": value})
-                        
+                        # Order of keys for display
+                        ordered_keys = [
+                            "Poin Jual Utama",
+                            "Segmen Wisatawan Ideal",
+                            "Ide Monetisasi & Produk Pariwisata",
+                            "Saran Peningkatan Pesan Promosi",
+                            "Potensi Kolaborasi Lokal"
+                        ]
+
+                        for key in ordered_keys:
+                            if key in analysis_data:
+                                items = analysis_data[key]
+                                formatted_items = []
+                                for item in items:
+                                    if "poin" in item and "deskripsi" in item:
+                                        formatted_items.append(f"**{item['poin']}**: {item['deskripsi']}")
+                                    elif "deskripsi" in item:
+                                        formatted_items.append(f"• {item['deskripsi']}")
+                                    else:
+                                        formatted_items.append(f"• {str(item)}")
+                                table_data.append({"Fitur Analisis": key, "Wawasan/Saran Strategi": "\n\n".join(formatted_items)})
+
                         df_analysis = pd.DataFrame(table_data)
-                        analisis_placeholder.dataframe(df_analysis, use_container_width=True, hide_index=True) # Tampilkan tabel
+                        analisis_placeholder.dataframe(df_analysis, use_container_width=True, hide_index=True)
 
-                        st.session_state.analysis_data = analysis_data # Simpan ke session state
+                        st.session_state.analysis_data = analysis_data
 
-                        # Tombol Unduh PDF Analisis
                         pdf_bytes_analysis = generate_analysis_pdf(analysis_data, f"Analisis_{judul_objek}")
                         if pdf_bytes_analysis:
                             download_analisis_placeholder.download_button(
@@ -360,7 +435,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
             except Exception as e:
                 st.error(f"Terjadi kesalahan saat analisis promosi dengan Gemini: {e}. Coba periksa prompt dan input.")
 
-# --- Sidebar Explanation (Moved to a separate section for better organization) ---
+# --- Sidebar Explanation ---
 st.sidebar.markdown("""
 ### Bagaimana Aplikasi Ini Bekerja?
 1.  **Input Data**: Masukkan nama objek, **lokasi objek**, deskripsi kunci, serta informasi tentang target audiens dan gaya bahasa yang diinginkan di bagian utama.
