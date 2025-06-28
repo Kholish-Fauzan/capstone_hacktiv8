@@ -1,111 +1,126 @@
 # utils/pdf_utils.py
-import io
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Frame, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.units import inch
-import streamlit as st # Masih perlu untuk st.session_state dan st.error
+from io import BytesIO
 
-def generate_pdf_from_text(text_content, filename_prefix="document"):
-    """Menghasilkan PDF dari teks biasa."""
-    buffer = io.BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter,
-                            rightMargin=inch, leftMargin=inch,
-                            topMargin=inch, bottomMargin=inch)
+def generate_pdf_from_text(text_content, title="Dokumen Streamlit"):
+    """
+    Menghasilkan file PDF dari string teks yang diberikan.
+    """
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
     styles = getSampleStyleSheet()
-
-    normal_style = styles['Normal']
-    normal_style.fontSize = 10
-    normal_style.leading = 14
-
-    title_style = styles['h1']
-    title_style.fontSize = 18
-    title_style.alignment = 1
-
     story = []
-    if "judul_objek" in st.session_state and st.session_state.judul_objek:
-        story.append(Paragraph(st.session_state.judul_objek, title_style))
-        story.append(Spacer(1, 0.2 * inch))
 
-    paragraphs = text_content.split('\n\n')
-    for para_text in paragraphs:
-        if para_text.strip():
-            story.append(Paragraph(para_text.replace('\n', '<br/>'), normal_style))
-            story.append(Spacer(1, 0.1 * inch))
+    # Custom style for title
+    title_style = ParagraphStyle(
+        'TitleStyle',
+        parent=styles['h1'],
+        fontSize=24,
+        leading=28,
+        alignment=TA_CENTER,
+        spaceAfter=20
+    )
+
+    # Custom style for normal text
+    normal_style = ParagraphStyle(
+        'NormalStyle',
+        parent=styles['Normal'],
+        fontSize=12,
+        leading=14,
+        alignment=TA_LEFT,
+        spaceAfter=12
+    )
+
+    story.append(Paragraph(title, title_style))
+    story.append(Spacer(1, 0.2 * inch))
+    story.append(Paragraph(text_content.replace('\n', '<br/>'), normal_style)) # Replace newline with <br/> for ReportLab
 
     try:
         doc.build(story)
         buffer.seek(0)
         return buffer.getvalue()
     except Exception as e:
-        st.error(f"Gagal membuat PDF narasi: {e}")
+        print(f"Error generating PDF: {e}")
         return None
 
-def generate_analysis_pdf(analysis_data, filename_prefix="analysis"):
-    """Menghasilkan PDF dari data analisis dalam bentuk layout terpisah, bukan tabel."""
-    buffer = io.BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter,
-                            rightMargin=inch, leftMargin=inch,
-                            topMargin=inch, bottomMargin=inch)
+def generate_analysis_pdf(analysis_data, title="Analisis Promosi"):
+    """
+    Menghasilkan file PDF dari data analisis yang diberikan dalam format yang terstruktur.
+    """
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
     styles = getSampleStyleSheet()
-
-    title_style = styles['h1']
-    title_style.fontSize = 18
-    title_style.alignment = 1
-
-    section_title_style = ParagraphStyle('SectionTitle',
-                                         parent=styles['h2'],
-                                         fontName='Helvetica-Bold',
-                                         fontSize=12,
-                                         spaceAfter=6)
-
-    sub_point_style = ParagraphStyle('SubPoint',
-                                     parent=styles['Normal'],
-                                     fontName='Helvetica-Bold',
-                                     fontSize=10,
-                                     spaceAfter=2,
-                                     leftIndent=20)
-
-    description_style = ParagraphStyle('Description',
-                                       parent=styles['Normal'],
-                                       fontSize=9,
-                                       spaceAfter=12,
-                                       leftIndent=20)
-
     story = []
-    story.append(Paragraph("Wawasan & Optimasi Promosi dari Gemini AI", title_style))
-    story.append(Spacer(1, 0.2 * inch))
 
-    if analysis_data:
-        ordered_keys = [
-            "Poin Jual Utama",
-            "Segmen Wisatawan Ideal",
-            "Ide Monetisasi & Produk Pariwisata",
-            "Saran Peningkatan Pesan Promosi",
-            "Potensi Kolaborasi Lokal"
-        ]
+    # Custom styles
+    title_style = ParagraphStyle(
+        'TitleStyle',
+        parent=styles['h1'],
+        fontSize=24,
+        leading=28,
+        alignment=TA_CENTER,
+        spaceAfter=20,
+        textColor='#1ABC9C' # Warna hijau toska
+    )
+    section_title_style = ParagraphStyle(
+        'SectionTitleStyle',
+        parent=styles['h2'],
+        fontSize=18,
+        leading=22,
+        spaceAfter=10,
+        textColor='#34495E' # Warna biru keabuan
+    )
+    point_style = ParagraphStyle(
+        'PointStyle',
+        parent=styles['h3'],
+        fontSize=14,
+        leading=16,
+        spaceBefore=10,
+        spaceAfter=5,
+        textColor='#2C3E50' # Warna biru gelap
+    )
+    description_style = ParagraphStyle(
+        'DescriptionStyle',
+        parent=styles['Normal'],
+        fontSize=11,
+        leading=13,
+        spaceAfter=10,
+        leftIndent=20
+    )
+    footer_style = ParagraphStyle(
+        'FooterStyle',
+        parent=styles['Normal'],
+        fontSize=9,
+        alignment=TA_CENTER,
+        textColor='#777777',
+        spaceBefore=30
+    )
 
-        for key in ordered_keys:
-            if key in analysis_data:
-                story.append(Paragraph(key, section_title_style))
-                items = analysis_data[key]
-                for item in items:
-                    if "poin" in item and "deskripsi" in item:
-                        story.append(Paragraph(f"{item['poin']}:", sub_point_style))
-                        story.append(Paragraph(item['deskripsi'], description_style))
-                    elif "deskripsi" in item:
-                        story.append(Paragraph(f"• {item['deskripsi']}", description_style))
-                    else:
-                        story.append(Paragraph(f"• {str(item)}", description_style))
-                story.append(Spacer(1, 0.2 * inch))
+    story.append(Paragraph(title, title_style))
+    story.append(Spacer(1, 0.3 * inch))
 
-    else:
-        story.append(Paragraph("Tidak ada data analisis yang valid untuk ditampilkan.", styles['Normal']))
+    for key, items in analysis_data.items():
+        story.append(Paragraph(key, section_title_style))
+        story.append(Spacer(1, 0.1 * inch))
+        if isinstance(items, list):
+            for item in items:
+                story.append(Paragraph(f"👉 {item.get('poin', '')}", point_style))
+                story.append(Paragraph(item.get('deskripsi', ''), description_style))
+        else: # Handle cases where value might be a string (e.g., if JSON structure changes)
+            story.append(Paragraph(str(items), description_style))
+        story.append(Spacer(1, 0.2 * inch))
+
+    story.append(Spacer(1, 0.5 * inch))
+    story.append(Paragraph(f"© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.", footer_style))
 
     try:
         doc.build(story)
         buffer.seek(0)
         return buffer.getvalue()
     except Exception as e:
-        st.error(f"Gagal membuat PDF analisis: {e}")
+        print(f"Error generating analysis PDF: {e}")
         return None

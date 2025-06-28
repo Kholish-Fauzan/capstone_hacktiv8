@@ -19,9 +19,9 @@ except Exception as e:
     st.stop()
 
 # --- Streamlit UI Setup ---
-# Set page_title agar "Beranda Utama" muncul di sidebar navigasi Streamlit
+# Set page_title agar "Beranda Utama" muncul di tab browser dan sebagai label utama di sidebar
 st.set_page_config(
-    page_title="Beranda Utama", # Nama ini akan muncul di sidebar Streamlit
+    page_title="Beranda Utama",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -33,7 +33,8 @@ def load_css(file_name):
 
 load_css('assets/style.css') # Load CSS file here
 
-# --- Sidebar (konten tambahan di sidebar, navigasi otomatis oleh Streamlit) ---
+# --- Sidebar (konten yang akan muncul di sidebar di SEMUA HALAMAN) ---
+# PENTING: Blok 'with st.sidebar:' ini HARUS disalin ke setiap file di folder pages/
 with st.sidebar:
     # st.image("https://i.imgur.com/example_logo.png", use_column_width=True) # Placeholder for a potential logo
     st.header("Nusantara Story AI 🇮🇩")
@@ -54,15 +55,13 @@ with st.sidebar:
 
 # --- Main Content for app.py (Homepage) ---
 st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")
-st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-1.5 Flash**.")
+st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-2.5 Flash**.")
 st.markdown("---")
 
 # --- Input Section ---
 st.header("Ceritakan Kekayaan Budaya/Wisata Lokal Anda ✍️")
 
 # Custom HTML/CSS for input fields to control spacing and help text
-# Ini akan membuat setiap input box memiliki label di atasnya, dan help text di bawahnya,
-# tanpa spasi aneh karena icon help Streamlit bawaan.
 st.markdown("""
 <style>
     .stTextInput, .stSelectbox, .stTextArea {
@@ -148,11 +147,11 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
             gemini_model, judul_objek, lokasi_objek, deskripsi_kunci, target_audiens, gaya_bahasa
         )
 
-        if generated_naration:
-            narasi_placeholder.markdown(f"<div class='output-card'><p>{generated_naration}</p></div>", unsafe_allow_html=True)
-            st.session_state.generated_narration = generated_naration
+        if generated_narration:
+            narasi_placeholder.markdown(f"<div class='output-card'><p>{generated_narration}</p></div>", unsafe_allow_html=True)
+            st.session_state.generated_narration = generated_narration
 
-            pdf_bytes = generate_pdf_from_text(generated_naration, f"Narasi_{judul_objek}")
+            pdf_bytes = generate_pdf_from_text(generated_narration, f"Narasi_{judul_objek}")
             if pdf_bytes:
                 download_narasi_placeholder.download_button(
                     label="Unduh Naskah Cerita (PDF) ⬇️",
@@ -166,7 +165,7 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
             st.session_state.generated_narration = ""
 
     # --- Tahap 2: Analisis & Optimasi oleh Gemini ---
-    if generated_naration: # Pastikan narasi sudah ada sebelum analisis
+    if generated_narration: # Pastikan narasi sudah ada sebelum analisis
         st.markdown("---")
         st.subheader("💡 Wawasan & Optimasi Promosi dari Gemini AI")
         analisis_output_container = st.container()

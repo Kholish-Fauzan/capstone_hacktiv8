@@ -1,130 +1,90 @@
 # utils/gemini_utils.py
-
-import streamlit as st
 import json
-import time
-import re # Import the regular expression module
+import streamlit as st
 
 def generate_narrative(model, judul_objek, lokasi_objek, deskripsi_kunci, target_audiens, gaya_bahasa):
-    """Menghasilkan narasi menggunakan model Gemini."""
+    """
+    Menghasilkan narasi cerita berdasarkan input pengguna menggunakan model Gemini.
+    """
+    prompt = f"""
+    Anda adalah seorang ahli narasi budaya dan pariwisata Indonesia. Buatlah narasi yang memukau dan informatif tentang objek budaya/pariwisata berikut:
+
+    Nama Objek: {judul_objek}
+    Lokasi: {lokasi_objek}
+    Deskripsi Kunci/Fakta Sejarah: {deskripsi_kunci}
+
+    Target Audiens (jika ada): {target_audiens if target_audiens else 'Umum'}
+    Gaya Bahasa (jika dipilih): {gaya_bahasa if gaya_bahasa != 'Pilih Gaya' else 'Informatif dan Menarik'}
+
+    Fokuskan pada:
+    1. Keunikan dan daya tarik utama objek tersebut.
+    2. Sejarah atau latar belakang budaya yang relevan (jika ada dalam deskripsi kunci).
+    3. Potensi pengalaman bagi pengunjung/pembaca.
+    4. Gunakan bahasa yang kaya dan deskriptif.
+    5. Panjang narasi sekitar 400-600 kata.
+
+    Pastikan narasi tersebut otentik dan menggugah minat.
+    """
     try:
-        prompt_narasi = f"""
-        Anda adalah seorang pencerita ulung dan promotor pariwisata yang sangat mengenal kekayaan budaya dan pariwisata di {lokasi_objek}, Indonesia.
-        Buatlah narasi atau skrip promosi yang sangat menarik dan detail (setidaknya beberapa paragraf, sekitar 300-500 kata) berdasarkan informasi berikut:
-
-        Nama Objek Budaya/Pariwisata: {judul_objek}
-        Poin-Poin Kunci / Fakta Sejarah / Detail Penting: {deskripsi_kunci}
-        """
-        if target_audiens.strip():
-            prompt_narasi += f"Target Audiens Utama: {target_audiens}\n"
-        if gaya_bahasa != "Pilih Gaya":
-            prompt_narasi += f"Gaya Bahasa yang Diinginkan: {gaya_bahasa}\n"
-
-        prompt_narasi += """
-        Kembangkan poin-poin ini menjadi narasi yang koheren dan deskriptif. Tambahkan sentuhan emosional dan gambarkan pengalaman yang dapat dirasakan pengunjung/pembaca. Pastikan narasi ini mengalir dengan baik dan terasa lengkap.
-        """
-
-        response_narasi = model.generate_content(
-            prompt_narasi,
-            generation_config={
-                "max_output_tokens": 6000,
-                "temperature": 0.6,
-                "top_p": 0.9,
-                "top_k": 50
-            }
-        )
-
-        if response_narasi.parts:
-            return response_narasi.text
-        elif response_narasi.candidates and response_narasi.candidates[0].finish_reason:
-            st.warning(f"Gemini tidak dapat menghasilkan narasi. Finish reason: {response_narasi.candidates[0].finish_reason.name}. Coba sesuaikan prompt atau input.")
-            return ""
-        else:
-            st.warning("Gemini tidak dapat menghasilkan narasi. Respons kosong atau tidak terduga. Coba sesuaikan prompt atau input.")
-            return ""
-
+        response = model.generate_content(prompt)
+        # Mengakses teks dari bagian text response
+        return response.text
     except Exception as e:
-        st.error(f"Terjadi kesalahan saat generasi narasi dengan Gemini: {e}. Coba periksa prompt dan input.")
-        return ""
+        st.error(f"Terjadi kesalahan saat menghasilkan narasi: {e}")
+        return None
 
-def generate_analysis_data(model, lokasi_objek, generated_narration, max_retries=3):
-    """Menghasilkan data analisis menggunakan model Gemini dengan mekanisme retry dan ekstraksi JSON yang lebih robust."""
+def generate_analysis_data(model, lokasi_objek, narrative_text):
+    """
+    Menganalisis narasi yang dihasilkan untuk memberikan wawasan promosi dan monetisasi.
+    Mengembalikan data dalam format JSON.
+    """
+    prompt = f"""
+    Berdasarkan narasi tentang objek budaya/pariwisata dari {lokasi_objek} ini, berikan analisis mendalam yang berfokus pada potensi promosi dan pengembangan ekonomi lokal.
 
-    prompt_analisis = f"""
-    Anda adalah seorang konsultan pemasaran pariwisata dan pengembang ekonomi lokal untuk wilayah {lokasi_objek}.
-    Analisis narasi budaya/pariwisata berikut secara mendalam untuk mengekstrak wawasan kunci dan menyarankan optimasi yang konkret dan terperinci untuk dampak ekonomi dan promosi pariwisata.
+    Narasi:
+    {narrative_text}
 
-    Berikan respons Anda dalam format JSON. Objek JSON harus memiliki 5 kunci utama berikut, di mana setiap kunci memiliki nilai berupa ARRAY OBJEK. Setiap objek dalam array tersebut harus memiliki dua properti: "poin" (nama singkat dari strategi/ide) dan "deskripsi" (penjelasan singkat namun padat tentang strategi tersebut).
+    Berikan output dalam format JSON yang terstruktur dengan kunci-kunci berikut. Untuk setiap kunci, berikan minimal 3 poin (jika relevan).
 
-    Contoh struktur untuk satu poin:
     {{
       "Poin Jual Utama": [
-        {{ "poin": "Pemandangan Kawah Ijen", "deskripsi": "Keunikan kawah dengan api biru dan danau asam belerang, menarik wisatawan petualangan dan fotografi." }}
+        {{"poin": "Poin utama 1", "deskripsi": "Deskripsi poin 1"}},
+        {{"poin": "Poin utama 2", "deskripsi": "Deskripsi poin 2"}}
       ],
       "Segmen Wisatawan Ideal": [
-        {{ "poin": "Wisatawan Minat Khusus (Kopi)", "deskripsi": "Mereka mencari pengalaman otentik dan edukatif tentang proses dan cita rasa kopi lokal." }}
+        {{"poin": "Segmen 1", "deskripsi": "Deskripsi segmen 1"}},
+        {{"poin": "Segmen 2", "deskripsi": "Deskripsi segmen 2"}}
+      ],
+      "Ide Monetisasi & Produk Pariwisata": [
+        {{"poin": "Ide 1", "deskripsi": "Deskripsi ide 1"}},
+        {{"poin": "Ide 2", "deskripsi": "Deskripsi ide 2"}}
+      ],
+      "Saran Peningkatan Pesan Promosi": [
+        {{"poin": "Saran 1", "deskripsi": "Deskripsi saran 1"}},
+        {{"poin": "Saran 2", "deskripsi": "Deskripsi saran 2"}}
+      ],
+      "Potensi Kolaborasi Lokal": [
+        {{"poin": "Kolaborasi 1", "deskripsi": "Deskripsi kolaborasi 1"}},
+        {{"poin": "Kolaborasi 2", "deskripsi": "Deskripsi kolaborasi 2"}}
       ]
     }}
 
-    Pastikan setiap "deskripsi" cukup informatif sehingga pengguna memahami strategi atau potensi di baliknya, tidak hanya daftar poin.
-    Sangat penting: Berikan HANYA objek JSON yang valid. Bungkus seluruh objek JSON Anda di dalam blok kode Markdown seperti ini:
-    ```json
-    {{
-      "key": "value"
-    }}
-    ```
-    Jangan tambahkan teks lain di luar blok kode JSON tersebut.
-
-    Narasi yang Dihasilkan:
-    ---
-    {generated_narration}
-    ---
+    Pastikan output adalah JSON yang valid dan dapat di-parse langsung.
     """
+    try:
+        response = model.generate_content(prompt)
+        # Mencoba membersihkan respons jika ada markdown atau teks tambahan
+        json_text = response.text.strip()
+        if json_text.startswith("```json"):
+            json_text = json_text[len("```json"):].strip()
+        if json_text.endswith("```"):
+            json_text = json_text[:-len("```")].strip()
 
-    for attempt in range(max_retries):
-        try:
-            response_analisis = model.generate_content(
-                prompt_analisis,
-                generation_config={
-                    "max_output_tokens": 6000,
-                    "temperature": 0.4,
-                    # response_mime_type dan response_schema DIHAPUS di sini
-                }
-            )
-
-            gemini_analysis_raw_text = ""
-            if response_analisis.parts:
-                gemini_analysis_raw_text = response_analisis.text
-            elif response_analisis.candidates and response_analisis.candidates[0].finish_reason:
-                st.warning(f"Percobaan {attempt + 1}/{max_retries}: Gemini tidak dapat menghasilkan analisis. Finish reason: {response_analisis.candidates[0].finish_reason.name}. Mencoba lagi...")
-                time.sleep(1)
-                continue
-            else:
-                st.warning(f"Percobaan {attempt + 1}/{max_retries}: Gemini tidak dapat menghasilkan analisis. Respons kosong atau tidak terduga. Mencoba lagi...")
-                time.sleep(1)
-                continue
-
-            # --- Ekstraksi JSON dari teks mentah ---
-            # Cari blok kode JSON yang dibungkus dengan ```json ... ```
-            json_match = re.search(r"```json\s*(\{.*\})\s*```", gemini_analysis_raw_text, re.DOTALL)
-
-            if json_match:
-                json_string = json_match.group(1) # Ambil konten di dalam blok json
-                return json.loads(json_string) # Coba parse JSON yang sudah diekstrak
-            else:
-                st.warning(f"Percobaan {attempt + 1}/{max_retries}: Tidak dapat menemukan blok JSON yang valid dalam respons Gemini. Respons mentah:\n```\n{gemini_analysis_raw_text}\n```\nMencoba lagi...")
-                time.sleep(1)
-                continue
-
-        except json.JSONDecodeError as json_err:
-            st.warning(f"Percobaan {attempt + 1}/{max_retries}: Gagal memparsing respons JSON dari Gemini: {json_err}. Respons mentah:\n```json\n{json_string if 'json_string' in locals() else gemini_analysis_raw_text}\n```\nMencoba lagi...")
-            time.sleep(1)
-            continue
-        except Exception as e:
-            st.warning(f"Percobaan {attempt + 1}/{max_retries}: Terjadi kesalahan umum saat analisis promosi dengan Gemini: {e}. Mencoba lagi...")
-            time.sleep(1)
-            continue
-
-    # Jika semua percobaan gagal
-    st.error(f"Semua {max_retries} percobaan untuk mendapatkan analisis valid gagal.")
-    return None
+        return json.loads(json_text)
+    except json.JSONDecodeError as e:
+        st.error(f"Gagal mengurai respons AI sebagai JSON. Mohon coba lagi. Error: {e}")
+        st.write("Respons AI mentah (untuk debugging):", response.text)
+        return None
+    except Exception as e:
+        st.error(f"Terjadi kesalahan saat menghasilkan analisis: {e}")
+        return None

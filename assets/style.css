@@ -1,266 +1,237 @@
 /* assets/style.css */
 
-/* --- GENERAL STYLES --- */
+/* General Body Styling */
 body {
-    font-family: 'Inter', 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #FDFDFD; /* Slightly off-white for a warm feel */
-    color: #2C3E50; /* Darker blue-gray for main text */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    background-color: #f0f2f6; /* Light gray background */
 }
 
-/* Streamlit Main Container Adjustments */
+/* Main Container Styling */
 .stApp {
-    background-color: #FDFDFD;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
 }
 
-div.block-container {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
-    max-width: 1200px; /* Limit content width for better readability */
-    margin: auto; /* Center the content */
-}
-
-/* --- TYPOGRAPHY --- */
+/* Custom Headers */
 h1 {
-    color: #1ABC9C; /* Stronger Teal/Turquoise - Primary color */
-    text-align: center;
+    color: #1ABC9C; /* Teal Green */
     font-weight: 800;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
-    font-size: 2.8rem; /* Slightly larger */
+    text-align: center;
     line-height: 1.2;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
 
 h2 {
-    color: #2C3E50; /* Darker Blue-Gray */
+    color: #2C3E50; /* Dark Blue Gray */
     font-weight: 700;
-    font-size: 2.2rem; /* Slightly larger */
-    margin-top: 2.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #ECF0F1; /* Subtle underline */
+    font-size: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #ECF0F1; /* Light gray line */
     padding-bottom: 0.5rem;
 }
 
 h3 {
-    color: #34495E; /* Medium Blue-Gray */
+    color: #34495E; /* Medium Blue Gray */
     font-weight: 600;
     font-size: 1.8rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
-
-h4 {
-    color: #16A085; /* Darker Teal for card titles */
-    font-weight: 700;
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
-    border-bottom: 1px dashed #E0E0E0; /* Dashed line for subtle separation */
-    padding-bottom: 5px;
-}
-
-
-/* General Markdown text */
-.stMarkdown {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #333333;
-}
-
-/* --- BUTTON STYLING --- */
-.stButton>button {
-    background-color: #FF7043; /* Vibrant Orange - CTA color */
-    color: white;
-    padding: 1.0em 2.5em; /* Slightly larger padding */
-    border: none;
-    border-radius: 12px; /* More rounded */
-    cursor: pointer;
-    font-size: 1.2rem; /* Larger font */
-    font-weight: 700;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 18px rgba(255,112,67,0.4); /* Stronger, warmer shadow */
-    margin-top: 2rem; /* More space */
-    letter-spacing: 0.8px;
-    text-transform: uppercase; /* Make text uppercase */
-}
-
-.stButton>button:hover {
-    background-color: #F4511E; /* Darker orange on hover */
-    transform: translateY(-4px); /* More pronounced lift effect */
-    box-shadow: 0 10px 22px rgba(255,112,67,0.5);
-}
-
-.stButton>button:active {
-    background-color: #BF360C; /* Even darker on active */
-    transform: translateY(0); /* Press down effect */
-    box-shadow: 0 4px 8px rgba(255,112,67,0.3);
-}
-
-/* Download Button specific styles (blue) */
-.stDownloadButton > button {
-    background-color: #3498DB; /* Brighter Blue for download button */
-    box-shadow: 0 5px 10px rgba(52,152,219,0.3);
-    font-size: 1.1rem; /* Adjust font size */
-    padding: 0.9em 2.2em; /* Adjust padding */
-    margin-top: 1.5rem; /* Adjust margin */
-}
-.stDownloadButton > button:hover {
-    background-color: #2980B9;
-    box-shadow: 0 7px 14px rgba(52,152,219,0.4);
-}
-.stDownloadButton > button:active {
-    background-color: #21618C;
-    box-shadow: 0 3px 6px rgba(52,152,219,0.2);
-}
-
-
-/* --- CARD DESIGN --- */
-.info-card, .output-card {
-    background: #FFFFFF; /* Pure white background */
-    border-radius: 18px; /* Softer, more rounded corners */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Stronger, more defined shadow */
-    padding: 30px 35px; /* More padding */
-    margin-bottom: 30px; /* More space between cards */
-    transition: all 0.3s ease-in-out;
-    border: 1px solid #E0E0E0; /* Light border */
-}
-
-.info-card:hover, .output-card:hover {
-    transform: translateY(-7px); /* More pronounced lift effect on hover */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Slightly more prominent shadow */
-}
-
-.info-card h4 {
-    margin-top: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #EAEAEA; /* Light separator */
-}
-
-.output-card p {
-    font-size: 1.05rem;
-    line-height: 1.8; /* Increased line height for better readability */
-    white-space: pre-wrap; /* Preserve whitespace and line breaks from model output */
-}
-
-/* --- INPUT FIELDS & LABELS --- */
-/* Sembunyikan ikon help bawaan Streamlit untuk input teks dan selectbox */
-.stHelpInline {
-    display: none !important;
-}
-
-/* Atur margin bawah untuk label bawaan Streamlit agar tidak ada celah besar */
-div[data-testid="stTextInput"] label,
-div[data-testid="stSelectbox"] label,
-div[data-testid="stTextArea"] label {
-    margin-bottom: 5px !important;
-}
-
-/* Pastikan warna label input default Streamlit sesuai */
-.st-emotion-cache-10q20q p { /* Selector untuk teks label di Streamlit */
-    font-weight: 600;
-    color: #555555;
-}
-
-
-.stTextInput>div>div>input,
-.stTextArea>div>div>textarea,
-.stSelectbox>div>div>div>div {
-    border-radius: 10px; /* Softer corners */
-    border: 1px solid #BDC3C7; /* Softer gray border */
-    padding: 12px 18px; /* More padding */
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Softer inner shadow */
-    background-color: #FFFFFF;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    font-size: 1rem; /* Consistent font size */
-    color: #34495E; /* Text color inside input */
-}
-
-.stTextInput>div>div>input:focus,
-.stTextArea>div>div>textarea:focus,
-.stSelectbox>div>div>div>div:focus {
-    border-color: #1ABC9C; /* Primary Teal border on focus */
-    box-shadow: 0 0 0 3px rgba(26,188,156,0.3); /* Stronger, more visible focus ring */
-    outline: none;
-}
-
-/* Custom classes for spacing and help text */
-/* Gunakan p.custom-help-text untuk pesan di bawah input */
-p.custom-help-text {
-    font-size: 0.85rem;
-    color: #7F8C8D; /* Muted gray for help text */
-    margin-top: 5px; /* Spasi antara input box dan help text kustom */
-    margin-bottom: 15px; /* Spasi di bawah help text sebelum elemen berikutnya */
-    line-height: 1.4;
-}
-
-/* --- SIDEBAR STYLING --- */
-.stSidebar > div:first-child {
-    background-color: #ECF0F1; /* Lighter gray for sidebar background */
-    padding-top: 2rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    box-shadow: 3px 0 15px rgba(0,0,0,0.07); /* More pronounced shadow on sidebar edge */
-    border-right: 1px solid #DEDEDE; /* Subtle border on the right */
-}
-
-.stSidebar h2 {
-    color: #2C3E50;
-    font-size: 1.8rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    border-bottom: none; /* Remove underline for sidebar h2 */
-    padding-bottom: 0;
-}
-
-.stSidebar h3 {
-    color: #34495E;
-    font-size: 1.4rem;
     margin-top: 1.5rem;
     margin-bottom: 0.8rem;
 }
 
-.stSidebar p {
+h4 {
+    color: #1ABC9C; /* Teal Green */
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Paragraphs and Text */
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+strong {
+    color: #2C3E50;
+}
+
+/* Buttons */
+.stButton>button {
+    background-color: #1ABC9C; /* Teal Green */
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stButton>button:hover {
+    background-color: #16A085; /* Darker Teal Green */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.stButton>button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Text Inputs and Text Areas */
+.stTextInput>div>div>input, .stTextArea>div>div>textarea {
+    border-radius: 0.5rem;
+    border: 1px solid #BDC3C7; /* Light Gray */
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stTextInput>div>div>input:focus, .stTextArea>div>div>textarea:focus {
+    border-color: #1ABC9C; /* Teal Green on focus */
+    box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
+    outline: none;
+}
+
+/* Selectbox */
+.stSelectbox>div>div {
+    border-radius: 0.5rem;
+    border: 1px solid #BDC3C7;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    color: #333;
+    background-color: white;
+}
+
+.stSelectbox>div>div:focus-within {
+    border-color: #1ABC9C;
+    box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
+    outline: none;
+}
+
+/* Custom Card Styling for Outputs/Info */
+.info-card {
+    background-color: #ECF0F1; /* Lighter Gray */
+    border-left: 5px solid #1ABC9C; /* Teal Green border */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h4 {
+    margin-top: 0;
+    color: #1ABC9C;
+}
+
+.info-card p {
+    color: #34495E;
     font-size: 0.95rem;
-    color: #666666;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 
-.stSidebar .stMarkdown {
-    font-size: 0.95rem;
-    color: #666666;
-}
-
-/* Streamlit Native Multipage Navigation (automatically styled) */
-/* This part is mostly handled by Streamlit itself, but you can override general link styles */
-.st-emotion-cache-1jm69l1.e1gri0o21 { /* Selector for the navigation links in sidebar */
-    font-size: 1.1rem; /* Adjust font size of navigation links */
-    font-weight: 500;
-    color: #34495E; /* Default color for links */
-}
-
-.st-emotion-cache-1jm69l1.e1gri0o21:hover {
-    color: #1ABC9C; /* Primary Teal on hover */
-    background-color: #E8F6F3; /* Light background on hover */
-    border-radius: 8px;
-}
-
-/* Adjust Streamlit's info box */
-.stAlert {
-    border-radius: 10px;
-    background-color: #E8F6F3; /* Lighter teal/mint green for info */
-    color: #1ABC9C; /* Darker teal for info text */
-    border: 1px solid #1ABC9C;
-}
-
-/* --- FOOTER STYLING --- */
-.stMarkdown hr {
-    margin-top: 3rem;
+.output-card {
+    background-color: #FFFFFF; /* White */
+    border: 1px solid #D7DBDD; /* Light Gray */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
     margin-bottom: 2rem;
-    border-top: 1px solid #DEDEDE; /* Lighter divider */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.footer-text {
-    text-align: center;
-    color: #888888;
-    font-size: 0.85rem;
+.output-card p {
+    color: #2C3E50;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+}
+
+/* Sidebar Customization */
+[data-testid="stSidebar"] {
+    background-color: #2C3E50; /* Dark Blue Gray */
+    color: white;
+    padding-top: 2rem;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+[data-testid="stSidebar"] .st-emotion-cache-16txtle { /* Selector for markdown in sidebar */
+    color: #ECF0F1; /* Lighter text color */
+}
+
+[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3, [data-testid="stSidebar"] h4, [data-testid="stSidebar"] p {
+    color: #ECF0F1; /* Ensure all text in sidebar is light */
+}
+
+[data-testid="stSidebar"] .st-emotion-cache-vk330y { /* Specific selector for default sidebar nav list */
+    background-color: #2C3E50; /* Match sidebar background */
+    color: #ECF0F1; /* Text color for nav items */
+}
+
+[data-testid="stSidebar"] .st-emotion-cache-1p5i3j { /* Nav item hover/selected background */
+    background-color: #34495E; /* Slightly lighter blue gray */
+    color: #1ABC9C; /* Highlight selected text */
+}
+
+[data-testid="stSidebar"] .st-emotion-cache-1p5i3j:hover {
+    background-color: #49688a; /* Even lighter on hover */
+}
+
+
+[data-testid="stSidebar"] .st-emotion-cache-1pxaz8s { /* Style for the default Streamlit "Navigasi" label */
+    color: #1ABC9C; /* Teal for "Navigasi" header */
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Expander in Sidebar (if used) */
+[data-testid="stSidebarExpander"] {
+    background-color: #34495E; /* Darker background for expander */
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+[data-testid="stSidebarExpander"] div[role="button"] p {
+    color: #ECF0F1; /* Text color for expander header */
+    font-weight: bold;
+}
+
+[data-testid="stSidebarExpander"] div[data-testid="stVerticalBlock"] {
+    padding-left: 1rem; /* Indent content inside expander */
+}
+
+/* Info Box */
+.stAlert > div {
+    background-color: #D6EAF8; /* Light blue for info alerts */
+    color: #2874A6; /* Dark blue text */
+    border-left: 5px solid #3498DB; /* Blue border */
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Warning Box */
+.stAlert.st-emotion-cache-r8x5j1 > div { /* Specific selector for warning */
+    background-color: #FCF3CF; /* Light yellow for warning alerts */
+    color: #B7950B; /* Dark yellow text */
+    border-left: 5px solid #F1C40F; /* Yellow border */
+}
+
+/* Error Box */
+.stAlert.st-emotion-cache-j4c9x8 > div { /* Specific selector for error */
+    background-color: #FADBD8; /* Light red for error alerts */
+    color: #C0392B; /* Dark red text */
+    border-left: 5px solid #E74C3C; /* Red border */
 }

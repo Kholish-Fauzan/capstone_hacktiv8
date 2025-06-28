@@ -7,8 +7,7 @@ def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Panggil load_css di setiap file halaman agar style tetap konsisten
-load_css('assets/style.css')
+load_css('assets/style.css') # Load CSS file here
 
 # --- Streamlit UI Setup for this specific page ---
 st.set_page_config(
@@ -16,6 +15,24 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# --- Sidebar (konten yang SAMA PERSIS dengan app.py) ---
+with st.sidebar:
+    st.header("Nusantara Story AI 🇮🇩")
+    st.markdown("---")
+    st.header("Bagaimana Kami Membantu Anda? 🚀")
+    st.markdown("""
+    Kami percaya setiap daerah punya kisah unik. Aplikasi ini hadir untuk memberdayakan Anda dalam merangkai dan membagikan kekayaan tersebut.
+    1.  **Input Cerita Anda**: Masukkan detail penting tentang objek budaya atau destinasi wisata Anda.
+    2.  **Rangkai Narasi Otentik**: AI Gemini akan menyusun cerita yang indah dan menarik. ✨
+    3.  **Analisis Potensi Promosi**: Dapatkan wawasan tentang bagaimana mempromosikan dan mengembangkan potensi ekonomi lokal. 📈
+    4.  **Unduh & Bagikan**: Hasil narasi dan analisis siap Anda gunakan! 📊
+    """)
+    st.markdown("---")
+    st.write("Dibuat oleh Kholish Fauzan")
+    st.markdown("---")
+    st.info("Tips: Semakin detail informasi yang Anda berikan, semakin kaya dan relevan hasil dari AI! 💡")
+
 
 # Konten utama halaman ini
 st.title("Contoh & Inspirasi ✨")
