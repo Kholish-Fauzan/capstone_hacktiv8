@@ -1,7 +1,7 @@
 # pages/examples_page.py
 import streamlit as st
 from datetime import datetime
-from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_expander_content # Import fungsi baru
+from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_expander_content
 
 # --- Load Custom CSS ---
 def load_css(file_name):
@@ -17,12 +17,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Sidebar (Revisi): Hanya header dan panggil fungsi konten kustom ---
-with st.sidebar:
-    st.header("Nusantara Story AI 🇮🇩")
-    render_custom_sidebar_content()
-    # render_sidebar_expander_content() # Jika ingin menambahkan expander seperti ReFisher
-
+st.header("Nusantara Story AI")
 
 # Konten utama halaman ini (TETAP SAMA)
 st.title("Contoh & Inspirasi ✨")

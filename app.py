@@ -34,11 +34,8 @@ def load_css(file_name):
 load_css('assets/style.css')
 
 # --- Sidebar ---
-with st.sidebar:
-    st.header("Nusantara Story AI")
-    st.sidebar.success("Panduan & Tips")
-    render_custom_sidebar_content()
-    # render_sidebar_expander_content() # Aktifkan jika ingin menambahkan expander
+st.header("Nusantara Story AI")
+st.sidebar.success("Select a page above.")
 
 # --- Main Content for app.py (Homepage) ---
 st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")

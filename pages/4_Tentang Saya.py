@@ -17,12 +17,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- Sidebar (Revisi): Hanya header dan panggil fungsi konten kustom ---
-with st.sidebar:
-    st.header("Nusantara Story AI 🇮🇩")
-    render_custom_sidebar_content()
-    # render_sidebar_expander_content() # Jika ingin menambahkan expander seperti ReFisher
-
+st.header("Nusantara Story AI")
 
 # Konten utama halaman ini (TETAP SAMA)
 st.title("Tentang Saya & Kontak 👋")
