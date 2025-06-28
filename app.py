@@ -37,7 +37,7 @@ load_css('assets/style.css')
 with st.sidebar:
     st.header("Nusantara Story AI")
     render_custom_sidebar_content()
-    # render_sidebar_expander_content() # Aktifkan jika ingin menambahkan expander
+    render_sidebar_expander_content() # Aktifkan jika ingin menambahkan expander
 
 # --- Main Content for app.py (Homepage) ---
 st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")

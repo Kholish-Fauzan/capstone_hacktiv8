@@ -21,7 +21,7 @@ st.set_page_config(
 with st.sidebar:
     st.header("Nusantara Story AI")
     render_custom_sidebar_content()
-    # render_sidebar_expander_content() # Jika ingin menambahkan expander seperti ReFisher
+    render_sidebar_expander_content() # Jika ingin menambahkan expander seperti ReFisher
 
 
 # Konten utama halaman ini (TETAP SAMA)
