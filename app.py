@@ -20,7 +20,7 @@ except Exception as e:
 # --- Streamlit UI Setup ---
 st.set_page_config(layout="wide", page_title="Jelajah Cerita Pariwisata dan Budaya melalui AI")
 
-st.title("Jelajah Kisah: Pengenalan Budaya &  Pariwisata Lokal Berbasis AI")
+st.title("Jelajah Kisah: Pengenalan Budaya & Pariwisata Lokal Berbasis AI")
 st.write("Aplikasi ini bantu Anda merangkai narasi budaya dan promosi pariwisata di lokasi Anda menggunakan **Gemini-2.5 Flash**.")
 
 # --- Sidebar ---
@@ -133,7 +133,7 @@ if st.button("Generate Kisah & Promosi Wisata", type="primary"):
                 response_analisis = gemini_model.generate_content(
                     prompt_analisis,
                     generation_config={
-                        "max_output_tokens": 700, # Meningkatkan batas token output untuk analisis
+                        "max_output_tokens": 1000, # Meningkatkan batas token output untuk analisis
                         "temperature": 0.6,        # Agak lebih tinggi dari sebelumnya untuk detail
                         "top_p": 0.9,
                         "top_k": 40
