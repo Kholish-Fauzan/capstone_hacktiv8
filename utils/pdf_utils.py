@@ -5,6 +5,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.lib.units import inch
 from io import BytesIO
+from datetime import datetime # Pastikan baris ini ada dan tidak dihapus!
 
 def generate_pdf_from_text(text_content, title="Dokumen Streamlit"):
     """
@@ -103,18 +104,53 @@ def generate_analysis_pdf(analysis_data, title="Analisis Promosi"):
     story.append(Paragraph(title, title_style))
     story.append(Spacer(1, 0.3 * inch))
 
-    for key, items in analysis_data.items():
-        story.append(Paragraph(key, section_title_style))
-        story.append(Spacer(1, 0.1 * inch))
-        if isinstance(items, list):
-            for item in items:
-                story.append(Paragraph(f"👉 {item.get('poin', '')}", point_style))
-                story.append(Paragraph(item.get('deskripsi', ''), description_style))
-        else: # Handle cases where value might be a string (e.g., if JSON structure changes)
-            story.append(Paragraph(str(items), description_style))
-        story.append(Spacer(1, 0.2 * inch))
+    # Adaptasi agar sesuai dengan struktur analisis_data
+    # Tambahkan judul utama untuk kedua kolom di PDF
+    story.append(Paragraph("Poin Jual Utama", section_title_style))
+    story.append(Spacer(1, 0.1 * inch))
+    if "Poin Jual Utama" in analysis_data:
+        for item in analysis_data["Poin Jual Utama"]:
+            story.append(Paragraph(f"👉 {item.get('poin', '')}", point_style))
+            story.append(Paragraph(item.get('deskripsi', ''), description_style))
+    story.append(Spacer(1, 0.2 * inch))
+
+    story.append(Paragraph("Segmen Wisatawan Ideal", section_title_style))
+    story.append(Spacer(1, 0.1 * inch))
+    if "Segmen Wisatawan Ideal" in analysis_data:
+        for item in analysis_data["Segmen Wisatawan Ideal"]:
+            story.append(Paragraph(f"👉 {item.get('poin', '')}", point_style))
+            story.append(Paragraph(item.get('deskripsi', ''), description_style))
+    story.append(Spacer(1, 0.2 * inch))
+
+    story.append(Paragraph("Ide Monetisasi & Produk Pariwisata", section_title_style))
+    story.append(Spacer(1, 0.1 * inch))
+    if "Ide Monetisasi & Produk Pariwisata" in analysis_data:
+        for item in analysis_data["Ide Monetisasi & Produk Pariwisata"]:
+            story.append(Paragraph(f"👉 {item.get('poin', '')}", point_style))
+            story.append(Paragraph(item.get('deskripsi', ''), description_style))
+    story.append(Spacer(1, 0.2 * inch))
+
+    story.append(PageBreak()) # Pisahkan bagian analisis ke halaman baru jika perlu
+
+    story.append(Paragraph("Saran Peningkatan Pesan Promosi", section_title_style))
+    story.append(Spacer(1, 0.1 * inch))
+    if "Saran Peningkatan Pesan Promosi" in analysis_data:
+        for item in analysis_data["Saran Peningkatan Pesan Promosi"]:
+            story.append(Paragraph(f"👉 {item.get('poin', '')}", point_style))
+            story.append(Paragraph(item.get('deskripsi', ''), description_style))
+    story.append(Spacer(1, 0.2 * inch))
+
+    story.append(Paragraph("Potensi Kolaborasi Lokal", section_title_style))
+    story.append(Spacer(1, 0.1 * inch))
+    if "Potensi Kolaborasi Lokal" in analysis_data:
+        for item in analysis_data["Potensi Kolaborasi Lokal"]:
+            story.append(Paragraph(f"👉 {item.get('poin', '')}", point_style))
+            story.append(Paragraph(item.get('deskripsi', ''), description_style))
+    story.append(Spacer(1, 0.2 * inch))
+
 
     story.append(Spacer(1, 0.5 * inch))
+    # Baris ini yang menyebabkan error, pastikan datetime diimpor
     story.append(Paragraph(f"© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.", footer_style))
 
     try:
