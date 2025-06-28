@@ -146,8 +146,7 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
     if generated_narration: # Pastikan narasi sudah ada sebelum analisis
         st.markdown("---")
         st.subheader("💡 Wawasan & Optimasi Promosi dari Gemini AI")
-        # download_analisis_placeholder = st.empty() # Ini akan dipindahkan ke bawah agar tombolnya di atas kolom
-
+        
         with st.spinner("AI sedang menganalisis potensi tak terbatas destinasi Anda... Mohon tunggu! 🚀"):
             analysis_data = generate_analysis_data(gemini_model, lokasi_objek, st.session_state.generated_narration)
 
@@ -159,38 +158,48 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
 
                 col_analysis1, col_analysis2 = st.columns(2)
 
+                # Definisi kunci untuk setiap kolom
+                col1_keys = [
+                    "Poin Jual Utama",
+                    "Segmen Wisatawan Ideal",
+                    "Ide Monetisasi & Produk Pariwisata"
+                ]
+                col2_keys = [
+                    "Saran Peningkatan Pesan Promosi",
+                    "Potensi Kolaborasi Lokal"
+                ]
+
+                # Render kolom 1
                 with col_analysis1:
-                    # >>> BARIS INI DIHAPUS UNTUK MENGHINDARI DUPLIKASI DAN PENEMPATAN DI LUAR KOTAK <<<
-                    # st.markdown("<h3>Poin Jual Utama</h3>", unsafe_allow_html=True)
-                    col1_keys = [
-                        "Poin Jual Utama",
-                        "Segmen Wisatawan Ideal",
-                        "Ide Monetisasi & Produk Pariwisata"
-                    ]
                     for key in col1_keys:
                         if key in analysis_data and analysis_data[key]:
+                            # Mulai satu info-card untuk setiap poin analisis utama
                             st.markdown(f'<div class="info-card">', unsafe_allow_html=True)
-                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True) # Ini adalah judul yang masuk ke dalam kotak
-                            for item in analysis_data[key]:
-                                st.markdown(f"**👉 {item['poin']}**")
-                                st.write(item['deskripsi'])
-                            st.markdown('</div>', unsafe_allow_html=True)
+                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True) # Ini adalah judul utama untuk info-card ini
 
+                            # Loop untuk setiap sub-poin dalam analisis_data[key]
+                            for item in analysis_data[key]:
+                                if 'poin' in item: # Pastikan kunci 'poin' ada
+                                    st.markdown(f"**👉 {item['poin']}**", unsafe_allow_html=True)
+                                if 'deskripsi' in item: # Pastikan kunci 'deskripsi' ada
+                                    st.write(item['deskripsi'])
+                            st.markdown('</div>', unsafe_allow_html=True) # Tutup info-card
+
+                # Render kolom 2
                 with col_analysis2:
-                    # >>> BARIS INI DIHAPUS UNTUK MENGHINDARI DUPLIKASI DAN PENEMPATAN DI LUAR KOTAK <<<
-                    # st.markdown("<h3>Saran Peningkatan Pesan Promosi</h3>", unsafe_allow_html=True)
-                    col2_keys = [
-                        "Saran Peningkatan Pesan Promosi",
-                        "Potensi Kolaborasi Lokal"
-                    ]
                     for key in col2_keys:
                         if key in analysis_data and analysis_data[key]:
+                            # Mulai satu info-card untuk setiap poin analisis utama
                             st.markdown(f'<div class="info-card">', unsafe_allow_html=True)
-                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True) # Ini adalah judul yang masuk ke dalam kotak
+                            st.markdown(f"<h4>{key}</h4>", unsafe_allow_html=True) # Ini adalah judul utama untuk info-card ini
+
+                            # Loop untuk setiap sub-poin dalam analisis_data[key]
                             for item in analysis_data[key]:
-                                st.markdown(f"**👉 {item['poin']}**")
-                                st.write(item['deskripsi'])
-                            st.markdown('</div>', unsafe_allow_html=True)
+                                if 'poin' in item: # Pastikan kunci 'poin' ada
+                                    st.markdown(f"**👉 {item['poin']}**", unsafe_allow_html=True)
+                                if 'deskripsi' in item: # Pastikan kunci 'deskripsi' ada
+                                    st.write(item['deskripsi'])
+                            st.markdown('</div>', unsafe_allow_html=True) # Tutup info-card
 
                 # Tombol download di sini, setelah kolom analisis dibuat
                 pdf_bytes_analysis = generate_analysis_pdf(analysis_data, f"Analisis_{judul_objek}")
