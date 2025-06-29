@@ -195,21 +195,12 @@ div[data-testid="stDateInput"] + div[data-testid="stMarkdownContainer"] p {
     padding-left: 0.2rem; /* Sedikit padding agar tidak terlalu mepet kiri */
 }
 
-/* Aturan untuk `Ini adalah informasi inti...` yang mungkin ada di luar div khusus */
-/* Ini akan menangani semua `p` yang mungkin ada secara generik */
+
 p {
     margin-top: 0.5rem; /* Margin atas default untuk paragraf, bisa disesuaikan */
     margin-bottom: 1rem;
     line-height: 1.6;
 }
-
-/* Specific for "Ini adalah informasi inti untuk Kami merangkai cerita." */
-/* Mengidentifikasi paragraf ini dengan class khusus di Python atau target CSS lebih spesifik */
-/* Jika ini adalah `st.markdown("Ini adalah informasi inti...")`, ini akan diatur oleh `p` di atas. */
-/* Jika kamu ingin lebih dekat, bisa tambahkan class custom di st.markdown-nya:
-   st.markdown('<p class="info-footer-text">Ini adalah informasi inti...</p>', unsafe_allow_html=True)
-   Lalu di CSS: .info-footer-text { margin-top: -15px !important; }
-*/
 
 .stHelpInline {
     display: none;
