@@ -20,20 +20,17 @@ def render_custom_sidebar_content():
     st.markdown("""
     Kami percaya setiap daerah punya kisah unik. Aplikasi ini hadir untuk memberdayakan Anda dalam merangkai dan membagikan kekayaan tersebut.
     1.  **Input Cerita Anda**: Masukkan detail penting tentang objek budaya atau destinasi wisata Anda.
-    2.  **Rangkai Narasi Otentik**: AI Gemini akan menyusun cerita yang indah dan menarik. ✨
+    2.  **Rangkai Narasi Otentik**: Generative Text kami akan menyusun cerita yang indah dan menarik. ✨
     3.  **Analisis Potensi Promosi**: Dapatkan wawasan tentang bagaimana mempromosikan dan mengembangkan potensi ekonomi lokal. 📈
     4.  **Unduh & Bagikan**: Hasil narasi dan analisis siap Anda gunakan! 📊
     """)
-    st.markdown("---")
-    st.write("Dibuat oleh Kholish Fauzan")
-    st.markdown("---")
+
     st.info("Tips: Semakin detail informasi yang Anda berikan, semakin kaya dan relevan hasil dari AI! 💡")
 
 def render_sidebar_expander_content():
-    st.markdown("---")
     with st.expander("Tentang Aplikasi"):
         st.markdown("""
-        Nusantara Story AI adalah proyek inovatif untuk menggali dan mempromosikan kekayaan budaya serta potensi pariwisata Indonesia menggunakan kecerdasan buatan Gemini.
+        Nusantara Story AI adalah proyek inovatif untuk menggali dan mempromosikan kekayaan budaya serta potensi pariwisata Indonesia memanfaatkan Gemini sebagai Generative Text dan IBM Granite sebagai Code Optimization pengembangan aplikasi.
         """)
         st.markdown("[Pelajari Lebih Lanjut](Tentang%20Saya)")
     st.markdown("---")
