@@ -32,5 +32,3 @@ def render_sidebar_expander_content():
         st.markdown("""
         Nusantara Story AI adalah proyek inovatif untuk menggali dan mempromosikan kekayaan budaya serta potensi pariwisata Indonesia memanfaatkan Gemini sebagai Generative Text dan IBM Granite sebagai Code Optimization pengembangan aplikasi.
         """)
-        st.markdown("[Pelajari Lebih Lanjut](Tentang%20Saya)")
-    st.markdown("---")
