@@ -14,10 +14,10 @@ def render_custom_sidebar_content():
     st.markdown("""
     Nusantara Story AI hadir untuk memberdayakan Anda dalam merangkai dan membagikan kekayaan narasi Indonesia.
 
-    * **1. Masukkan Detail Objek**: Berikan informasi kunci tentang objek budaya atau destinasi wisata Anda.
-    * **2. Rangkai Kisah Otentik**: AI kami akan menyusun cerita yang indah dan menarik. ✨
-    * **3. Analisis Potensi Promosi**: Dapatkan wawasan tentang strategi promosi & pengembangan ekonomi lokal. 📈
-    * **4. Unduh & Bagikan**: Hasil narasi dan analisis siap Anda gunakan! 📊
+    **1. Masukkan Detail Objek**: Berikan informasi kunci tentang objek budaya atau destinasi wisata Anda.
+    **2. Rangkai Kisah Otentik**: AI kami akan menyusun cerita yang indah dan menarik. ✨
+    **3. Analisis Potensi Promosi**: Dapatkan wawasan tentang strategi promosi & pengembangan ekonomi lokal. 📈
+    **4. Unduh & Bagikan**: Hasil narasi dan analisis siap Anda gunakan! 📊
     """)
 
     st.info("💡 **Tips Cepat:** Semakin detail input Anda, semakin berkualitas hasil narasi dan analisis dari AI! Ayo berikan informasi selengkapnya.")
