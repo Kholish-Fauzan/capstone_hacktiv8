@@ -40,7 +40,7 @@ with st.sidebar:
 
 # --- Main Content for app.py (Homepage) ---
 st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")
-st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-2.5 Flash**.")
+st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-2.5 Flash** dan **IBM Granite**.")
 st.markdown("---")
 
 # HAPUS BLOK <style> HTML INI JIKA ADA DI `app.py`, karena sudah dipindahkan ke `style.css`
