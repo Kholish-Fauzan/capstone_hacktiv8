@@ -1,9 +1,8 @@
-/* assets/style.css - Kode CSS Utuh Terbaru */
+/* assets/style.css - Kode CSS Utuh Terbaru (Final Version) */
 
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* --- Sembunyikan Navigasi Multi-Halaman Bawaan Streamlit --- */
 div[data-testid="stSidebarNav"] {
     display: none !important;
     visibility: hidden !important;
@@ -14,13 +13,12 @@ div[data-testid="stSidebarNav"] {
     overflow: hidden !important;
 }
 
-/* Mengatasi sisa dari navigasi default Streamlit (jika masih ada) */
 .st-emotion-cache-vk330y, /* Selector umum untuk container navigasi default */
 .st-emotion-cache-1p5i3j { /* Selector untuk item navigasi default */
     display: none !important;
 }
 
-/* Pastikan tidak ada sisa padding atau margin dari elemen yang disembunyikan */
+
 div[data-testid="stSidebar"] > div > section:first-child > div:nth-child(2) {
     padding-top: 0 !important;
     margin-top: 0 !important;
@@ -172,21 +170,20 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     padding: 0.75rem 1rem;
 }
 
-/* Input Labels and Help Text */
-/* Ini adalah bagian yang sudah ada dan biarkan saja untuk label utama */
 .st-emotion-cache-10q20q p {
     font-weight: 600;
     color: #555555;
     margin-bottom: 5px;
 }
 
+/* --- REVISI: Styling untuk custom-help-text --- */
 .custom-help-text {
-    font-size: 0.85rem !important;
-    color: #777777 !important; 
-    margin-top: -30px !important;
-    margin-bottom: 15px !important;
+    font-size: 0.85rem !important; /* Ukuran teks lebih kecil */
+    color: #777777 !important; /* Warna abu-abu yang lebih lembut */
+    margin-top: -30px !important; /* Kunci: Mengurangi margin atas secara signifikan */
+    margin-bottom: 15px !important; /* Jarak ke elemen berikutnya (bisa disesuaikan) */
     line-height: 1.4 !important;
-    padding-left: 0.2rem !important;
+    padding-left: 0.2rem !important; /* Sedikit padding agar tidak terlalu mepet kiri */
 }
 
 
@@ -215,13 +212,29 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 [data-testid="stSidebar"] {
     background-color: #2C3E50; /* Dark Blue Gray - Warna utama sidebar */
     color: white; /* Default text color in sidebar */
-    padding-top: 1rem; /* Mengurangi padding top keseluruhan sidebar */
+    padding-top: 0.5rem !important; /* Mengurangi padding top keseluruhan sidebar lebih agresif */
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     height: 100vh;
     overflow-y: auto;
 }
+
+[data-testid="stSidebar"] > div > section > div > div:first-child {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] > div > h1 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+[data-testid="stSidebar"] > div:first-child > section:first-child {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
 
 /* General text within sidebar (termasuk p, markdown, dll.) */
 [data-testid="stSidebar"] *,
@@ -240,7 +253,7 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     text-align: left !important; /* Pastikan header di sidebar tidak center */
     border-bottom: none !important; /* Hapus border bawah untuk header di sidebar */
     padding-bottom: 0 !important; /* Hapus padding bawah untuk header di sidebar */
-    margin-top: 1rem !important; /* Mengurangi margin atas header */
+    margin-top: 0.5rem !important; /* Mengurangi margin atas header (sedikit ruang untuk pemisah) */
     margin-bottom: 0.5rem !important; /* Mengurangi margin bawah header */
 }
 
