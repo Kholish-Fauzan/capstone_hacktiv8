@@ -2,14 +2,19 @@ import streamlit as st
 from datetime import datetime
 from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_expander_content
 
-# --- Tambahkan kembali Sidebar ini ---
+# --- Load Custom CSS (PENTING: tambahkan ini di setiap halaman `pages/`) ---
+def load_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+load_css('assets/style.css')
+
+# --- Sidebar (PENTING: Pastikan ini ada di setiap halaman `pages/`) ---
 with st.sidebar:
     st.header("Nusantara Story AI")
     render_custom_sidebar_content()
     render_sidebar_expander_content()
 
-
-# Konten utama halaman ini (TETAP SAMA)
+# Konten utama halaman ini
 st.title("Tentang Saya & Kontak 👋")
 st.markdown("Salam kenal! Saya adalah Kholish Fauzan, pengembang di balik Nusantara Story AI.")
 st.markdown("---")
@@ -34,7 +39,6 @@ st.markdown("""
 -   **GitHub:** [github.com/KholishFauzan](https://github.com/KholishFauzan) 💻
 """)
 st.markdown('</div>', unsafe_allow_html=True)
-
 
 st.markdown("---")
 st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)

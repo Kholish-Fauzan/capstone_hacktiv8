@@ -2,14 +2,19 @@ import streamlit as st
 from datetime import datetime
 from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_expander_content
 
-# --- Sidebar (Ditambahkan Kembali): Pastikan ini ada di setiap halaman ---
+# --- Load Custom CSS (PENTING: tambahkan ini di setiap halaman `pages/`) ---
+def load_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+load_css('assets/style.css')
+
+# --- Sidebar (PENTING: Pastikan ini ada di setiap halaman `pages/`) ---
 with st.sidebar:
     st.header("Nusantara Story AI")
     render_custom_sidebar_content()
     render_sidebar_expander_content()
 
-
-# Konten utama halaman ini (TETAP SAMA)
+# Konten utama halaman ini
 st.title("Tips & Panduan: Maksimalkan AI Anda! 🚀")
 st.markdown("Dapatkan hasil terbaik dari Nusantara Story AI dengan panduan singkat ini. Semakin baik input Anda, semakin berkualitas output yang dihasilkan!")
 st.markdown("---")

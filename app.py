@@ -18,14 +18,14 @@ except Exception as e:
     st.error(f"Maaf, kami mengalami masalah teknis. Gagal menghubungkan ke kecerdasan AI. Silakan coba lagi nanti atau hubungi pengembang.")
     st.stop()
 
-# --- Streamlit UI Setup ---
+# --- Streamlit UI Setup (Hanya di app.py) ---
 st.set_page_config(
     page_title="Beranda Utama",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# --- Load Custom CSS ---
+# --- Load Custom CSS (Hanya di app.py yang pertama kali memuatnya, tapi akan dimuat ulang di setiap halaman `pages/` juga) ---
 def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -36,44 +36,23 @@ load_css('assets/style.css')
 with st.sidebar:
     st.header("Nusantara Story AI")
     render_custom_sidebar_content()
-    render_sidebar_expander_content() # Aktifkan jika ingin menambahkan expander
+    render_sidebar_expander_content()
 
 # --- Main Content for app.py (Homepage) ---
 st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")
 st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-2.5 Flash**.")
 st.markdown("---")
 
-# --- Input Section ---
-st.header("Ceritakan Kekayaan Budaya/Wisata Lokal Anda ✍️")
+# HAPUS BLOK <style> HTML INI JIKA ADA DI `app.py`, karena sudah dipindahkan ke `style.css`
+# st.markdown("""
+# <style>
+#     .stTextInput, .stSelectbox, .stTextArea {
+#         margin-bottom: 20px;
+#     }
+#     ...
+# </style>
+# """, unsafe_allow_html=True)
 
-# Custom HTML/CSS for input fields to control spacing and help text
-# Perhatikan bahwa bagian <style> ini bisa dihapus jika styling sudah di style.css
-# Aku membiarkannya jika ada styling yang sangat spesifik hanya untuk app.py
-st.markdown("""
-<style>
-    .stTextInput, .stSelectbox, .stTextArea {
-        margin-bottom: 20px;
-    }
-    div[data-testid="stTextInput"] label,
-    div[data-testid="stSelectbox"] label,
-    div[data-testid="stTextArea"] label {
-        margin-bottom: 5px;
-    }
-    .stHelpInline {
-        display: none;
-    }
-    .custom-help-text {
-        font-size: 0.85rem;
-        color: #777777;
-        margin-top: 5px;
-        margin-bottom: 15px;
-    }
-    .st-emotion-cache-10q20q p {
-        font-weight: 600;
-        color: #555555;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 col_input1, col_input2 = st.columns(2)
 

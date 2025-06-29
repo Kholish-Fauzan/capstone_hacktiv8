@@ -1,12 +1,30 @@
-/* assets/style.css - REVISI TOTAL (FINAL UNTUK LAYOUT & STYLING) */
+/* assets/style.css - REVISI TOTAL (FINAL UNTUK KONSISTENSI & NAVIGASI) */
 
 /* Import Google Fonts (optional, but good for consistent typography) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* Sembunyikan navigasi multi-halaman bawaan Streamlit */
 div[data-testid="stSidebarNav"] {
-    display: none;
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
 }
+
+.st-emotion-cache-vk330y { /* Selector umum untuk container navigasi default */
+    display: none !important;
+}
+.st-emotion-cache-1p5i3j { /* Selector untuk item navigasi default */
+    display: none !important;
+}
+/* Pastikan tidak ada sisa padding atau margin dari elemen yang disembunyikan */
+div[data-testid="stSidebar"] > div > section:first-child > div:nth-child(2) { /* Ini menargetkan div di atas navigasi kustom */
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
 
 /* General Body Styling & Font */
 html, body {
@@ -15,55 +33,51 @@ html, body {
     background-color: #f0f2f6; /* Light gray background */
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
-    overflow-x: hidden; /* Mencegah scrollbar horizontal yang tidak diinginkan */
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /* Streamlit Main Container Styling */
 .stApp {
-    max-width: 100%; /* Ubah dari 1200px menjadi 100% untuk full width */
-    margin: 0; /* Hapus margin auto untuk menghilangkan pemusatan */
-    padding: 2rem 5%; /* Tambahkan padding horizontal agar konten tidak menempel ke tepi layar */
+    max-width: 100%;
+    margin: 0;
+    padding: 2rem 5%;
     box-sizing: border-box;
 }
 
 /* Custom Headers */
 h1 {
-    color: #1ABC9C; /* Teal Green */
+    color: #1ABC9C;
     font-weight: 800;
     font-size: 3.5rem;
     margin-bottom: 1rem;
     text-align: center;
     line-height: 1.2;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    animation: fadeIn 1s ease-out; /* Optional: fade in animation */
+    animation: fadeIn 1s ease-out;
 }
 
 h2 {
-    color: #2C3E50; /* Dark Blue Gray */
+    color: #2C3E50;
     font-weight: 700;
     font-size: 2.5rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #ECF0F1; /* Light gray line */
+    border-bottom: 2px solid #ECF0F1;
     padding-bottom: 0.5rem;
 }
 
-/* h3 untuk judul kolom analisis (Poin Jual Utama, Saran Peningkatan) */
-/* Catatan: Ini tidak lagi digunakan untuk judul kolom terpisah di app.py,
-   tapi tetap relevan jika digunakan di halaman lain atau untuk struktur PDF. */
 h3 {
-    color: #34495E; /* Medium Blue Gray */
+    color: #34495E;
     font-weight: 600;
     font-size: 1.8rem;
     margin-top: 1.5rem;
     margin-bottom: 0.8rem;
-    text-align: center; /* Pusat judul kolom */
+    text-align: center;
 }
 
-/* h4 untuk judul di dalam info-card (misal: Poin Jual Utama, Segmen Wisatawan Ideal, dll.) */
 h4 {
-    color: #1ABC9C; /* Teal Green */
+    color: #1ABC9C;
     font-weight: 700;
     font-size: 1.4rem;
     margin-top: 1rem;
@@ -84,8 +98,8 @@ strong {
 
 /* Streamlit Button Styling */
 .stButton>button {
-    background-color: #1ABC9C; /* Teal Green */
-    color: white !important; /* !important to override Streamlit's default */
+    background-color: #1ABC9C;
+    color: white !important;
     font-weight: bold;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
@@ -93,12 +107,12 @@ strong {
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: auto; /* Ensure button width adapts to content */
-    display: inline-block; /* Allow text-align if needed */
+    width: auto;
+    display: inline-block;
 }
 
 .stButton>button:hover {
-    background-color: #16A085; /* Darker Teal Green */
+    background-color: #16A085;
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
@@ -108,44 +122,39 @@ strong {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Streamlit Input Fields (Text, Text Area, Number, Date, etc.) */
-/* This targets the main div wrapping the input */
+/* Streamlit Input Fields */
 div[data-testid="stTextInput"],
 div[data-testid="stSelectbox"],
 div[data-testid="stTextArea"],
 div[data-testid="stDateInput"],
 div[data-testid="stNumberInput"] {
-    margin-bottom: 15px; /* Consistent spacing between input groups */
+    margin-bottom: 15px;
 }
 
-/* Styling the actual input/textarea elements */
 div[data-testid="stTextInput"] input,
 div[data-testid="stTextArea"] textarea,
 div[data-testid="stNumberInput"] input,
 div[data-testid="stDateInput"] input {
     border-radius: 0.5rem;
-    border: 1px solid #BDC3C7; /* Light Gray */
+    border: 1px solid #BDC3C7;
     padding: 0.75rem 1rem;
     font-size: 1rem;
     color: #333;
-    width: 100%; /* Make inputs fill their container */
-    box-sizing: border-box; /* Include padding/border in width */
+    width: 100%;
+    box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Focus state for input/textarea */
 div[data-testid="stTextInput"] input:focus,
 div[data-testid="stTextArea"] textarea:focus,
 div[data-testid="stNumberInput"] input:focus,
 div[data-testid="stDateInput"] input:focus {
-    border-color: #1ABC9C; /* Teal Green on focus */
+    border-color: #1ABC9C;
     box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
     outline: none;
 }
 
-/* Styling the Selectbox dropdown itself */
-div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n { /* This targets the actual selectbox container */
+div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n {
     border-radius: 0.5rem;
     border: 1px solid #BDC3C7;
     background-color: white;
@@ -156,39 +165,35 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n:focus-within {
     box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
     outline: none;
 }
-div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g3y { /* Dropdown text inside selectbox */
+div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g3y {
     color: #333;
     font-size: 1rem;
     padding: 0.75rem 1rem;
 }
 
-
 /* Input Labels and Help Text */
-/* Custom label styles applied via markdown in Python (as Streamlit's default label p is harder to override consistently) */
-.st-emotion-cache-10q20q p { /* This targets the default Streamlit label text within its container */
+.st-emotion-cache-10q20q p {
     font-weight: 600;
     color: #555555;
-    margin-bottom: 5px; /* Reduce default margin below label */
+    margin-bottom: 5px;
 }
 
 .custom-help-text {
     font-size: 0.85rem;
     color: #777777;
-    margin-top: 5px; /* Space between input box and custom help text */
-    margin-bottom: 15px; /* Space below help text before next element */
+    margin-top: 5px;
+    margin-bottom: 15px;
     line-height: 1.4;
 }
 
-/* Hide Streamlit's default help icon/text for cleaner look if custom help is used */
 .stHelpInline {
     display: none;
 }
 
-
 /* Custom Card Styling for Outputs/Info */
 .info-card {
-    background-color: #ECF0F1; /* Lighter Gray */
-    border-left: 5px solid #1ABC9C; /* Teal Green border */
+    background-color: #ECF0F1;
+    border-left: 5px solid #1ABC9C;
     border-radius: 0.5rem;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -207,8 +212,8 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 }
 
 .output-card {
-    background-color: #FFFFFF; /* White */
-    border: 1px solid #D7DBDD; /* Light Gray */
+    background-color: #FFFFFF;
+    border: 1px solid #D7DBDD;
     border-radius: 0.5rem;
     padding: 1.5rem;
     margin-top: 1.5rem;
@@ -220,7 +225,7 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     color: #2C3E50;
     font-size: 1.05rem;
     line-height: 1.7;
-    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    white-space: pre-wrap;
 }
 
 /* Sidebar Customization */
@@ -229,64 +234,82 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     color: white;
     padding-top: 2rem;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    /* Make sidebar stick to top */
     position: sticky;
     top: 0;
-    height: 100vh; /* Make it full height */
-    overflow-y: auto; /* Enable scrolling if content overflows */
+    height: 100vh;
+    overflow-y: auto;
 }
 
 /* All text within sidebar */
 [data-testid="stSidebar"] *,
 [data-testid="stSidebar"] p {
-    color: #ECF0F1 !important; /* Lighter text color for all elements */
+    color: #ECF0F1 !important;
 }
 
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3,
-[data-testid="stSidebar"] h4 { /* Tambahkan h4 di sini agar warna header di sidebar konsisten */
-    color: #ECF0F1 !important; /* Ensure headers also use light color */
+[data-testid="stSidebar"] h4 {
+    color: #ECF0F1 !important;
 }
 
-/* Styling untuk st.page_link yang kita buat secara kustom */
-.stSidebar [data-testid="stPageLink"] {
-    background-color: transparent !important;
-    color: #ECF0F1 !important; /* Warna teks untuk link */
-    border-radius: 0.5rem;
+.stSidebar [data-testid="stPageLink-wrapper"] {
     margin-bottom: 0.2rem;
+}
+
+.stSidebar [data-testid="stPageLink-wrapper"] a {
+    background-color: transparent !important;
+    color: #ECF0F1 !important;
+    border-radius: 0.5rem;
     padding: 0.75rem 1rem;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    text-decoration: none; /* Hilangkan garis bawah default */
-    display: block; /* Agar menempati lebar penuh */
+    transition: background-color 0.2s ease, color 0.2s ease, outline 0s; /* Tambahkan outline 0s */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    outline: none !important; /* Hapus outline default saat focus */
+    border: none !important; /* Hapus border default jika ada */
 }
 
-.stSidebar [data-testid="stPageLink"]:hover {
-    background-color: #34495E !important; /* Warna latar belakang saat hover */
-    color: #1ABC9C !important; /* Warna teks saat hover */
+.stSidebar [data-testid="stPageLink-wrapper"] a:hover {
+    background-color: #34495E !important;
+    color: #1ABC9C !important;
+    outline: none !important; /* Penting untuk hover */
+    border: none !important; /* Penting untuk hover */
 }
 
-.stSidebar [data-testid="stPageLink"][data-selected="true"] {
-    background-color: #1ABC9C !important; /* Warna latar belakang saat terpilih */
-    color: white !important; /* Warna teks saat terpilih */
+.stSidebar [data-testid="stPageLink-wrapper"] a:active {
+    outline: none !important;
+    border: none !important;
+}
+
+.stSidebar [data-testid="stPageLink-wrapper"] a[aria-current="page"] {
+    background-color: #1ABC9C !important;
+    color: white !important;
     font-weight: 600;
+    outline: none !important;
+    border: none !important;
 }
 
+/* Styling untuk ikon di dalam page_link */
+.stSidebar [data-testid="stPageLink-wrapper"] a > div:first-child {
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+}
 
 /* Expander in Sidebar */
 [data-testid="stSidebarExpander"] {
-    background-color: #34495E; /* Darker background for expander */
+    background-color: #34495E;
     border-radius: 0.5rem;
     margin-top: 1rem;
 }
 
 [data-testid="stSidebarExpander"] div[role="button"] p {
-    color: #ECF0F1 !important; /* Text color for expander header */
+    color: #ECF0F1 !important;
     font-weight: bold;
 }
 
 [data-testid="stSidebarExpander"] div[data-testid="stVerticalBlock"] {
-    padding-left: 1rem; /* Indent content inside expander */
+    padding-left: 1rem;
 }
 
 /* Alerts */
@@ -299,24 +322,24 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 }
 
 /* Info Alert */
-.stAlert > div[data-testid="stMarkdownContainer"] { /* Targeting the inner markdown container for info */
-    background-color: #D6EAF8; /* Light blue */
-    color: #2874A6; /* Dark blue text */
-    border-left: 5px solid #3498DB; /* Blue border */
+.stAlert > div[data-testid="stMarkdownContainer"] {
+    background-color: #D6EAF8;
+    color: #2874A6;
+    border-left: 5px solid #3498DB;
 }
 
 /* Warning Alert */
-.stAlert > div[data-testid="stMarkdownContainer"].st-emotion-cache-r8x5j1 { /* Specific selector for warning */
-    background-color: #FCF3CF; /* Light yellow */
-    color: #B7950B; /* Dark yellow text */
-    border-left: 5px solid #F1C40F; /* Yellow border */
+.stAlert > div[data-testid="stMarkdownContainer"].st-emotion-cache-r8x5j1 {
+    background-color: #FCF3CF;
+    color: #B7950B;
+    border-left: 5px solid #F1C40F;
 }
 
 /* Error Alert */
-.stAlert > div[data-testid="stMarkdownContainer"].st-emotion-cache-j4c9x8 { /* Specific selector for error */
-    background-color: #FADBD8; /* Light red */
-    color: #C0392B; /* Dark red text */
-    border-left: 5px solid #E74C3C; /* Red border */
+.stAlert > div[data-testid="stMarkdownContainer"].st-emotion-cache-j4c9x8 {
+    background-color: #FADBD8;
+    color: #C0392B;
+    border-left: 5px solid #E74C3C;
 }
 
 /* Optional: Animations */
@@ -334,4 +357,3 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 .stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .info-card, .output-card {
     animation: fadeIn 0.8s ease-out;
 }
-/* More specific animations can be added if desired */
