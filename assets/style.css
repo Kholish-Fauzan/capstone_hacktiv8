@@ -1,8 +1,10 @@
-/* assets/style.css - REVISI TOTAL (FINAL UNTUK KONSISTENSI & NAVIGASI) */
+/* assets/style.css - REVISI UNTUK MENGATASI GARIS HIJAU PADA JUDUL */
 
 /* Import Google Fonts (optional, but good for consistent typography) */
-@import url('https://fonts.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+/* --- Sembunyikan Navigasi Multi-Halaman Bawaan Streamlit (SANGAT SPESIFIK & KUAT) --- */
+/* Target div parent yang membungkus navigasi default */
 div[data-testid="stSidebarNav"] {
     display: none !important;
     visibility: hidden !important;
@@ -13,6 +15,8 @@ div[data-testid="stSidebarNav"] {
     overflow: hidden !important;
 }
 
+/* Jika ada elemen lain yang masih muncul, target juga berdasarkan class Streamlit yang dinamis */
+/* Ini adalah contoh, mungkin perlu disesuaikan jika Streamlit mengubah classname */
 .st-emotion-cache-vk330y { /* Selector umum untuk container navigasi default */
     display: none !important;
 }
@@ -191,6 +195,7 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 }
 
 /* Custom Card Styling for Outputs/Info */
+/* TARGET SPESIFIK UNTUK INFO-CARD agar tidak bertabrakan dengan subheader */
 .info-card {
     background-color: #ECF0F1;
     border-left: 5px solid #1ABC9C;
@@ -210,6 +215,31 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     font-size: 0.95rem;
     line-height: 1.5;
 }
+
+/* CSS baru untuk mengatasi border pada st.subheader yang mungkin otomatis */
+/* Streamlit menggunakan div dengan data-testid="stMarkdownContainer" untuk st.subheader, st.header, dll. */
+/* Kita pastikan elemen ini tidak punya border-left bawaan yang sama dengan info-card, kecuali kita ingin. */
+div[data-testid="stMarkdownContainer"] h2,
+div[data-testid="stMarkdownContainer"] h3,
+div[data-testid="stMarkdownContainer"] h4 {
+    border-left: none !important; /* Hapus border-left jika ada */
+    padding-left: 0 !important; /* Hapus padding-left jika ada dari default border */
+}
+
+/* Lebih spesifik lagi jika subheader itu sendiri memiliki div parent yang memberinya border */
+/* Contoh selector Streamlit untuk subheader: div[data-testid="stVerticalBlock"] > div > h3 */
+/* Atau div[data-testid="stVerticalBlock"] > div > div > h3 */
+/* Ini adalah generalisasi, bisa jadi perlu disesuaikan dengan inspeksi elemen terbaru */
+div[data-testid^="stBlock"] > div > h2,
+div[data-testid^="stBlock"] > div > h3,
+div[data-testid^="stBlock"] > div > h4,
+div[data-testid^="stVerticalBlock"] > div > h2,
+div[data-testid^="stVerticalBlock"] > div > h3,
+div[data-testid^="stVerticalBlock"] > div > h4 {
+    border-left: none !important;
+    padding-left: 0 !important;
+}
+
 
 .output-card {
     background-color: #FFFFFF;
@@ -253,6 +283,7 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     color: #ECF0F1 !important;
 }
 
+/* Styling untuk st.page_link yang kita buat secara kustom (Perbaikan Hover & Border) */
 .stSidebar [data-testid="stPageLink-wrapper"] {
     margin-bottom: 0.2rem;
 }
