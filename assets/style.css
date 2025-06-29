@@ -1,10 +1,9 @@
-/* assets/style.css - REVISI UNTUK MENGATASI GARIS HIJAU PADA JUDUL */
+/* assets/style.css - REVISI AKHIR (MENGHAPUS INFO-CARD DAN MEMAMPATKAN) */
 
-/* Import Google Fonts (optional, but good for consistent typography) */
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* --- Sembunyikan Navigasi Multi-Halaman Bawaan Streamlit (SANGAT SPESIFIK & KUAT) --- */
-/* Target div parent yang membungkus navigasi default */
+/* --- Sembunyikan Navigasi Multi-Halaman Bawaan Streamlit --- */
 div[data-testid="stSidebarNav"] {
     display: none !important;
     visibility: hidden !important;
@@ -15,16 +14,13 @@ div[data-testid="stSidebarNav"] {
     overflow: hidden !important;
 }
 
-/* Jika ada elemen lain yang masih muncul, target juga berdasarkan class Streamlit yang dinamis */
-/* Ini adalah contoh, mungkin perlu disesuaikan jika Streamlit mengubah classname */
-.st-emotion-cache-vk330y { /* Selector umum untuk container navigasi default */
-    display: none !important;
-}
+.st-emotion-cache-vk330y, /* Selector umum untuk container navigasi default */
 .st-emotion-cache-1p5i3j { /* Selector untuk item navigasi default */
     display: none !important;
 }
+
 /* Pastikan tidak ada sisa padding atau margin dari elemen yang disembunyikan */
-div[data-testid="stSidebar"] > div > section:first-child > div:nth-child(2) { /* Ini menargetkan div di atas navigasi kustom */
+div[data-testid="stSidebar"] > div > section:first-child > div:nth-child(2) {
     padding-top: 0 !important;
     margin-top: 0 !important;
 }
@@ -67,7 +63,7 @@ h2 {
     font-size: 2.5rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #ECF0F1;
+    border-bottom: 2px solid #ECF0F1; /* Ini border bawah untuk h2 */
     padding-bottom: 0.5rem;
 }
 
@@ -194,53 +190,6 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     display: none;
 }
 
-/* Custom Card Styling for Outputs/Info */
-/* TARGET SPESIFIK UNTUK INFO-CARD agar tidak bertabrakan dengan subheader */
-.info-card {
-    background-color: #ECF0F1;
-    border-left: 5px solid #1ABC9C;
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.info-card h4 {
-    margin-top: 0;
-    color: #1ABC9C;
-}
-
-.info-card p {
-    color: #34495E;
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-/* CSS baru untuk mengatasi border pada st.subheader yang mungkin otomatis */
-/* Streamlit menggunakan div dengan data-testid="stMarkdownContainer" untuk st.subheader, st.header, dll. */
-/* Kita pastikan elemen ini tidak punya border-left bawaan yang sama dengan info-card, kecuali kita ingin. */
-div[data-testid="stMarkdownContainer"] h2,
-div[data-testid="stMarkdownContainer"] h3,
-div[data-testid="stMarkdownContainer"] h4 {
-    border-left: none !important; /* Hapus border-left jika ada */
-    padding-left: 0 !important; /* Hapus padding-left jika ada dari default border */
-}
-
-/* Lebih spesifik lagi jika subheader itu sendiri memiliki div parent yang memberinya border */
-/* Contoh selector Streamlit untuk subheader: div[data-testid="stVerticalBlock"] > div > h3 */
-/* Atau div[data-testid="stVerticalBlock"] > div > div > h3 */
-/* Ini adalah generalisasi, bisa jadi perlu disesuaikan dengan inspeksi elemen terbaru */
-div[data-testid^="stBlock"] > div > h2,
-div[data-testid^="stBlock"] > div > h3,
-div[data-testid^="stBlock"] > div > h4,
-div[data-testid^="stVerticalBlock"] > div > h2,
-div[data-testid^="stVerticalBlock"] > div > h3,
-div[data-testid^="stVerticalBlock"] > div > h4 {
-    border-left: none !important;
-    padding-left: 0 !important;
-}
-
-
 .output-card {
     background-color: #FFFFFF;
     border: 1px solid #D7DBDD;
@@ -343,7 +292,7 @@ div[data-testid^="stVerticalBlock"] > div > h4 {
     padding-left: 1rem;
 }
 
-/* Alerts */
+/* Alerts - tetap dipertahankan karena ini styling untuk st.info, st.warning, st.error */
 .stAlert > div {
     border-radius: 0.5rem;
     padding: 1rem 1.5rem;
@@ -385,6 +334,6 @@ div[data-testid^="stVerticalBlock"] > div > h4 {
 }
 
 /* Apply animation to elements */
-.stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .info-card, .output-card {
+.stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .output-card { /* Hapus .info-card di sini */
     animation: fadeIn 0.8s ease-out;
 }

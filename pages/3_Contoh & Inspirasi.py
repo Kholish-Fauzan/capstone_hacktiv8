@@ -19,25 +19,19 @@ st.title("Contoh & Inspirasi ✨")
 st.markdown("Temukan ide dan lihat bagaimana Nusantara Story AI bisa membantu Anda merangkai kisah dan strategi promosi yang powerful!")
 st.markdown("---")
 
-# Perubahan ada di sini:
 st.subheader("Narasi & Analisis Promosi - Gunung Bromo, Jawa Timur 🌋")
-# Mulai info-card HANYA UNTUK KONTEN DI DALAMNYA, bukan untuk subheader di atasnya.
-st.markdown(f'<div class="info-card">', unsafe_allow_html=True)
-st.markdown("#### Kisah Bromo: Pesona Magis Sang Penjaga Timur") # Ini adalah sub-judul internal card
+st.markdown("#### Kisah Bromo: Pesona Magis Sang Penjaga Timur")
 st.write("""
 **Judul Objek:** Gunung Bromo
 **Lokasi:** Taman Nasional Bromo Tengger Semeru, Jawa Timur
 **Deskripsi Kunci:** Gunung berapi aktif dengan kawah berasap, pemandangan matahari terbit yang ikonik, pasir berbisik, suku Tengger, upacara Yadnya Kasada.
 
-Tersembunyi di jantung Taman Nasional Bromo Tengger Semeru, Jawa Timur, Gunung Bromo bukan sekadar gunung berapi, melainkan lanskap magis yang menggetarkan jiwa. Puncaknya yang diselimuti asap belerang seolah memanggil para petualang untuk menyaksikan keajaiban alam yang tak terlupakan. Setiap fajar menyingsung, lautan kabut menyelimuti kaldera raksasa, perlahan tersingkap oleh semburat jingga keemasan yang muncul dari balik punggung gunung. Pemandangan matahari terbit di Bromo adalah orkestra warna yang memukau, di mana langit berubah dari kelam menjadi palet warna pastel yang lembut, diselingi siluet Gunung Semeru yang gagah di kejauhan.
+Tersembunyi di jantung Taman Nasional Bromo Tengger Semeru, Jawa Timur, terhampar permadani perkebunan kopi yang menghasilkan salah satu harta karun terbaik Indonesia: Kopi Gayo. Bukan sekadar minuman, Kopi Gayo adalah warisan berharga yang tumbuh subur di ketinggian 1.200 meter di atas permukaan laut, diberkahi dengan tanah vulkanis subur dan iklim mikro yang ideal. Cita rasanya yang unik dan kompleks – perpaduan antara *fruity*, *spicy*, dengan sedikit sentuhan cokelat dan *earthy* – telah memikat lidah para pecinta kopi di seluruh dunia.
 
-Bukan hanya pesona visual, Bromo juga kaya akan narasi budaya. Di lerengnya, suku Tengger, penduduk asli yang gigih, hidup harmonis dengan alam dan menjaga tradisi leluhur. Upacara Yadnya Kasada, ritual persembahan hasil bumi ke kawah Bromo, adalah manifestasi keyakinan mendalam mereka yang telah diwariskan turun-temurun. Saat melangkah di Lautan Pasir yang membentang luas, hembusan angin seolah membisikkan kisah-kisah kuno, membawa kita pada perjalanan spiritual yang menyatukan manusia dengan alam semesta. Bromo adalah simfoni keindahan, ketenangan, dan kearifan lokal yang abadi.
+Keistimewaan Kopi Gayo tak hanya terletak pada rasanya, namun juga pada proses pasca-panennya yang khas, yaitu "Giling Basah". Metode ini memberikan karakteristik bodi yang tebal dan aroma yang kuat, membedakannya dari kopi lain. Lebih dari itu, Kopi Gayo adalah cerminan ketekunan dan kearifan komunitas petani lokal yang telah mengolah kopi secara turun-temurun. Setiap biji kopi adalah hasil kerja keras, cinta, dan dedikasi, menjadikan Kopi Gayo sebagai simbol kebanggaan dan identitas bagi masyarakat Gayo. Menikmati Kopi Gayo berarti menikmati secangkir cerita tentang alam, budaya, dan semangat pantang menyerah.
 """)
-st.markdown('</div>', unsafe_allow_html=True) # Tutup div info-card di sini
 
-# Di sini, subheader "Analisis Promosi untuk Gunung Bromo" ada di luar info-card.
 st.subheader("Analisis Promosi untuk Gunung Bromo")
-st.markdown(f'<div class="info-card">', unsafe_allow_html=True) # Mulai info-card untuk analisis
 st.markdown("**👉 Poin Jual Utama**")
 st.write("""
 - **Matahari Terbit Ikonik:** Pemandangan matahari terbit dengan lautan awan dan siluet gunung berapi yang ikonik.
@@ -51,12 +45,10 @@ st.write("""
 - **Pencinta Budaya:** Tertarik pada tradisi lokal yang otentik dan interaksi dengan masyarakat adat.
 - **Wisatawan Internasional:** Bromo sudah dikenal luas di dunia.
 """)
-st.markdown('</div>', unsafe_allow_html=True) # Tutup div info-card di sini
 
 
 st.subheader("Narasi & Analisis Promosi - Kopi Gayo, Aceh ☕")
-st.markdown(f'<div class="info-card">', unsafe_allow_html=True) # Mulai info-card untuk narasi kopi gayo
-st.markdown("#### Kisah Kopi Gayo: Aroma Warisan Dataran Tinggi") # Ini adalah sub-judul internal card
+st.markdown("#### Kisah Kopi Gayo: Aroma Warisan Dataran Tinggi")
 st.write("""
 **Judul Objek:** Kopi Gayo
 **Lokasi:** Dataran Tinggi Gayo, Aceh Tengah
@@ -66,11 +58,8 @@ Di perbukitan hijau Dataran Tinggi Gayo, Aceh Tengah, terhampar permadani perkeb
 
 Keistimewaan Kopi Gayo tak hanya terletak pada rasanya, namun juga pada proses pasca-panennya yang khas, yaitu "Giling Basah". Metode ini memberikan karakteristik bodi yang tebal dan aroma yang kuat, membedakannya dari kopi lain. Lebih dari itu, Kopi Gayo adalah cerminan ketekunan dan kearifan komunitas petani lokal yang telah mengolah kopi secara turun-temurun. Setiap biji kopi adalah hasil kerja keras, cinta, dan dedikasi, menjadikan Kopi Gayo sebagai simbol kebanggaan dan identitas bagi masyarakat Gayo. Menikmati Kopi Gayo berarti menikmati secangkir cerita tentang alam, budaya, dan semangat pantang menyerah.
 """)
-st.markdown('</div>', unsafe_allow_html=True) # Tutup div info-card di sini
 
-# Di sini, subheader "Analisis Promosi untuk Kopi Gayo" ada di luar info-card.
 st.subheader("Analisis Promosi untuk Kopi Gayo")
-st.markdown(f'<div class="info-card">', unsafe_allow_html=True) # Mulai info-card untuk analisis kopi gayo
 st.markdown("**👉 Poin Jual Utama**")
 st.write("""
 - **Cita Rasa Khas:** Profil rasa yang unik dan kompleks, diminati oleh penikmat kopi spesialti.
@@ -84,7 +73,6 @@ st.write("""
 - **Wisatawan Edukatif:** Ingin belajar tentang pertanian kopi dan budaya lokal.
 - **Eksportir & Distributor Kopi:** Mencari produk kopi berkualitas tinggi.
 """)
-st.markdown('</div>', unsafe_allow_html=True) # Tutup div info-card di sini
 
 st.markdown("---")
 st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)
