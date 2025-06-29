@@ -180,14 +180,13 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     margin-bottom: 5px;
 }
 
-/* --- REVISI: Styling untuk custom-help-text --- */
 .custom-help-text {
-    font-size: 0.85rem !important; /* Ukuran teks lebih kecil */
-    color: #777777 !important; /* Warna abu-abu yang lebih lembut */
-    margin-top: -15px !important; /* Kunci: Mengurangi margin atas secara signifikan */
-    margin-bottom: 15px !important; /* Jarak ke elemen berikutnya (bisa disesuaikan) */
+    font-size: 0.85rem !important;
+    color: #777777 !important; 
+    margin-top: -50px !important;
+    margin-bottom: 15px !important;
     line-height: 1.4 !important;
-    padding-left: 0.2rem !important; /* Sedikit padding agar tidak terlalu mepet kiri */
+    padding-left: 0.2rem !important;
 }
 
 
