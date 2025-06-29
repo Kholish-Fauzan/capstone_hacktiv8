@@ -1,3 +1,5 @@
+/* assets/style.css - Kode CSS Utuh Terbaru */
+
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
@@ -171,39 +173,26 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 }
 
 /* Input Labels and Help Text */
-/* Ini adalah bagian yang akan kita atur */
-div[data-testid="stForm"] .st-emotion-cache-10q20q p, /* Untuk label bawaan Streamlit (jika ada) */
-div[data-testid="stForm"] .st-emotion-cache-1gcsb4i p, /* Selector lain yang mungkin untuk label/help text */
-.stMarkdownContainer p { /* Untuk p yang dibuat dengan st.markdown */
-    font-weight: 600; /* Label utama */
+/* Ini adalah bagian yang sudah ada dan biarkan saja untuk label utama */
+.st-emotion-cache-10q20q p {
+    font-weight: 600;
     color: #555555;
-    margin-bottom: 5px; /* Tetap sama untuk label */
+    margin-bottom: 5px;
 }
 
-/* TARGET PENTING: Untuk teks pendukung di bawah input */
-/* Ini menargetkan paragraf yang datang setelah div input Streamlit */
-div[data-testid^="stTextInput"] + div[data-testid="stMarkdownContainer"] p,
-div[data-testid^="stSelectbox"] + div[data-testid="stMarkdownContainer"] p,
-div[data-testid^="stTextArea"] + div[data-testid="stMarkdownContainer"] p,
-div[data-testid^="stNumberInput"] + div[data-testid="stMarkdownContainer"] p,
-div[data-testid="stDateInput"] + div[data-testid="stMarkdownContainer"] p {
-    font-size: 0.85rem; /* Ukuran teks lebih kecil */
-    color: #777777; /* Warna abu-abu yang lebih lembut */
-    margin-top: -10px !important; /* Mengurangi margin atas secara signifikan */
-    margin-bottom: 15px; /* Jarak ke elemen berikutnya */
-    line-height: 1.4;
-    padding-left: 0.2rem; /* Sedikit padding agar tidak terlalu mepet kiri */
+/* --- REVISI: Styling untuk custom-help-text --- */
+.custom-help-text {
+    font-size: 0.85rem !important; /* Ukuran teks lebih kecil */
+    color: #777777 !important; /* Warna abu-abu yang lebih lembut */
+    margin-top: -15px !important; /* Kunci: Mengurangi margin atas secara signifikan */
+    margin-bottom: 15px !important; /* Jarak ke elemen berikutnya (bisa disesuaikan) */
+    line-height: 1.4 !important;
+    padding-left: 0.2rem !important; /* Sedikit padding agar tidak terlalu mepet kiri */
 }
 
-
-p {
-    margin-top: 0.5rem; /* Margin atas default untuk paragraf, bisa disesuaikan */
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
 
 .stHelpInline {
-    display: none;
+    display: none !important;
 }
 
 .output-card {
