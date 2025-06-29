@@ -123,7 +123,7 @@ if submit_button:
 
             if generated_narration:
                 narasi_placeholder.markdown(f"<div class='output-card'><p>{generated_narration}</p></div>", unsafe_allow_html=True)
-                st.session_state.generated_narration = generated_naration # Simpan ke session state
+                st.session_state.generated_narration = generated_narration # Simpan ke session state
 
                 # Generate PDF bytes dan simpan juga ke session state
                 pdf_bytes_narasi_temp = generate_pdf_from_text(generated_narration, f"Narasi_{judul_objek}")
