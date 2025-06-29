@@ -1,4 +1,4 @@
-/* assets/style.css - REVISI AKHIR (MENGHAPUS INFO-CARD DAN MEMAMPATKAN) */
+/* assets/style.css - REVISI UNTUK MEMPERCANTIK SIDEBAR DAN MEMASTIKAN KONSISTENSI */
 
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -14,6 +14,7 @@ div[data-testid="stSidebarNav"] {
     overflow: hidden !important;
 }
 
+/* Mengatasi sisa dari navigasi default Streamlit (jika masih ada) */
 .st-emotion-cache-vk330y, /* Selector umum untuk container navigasi default */
 .st-emotion-cache-1p5i3j { /* Selector untuk item navigasi default */
     display: none !important;
@@ -45,9 +46,9 @@ html, body {
     box-sizing: border-box;
 }
 
-/* Custom Headers */
+/* Custom Headers (untuk Main Content Area) */
 h1 {
-    color: #1ABC9C;
+    color: #1ABC9C; /* Hijau Turquoise */
     font-weight: 800;
     font-size: 3.5rem;
     margin-bottom: 1rem;
@@ -58,26 +59,26 @@ h1 {
 }
 
 h2 {
-    color: #2C3E50;
+    color: #2C3E50; /* Dark Blue Gray */
     font-weight: 700;
     font-size: 2.5rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #ECF0F1; /* Ini border bawah untuk h2 */
+    border-bottom: 2px solid #ECF0F1; /* Light Gray */
     padding-bottom: 0.5rem;
 }
 
 h3 {
-    color: #34495E;
+    color: #34495E; /* Medium Blue Gray */
     font-weight: 600;
     font-size: 1.8rem;
     margin-top: 1.5rem;
     margin-bottom: 0.8rem;
-    text-align: center;
+    text-align: center; /* Tetap center untuk halaman utama */
 }
 
 h4 {
-    color: #1ABC9C;
+    color: #1ABC9C; /* Hijau Turquoise */
     font-weight: 700;
     font-size: 1.4rem;
     margin-top: 1rem;
@@ -93,12 +94,12 @@ p {
 }
 
 strong {
-    color: #2C3E50;
+    color: #2C3E50; /* Dark Blue Gray */
 }
 
 /* Streamlit Button Styling */
 .stButton>button {
-    background-color: #1ABC9C;
+    background-color: #1ABC9C; /* Hijau Turquoise */
     color: white !important;
     font-weight: bold;
     padding: 0.75rem 1.5rem;
@@ -112,7 +113,7 @@ strong {
 }
 
 .stButton>button:hover {
-    background-color: #16A085;
+    background-color: #16A085; /* Hijau lebih gelap */
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
@@ -136,7 +137,7 @@ div[data-testid="stTextArea"] textarea,
 div[data-testid="stNumberInput"] input,
 div[data-testid="stDateInput"] input {
     border-radius: 0.5rem;
-    border: 1px solid #BDC3C7;
+    border: 1px solid #BDC3C7; /* Light Gray Blue */
     padding: 0.75rem 1rem;
     font-size: 1rem;
     color: #333;
@@ -149,19 +150,19 @@ div[data-testid="stTextInput"] input:focus,
 div[data-testid="stTextArea"] textarea:focus,
 div[data-testid="stNumberInput"] input:focus,
 div[data-testid="stDateInput"] input:focus {
-    border-color: #1ABC9C;
+    border-color: #1ABC9C; /* Hijau Turquoise */
     box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
     outline: none;
 }
 
 div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n {
     border-radius: 0.5rem;
-    border: 1px solid #BDC3C7;
+    border: 1px solid #BDC3C7; /* Light Gray Blue */
     background-color: white;
     box-sizing: border-box;
 }
 div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n:focus-within {
-    border-color: #1ABC9C;
+    border-color: #1ABC9C; /* Hijau Turquoise */
     box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.25);
     outline: none;
 }
@@ -192,7 +193,7 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 
 .output-card {
     background-color: #FFFFFF;
-    border: 1px solid #D7DBDD;
+    border: 1px solid #D7DBDD; /* Light Gray */
     border-radius: 0.5rem;
     padding: 1.5rem;
     margin-top: 1.5rem;
@@ -201,16 +202,16 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 }
 
 .output-card p {
-    color: #2C3E50;
+    color: #2C3E50; /* Dark Blue Gray */
     font-size: 1.05rem;
     line-height: 1.7;
     white-space: pre-wrap;
 }
 
-/* Sidebar Customization */
+/* --- SIDEBAR CUSTOMIZATION --- */
 [data-testid="stSidebar"] {
-    background-color: #2C3E50; /* Dark Blue Gray */
-    color: white;
+    background-color: #2C3E50; /* Dark Blue Gray - Warna utama sidebar */
+    color: white; /* Default text color in sidebar */
     padding-top: 2rem;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     position: sticky;
@@ -219,42 +220,59 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     overflow-y: auto;
 }
 
-/* All text within sidebar */
+/* General text within sidebar (termasuk p, markdown, dll.) */
 [data-testid="stSidebar"] *,
-[data-testid="stSidebar"] p {
-    color: #ECF0F1 !important;
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] li { /* Menambahkan li untuk list items */
+    color: #ECF0F1 !important; /* Off-white untuk teks biasa */
+    line-height: 1.6;
 }
 
+/* Headers dalam sidebar */
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
 [data-testid="stSidebar"] h3,
 [data-testid="stSidebar"] h4 {
-    color: #ECF0F1 !important;
+    color: #ECF0F1 !important; /* Off-white untuk semua header di sidebar */
+    text-align: left !important; /* Pastikan header di sidebar tidak center */
+    border-bottom: none !important; /* Hapus border bawah untuk header di sidebar */
+    padding-bottom: 0 !important; /* Hapus padding bawah untuk header di sidebar */
+    margin-bottom: 0.5rem !important; /* Sesuaikan margin bawah */
 }
 
-/* Styling untuk st.page_link yang kita buat secara kustom (Perbaikan Hover & Border) */
+/* Khusus untuk subheader "Jelajahi Halaman Lain" */
+[data-testid="stSidebar"] h3 {
+    font-size: 1.3rem; /* Sedikit lebih kecil dari h3 utama */
+    font-weight: 700;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.8rem !important;
+    color: #1ABC9C !important; /* Warna hijau turquoise untuk judul navigasi */
+}
+
+
+/* Styling untuk st.page_link yang kita buat secara kustom */
 .stSidebar [data-testid="stPageLink-wrapper"] {
     margin-bottom: 0.2rem;
 }
 
 .stSidebar [data-testid="stPageLink-wrapper"] a {
     background-color: transparent !important;
-    color: #ECF0F1 !important;
+    color: #ECF0F1 !important; /* Warna teks link default */
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
-    transition: background-color 0.2s ease, color 0.2s ease, outline 0s; /* Tambahkan outline 0s */
+    transition: background-color 0.2s ease, color 0.2s ease, outline 0s;
     text-decoration: none;
     display: flex;
     align-items: center;
-    outline: none !important; /* Hapus outline default saat focus */
-    border: none !important; /* Hapus border default jika ada */
+    outline: none !important;
+    border: none !important;
 }
 
 .stSidebar [data-testid="stPageLink-wrapper"] a:hover {
-    background-color: #34495E !important;
-    color: #1ABC9C !important;
-    outline: none !important; /* Penting untuk hover */
-    border: none !important; /* Penting untuk hover */
+    background-color: #34495E !important; /* Warna latar belakang saat hover */
+    color: #1ABC9C !important; /* Warna teks saat hover (hijau turquoise) */
+    outline: none !important;
+    border: none !important;
 }
 
 .stSidebar [data-testid="stPageLink-wrapper"] a:active {
@@ -263,8 +281,8 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 }
 
 .stSidebar [data-testid="stPageLink-wrapper"] a[aria-current="page"] {
-    background-color: #1ABC9C !important;
-    color: white !important;
+    background-color: #1ABC9C !important; /* Warna latar belakang untuk halaman aktif (hijau turquoise) */
+    color: white !important; /* Warna teks untuk halaman aktif */
     font-weight: 600;
     outline: none !important;
     border: none !important;
@@ -278,31 +296,44 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 
 /* Expander in Sidebar */
 [data-testid="stSidebarExpander"] {
-    background-color: #34495E;
+    background-color: #34495E; /* Medium Blue Gray untuk expander */
     border-radius: 0.5rem;
     margin-top: 1rem;
+    padding: 0.5rem 1rem; /* Padding di sekitar expander agar tidak terlalu mepet */
+    color: #ECF0F1 !important; /* Warna teks di expander */
 }
 
+/* Header/title of the expander */
 [data-testid="stSidebarExpander"] div[role="button"] p {
-    color: #ECF0F1 !important;
+    color: #ECF0F1 !important; /* Warna teks judul expander */
     font-weight: bold;
 }
 
+/* Content inside the expander */
 [data-testid="stSidebarExpander"] div[data-testid="stVerticalBlock"] {
-    padding-left: 1rem;
+    padding-left: 1rem; /* Indentasi konten di dalam expander */
+    margin-top: 0.5rem; /* Jarak antara judul expander dan kontennya */
 }
 
-/* Alerts - tetap dipertahankan karena ini styling untuk st.info, st.warning, st.error */
-.stAlert > div {
+/* Styling untuk st.info di sidebar */
+[data-testid="stSidebar"] .stAlert > div {
     border-radius: 0.5rem;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1rem; /* Padding lebih kecil untuk alert di sidebar */
     margin-bottom: 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 0.9rem; /* Ukuran font lebih kecil */
+    line-height: 1.4;
 }
 
+/* Styling spesifik untuk st.info di sidebar */
+[data-testid="stSidebar"] .stAlert > div[data-testid="stMarkdownContainer"] {
+    background-color: #225C6F; /* Warna latar belakang yang lebih gelap dari #3498DB */
+    color: #ECF0F1; /* Warna teks yang kontras */
+    border-left: 5px solid #1ABC9C; /* Garis hijau turquoise */
+}
+
+/* Alerts (untuk Main Content Area) */
 /* Info Alert */
-.stAlert > div[data-testid="stMarkdownContainer"] {
+.stAlert > div[data-testid="stMarkdownContainer"]:not([data-testid="stSidebar"] .stAlert > div[data-testid="stMarkdownContainer"]) {
     background-color: #D6EAF8;
     color: #2874A6;
     border-left: 5px solid #3498DB;
@@ -334,6 +365,6 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 }
 
 /* Apply animation to elements */
-.stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .output-card { /* Hapus .info-card di sini */
+.stHeader, .stSubheader, .stMarkdown, .stTextInput, .stButton, .output-card {
     animation: fadeIn 0.8s ease-out;
 }
