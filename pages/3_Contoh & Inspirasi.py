@@ -10,13 +10,13 @@ load_css('assets/style.css')
 
 # --- Sidebar ---
 with st.sidebar:
-    st.header("Nusantara Story AI")
+    st.header("Nusantara Story")
     render_custom_sidebar_content()
     render_sidebar_expander_content()
 
 # Konten utama halaman ini
 st.title("Contoh & Inspirasi ✨")
-st.markdown("Temukan ide dan lihat bagaimana Nusantara Story AI bisa membantu Anda merangkai kisah dan strategi promosi yang powerful!")
+st.markdown("Temukan ide dan lihat bagaimana Nusantara Story bisa membantu Anda merangkai kisah dan strategi promosi yang powerful!")
 st.markdown("---")
 
 st.subheader("Narasi & Analisis Promosi - Gunung Bromo, Jawa Timur 🌋")
@@ -76,4 +76,4 @@ st.write("""
 """)
 
 st.markdown("---")
-st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)

@@ -10,18 +10,18 @@ load_css('assets/style.css')
 
 # --- Sidebar ---
 with st.sidebar:
-    st.header("Nusantara Story AI")
+    st.header("Nusantara Story")
     render_custom_sidebar_content()
     render_sidebar_expander_content()
 
 # Konten utama halaman ini
 st.title("Tentang Saya & Kontak 👋")
-st.markdown("Salam kenal! Saya adalah Kholish Fauzan, pengembang di balik Nusantara Story AI.")
+st.markdown("Salam kenal! Saya adalah Kholish Fauzan, pengembang di balik Nusantara Story.")
 st.markdown("---")
 
 st.subheader("Perjalanan di Balik Aplikasi Ini 💡")
 st.write("""
-Saya Kholish Fauzan, seorang individu yang memiliki semangat besar untuk teknologi dan kekayaan budaya Indonesia. Aplikasi Nusantara Story AI ini lahir dari keinginan saya untuk menjembatani kemajuan teknologi kecerdasan buatan dengan potensi luar biasa dari warisan budaya dan pariwisata lokal kita.
+Saya Kholish Fauzan, seorang individu yang memiliki semangat besar untuk teknologi dan kekayaan budaya Indonesia. Aplikasi Nusantara Story ini lahir dari keinginan saya untuk menjembatani kemajuan teknologi kecerdasan buatan dengan potensi luar biasa dari warisan budaya dan pariwisata lokal kita.
 
 Saya percaya bahwa setiap daerah memiliki kisah unik yang layak diceritakan dan potensi ekonomi yang menunggu untuk digali. Dengan Gemini Generative Text Model dan IBM Granite Code Optimization, saya berharap aplikasi ini dapat menjadi alat yang memberdayakan masyarakat, penggiat budaya, dan pelaku pariwisata untuk merangkai narasi yang memukau dan strategi promosi yang efektif.
 
@@ -37,4 +37,4 @@ st.markdown("""
 """)
 
 st.markdown("---")
-st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)

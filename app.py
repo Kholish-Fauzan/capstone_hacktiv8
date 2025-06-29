@@ -15,7 +15,7 @@ from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_
 try:
     gemini_model = get_gemini_model()
 except Exception as e:
-    st.error(f"Maaf, kami mengalami masalah teknis. Gagal menghubungkan ke kecerdasan AI. Silakan coba lagi nanti atau hubungi pengembang.")
+    st.error(f"Maaf, kami mengalami masalah teknis. Silakan coba lagi nanti atau hubungi pengembang.")
     st.stop()
 
 # --- Streamlit UI Setup (Hanya di app.py) ---
@@ -34,25 +34,14 @@ load_css('assets/style.css')
 
 # --- Sidebar ---
 with st.sidebar:
-    st.header("Nusantara Story AI")
+    st.header("Nusantara Story")
     render_custom_sidebar_content()
     render_sidebar_expander_content()
 
 # --- Main Content for app.py (Homepage) ---
-st.title("Nusantara Story AI: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")
+st.title("Nusantara Story: Menggali Kisah Budaya, Memicu Potensi Wisata 🗺️")
 st.markdown("Jelajahi potensi tak terbatas budaya dan pariwisata lokal Anda. Aplikasi ini dirancang untuk membantu Anda merangkai **narasi yang memikat** dan **strategi promosi cerdas**, didukung oleh kecerdasan buatan **Gemini-2.5 Flash** dan **IBM Granite**.")
 st.markdown("---")
-
-# HAPUS BLOK <style> HTML INI JIKA ADA DI `app.py`, karena sudah dipindahkan ke `style.css`
-# st.markdown("""
-# <style>
-#     .stTextInput, .stSelectbox, .stTextArea {
-#         margin-bottom: 20px;
-#     }
-#     ...
-# </style>
-# """, unsafe_allow_html=True)
-
 
 col_input1, col_input2 = st.columns(2)
 
@@ -79,7 +68,7 @@ st.markdown('<p style="font-weight: 600; color: #555555; margin-bottom: 5px;">De
 deskripsi_kunci = st.text_area("", height=150,
                                placeholder="Sebutkan detail penting, fragmen cerita, lokasi, tradisi, keunikan, atau fakta sejarah obyek ini. Semakin detail dan spesifik, semakin baik hasil yang akan AI berikan!",
                                key="input_deskripsi", label_visibility="collapsed")
-st.markdown('<p class="custom-help-text">Ini adalah informasi inti untuk AI merangkai cerita. Beri detail sebanyak mungkin!</p>', unsafe_allow_html=True)
+st.markdown('<p class="custom-help-text">Ini adalah informasi inti untuk Kami merangkai cerita. Beri detail sebanyak mungkin!</p>', unsafe_allow_html=True)
 
 
 # --- Tombol Generate ---
@@ -96,11 +85,11 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
 
 
     # --- Tahap 1: Generasi Narasi oleh Gemini ---
-    st.subheader("📝 Kisah & Narasi dari Gemini AI")
+    st.subheader("📝 Kisah & Narasi")
     narasi_placeholder = st.empty()
     download_narasi_placeholder = st.empty()
 
-    with st.spinner("AI sedang menyusun narasi memukau untuk Anda... Sabar ya! ⏳"):
+    with st.spinner("Kami sedang menyusun narasi memukau untuk Anda... Sabar ya! ⏳"):
         generated_narration = generate_narrative(
             gemini_model, judul_objek, lokasi_objek, deskripsi_kunci, target_audiens, gaya_bahasa
         )
@@ -116,18 +105,18 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
                     data=pdf_bytes,
                     file_name=f"Kisah_{judul_objek}.pdf",
                     mime="application/pdf",
-                    help="Unduh naskah cerita yang dihasilkan AI sebagai file PDF. Siap untuk dibagikan!"
+                    help="Unduh naskah cerita sebagai file PDF. Siap untuk dibagikan!"
                 )
         else:
-            narasi_placeholder.error("Maaf, AI gagal merangkai narasi yang valid. Coba ulangi atau sesuaikan input Anda.")
+            narasi_placeholder.error("Maaf, Kami gagal merangkai narasi yang valid. Coba ulangi atau sesuaikan input Anda.")
             st.session_state.generated_narration = ""
 
     # --- Tahap 2: Analisis & Optimasi oleh Gemini ---
     if generated_narration: # Pastikan narasi sudah ada sebelum analisis
         st.markdown("---")
-        st.subheader("💡 Wawasan & Optimasi Promosi dari Gemini AI")
+        st.subheader("💡 Wawasan & Optimasi Promosi Wisata")
         
-        with st.spinner("AI sedang menganalisis potensi tak terbatas destinasi Anda... Mohon tunggu! 🚀"):
+        with st.spinner("Kami sedang menganalisis potensi tak terbatas destinasi Anda... Mohon tunggu! 🚀"):
             analysis_data = generate_analysis_data(gemini_model, lokasi_objek, st.session_state.generated_narration)
 
             if analysis_data:
@@ -193,10 +182,10 @@ if st.button("Mulai Rangkai Kisah & Optimalkan Promosi! ✨", type="primary"):
                     )
 
             else:
-                st.error("Maaf, AI gagal mendapatkan analisis yang valid. Coba ulangi atau sesuaikan input Anda.")
+                st.error("Maaf, Kami gagal mendapatkan analisis yang valid. Coba ulangi atau sesuaikan input Anda.")
     else:
         st.warning("Analisis tidak dapat dilakukan karena narasi belum berhasil dibuat.")
 
 # --- Footer Copyright ---
 st.markdown("---")
-st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)

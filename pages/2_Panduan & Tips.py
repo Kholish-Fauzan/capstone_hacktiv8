@@ -10,19 +10,19 @@ load_css('assets/style.css')
 
 # --- Sidebar ---
 with st.sidebar:
-    st.header("Nusantara Story AI")
+    st.header("Nusantara Story")
     render_custom_sidebar_content()
     render_sidebar_expander_content()
 
 # Konten utama halaman ini
-st.title("Tips & Panduan: Maksimalkan AI Anda! 🚀")
-st.markdown("Dapatkan hasil terbaik dari Nusantara Story AI dengan panduan singkat ini. Semakin baik input Anda, semakin berkualitas output yang dihasilkan!")
+st.title("Tips & Panduan: Maksimalkan Hasil Anda! 🚀")
+st.markdown("Dapatkan hasil terbaik dari Nusantara Story dengan panduan singkat ini. Semakin baik input Anda, semakin berkualitas output yang dihasilkan!")
 st.markdown("---")
 
 st.subheader("1. Tips Mengisi Deskripsi Kunci 📝")
 st.write("""
-* **Detail adalah Kunci!** Semakin banyak detail spesifik yang Anda berikan (nama tokoh sejarah, tanggal penting, keunikan tradisi, ciri khas arsitektur, jenis kuliner, dll.), semakin kaya dan akurat narasi yang AI hasilkan.
-* **Gunakan Poin-Poin atau Paragraf Singkat:** Anda bisa menggunakan daftar poin atau paragraf singkat yang padat informasi. AI akan merangkainya menjadi cerita yang mengalir.
+* **Detail adalah Kunci!** Semakin banyak detail spesifik yang Anda berikan (nama tokoh sejarah, tanggal penting, keunikan tradisi, ciri khas arsitektur, jenis kuliner, dll.), semakin kaya dan akurat narasi yang kami hasilkan.
+* **Gunakan Poin-Poin atau Paragraf Singkat:** Anda bisa menggunakan daftar poin atau paragraf singkat yang padat informasi. Kami akan merangkainya menjadi cerita yang mengalir.
 * **Sertakan Keunikan:** Apa yang membuat objek ini istimewa? Sebutkan elemen unik yang membedakannya dari yang lain.
 * **Libatkan Indera:** Coba deskripsikan apa yang bisa dilihat, didengar, dicium, dirasakan, atau dicicipi di tempat/objek tersebut.
 """)
@@ -49,4 +49,4 @@ Bagian analisis akan memberikan wawasan mendalam untuk strategi promosi Anda:
 """)
 
 st.markdown("---")
-st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story AI. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: #777;'>© {datetime.now().year} Nusantara Story. Dibuat dengan ✨ oleh Kholish Fauzan.</p>", unsafe_allow_html=True)
