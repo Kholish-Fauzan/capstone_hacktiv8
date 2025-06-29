@@ -1,28 +1,6 @@
-# pages/about_me_page.py
+# pages/4_Tentang Saya.py
 import streamlit as st
 from datetime import datetime
-from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_expander_content # Import fungsi baru
-
-# --- Load Custom CSS ---
-def load_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-load_css('assets/style.css')
-
-# --- Streamlit UI Setup for this specific page ---
-st.set_page_config(
-    page_title="Tentang Saya",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# --- Sidebar (Revisi): Hanya header dan panggil fungsi konten kustom ---
-with st.sidebar:
-    st.header("Nusantara Story AI")
-    render_custom_sidebar_content()
-    render_sidebar_expander_content() # Jika ingin menambahkan expander seperti ReFisher
-
 
 # Konten utama halaman ini (TETAP SAMA)
 st.title("Tentang Saya & Kontak 👋")

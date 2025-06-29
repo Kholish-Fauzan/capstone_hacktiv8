@@ -1,14 +1,21 @@
-# utils/sidebar_content.py
 import streamlit as st
 
 def render_custom_sidebar_content():
-    st.sidebar.success("Pilih Satu Halaman di Atas")
+    st.markdown("---")
+
+    st.markdown("#### Jelajahi Halaman Lain:") # Judul untuk bagian navigasi kustom
+    st.page_link("app.py", label="🏠 Beranda Utama", icon="🏠")
+    st.page_link("pages/2_Panduan & Tips.py", label="💡 Panduan & Tips", icon="💡")
+    st.page_link("pages/3_Contoh & Inspirasi.py", label="✨ Contoh & Inspirasi", icon="✨")
+    st.page_link("pages/4_Tentang Saya.py", label="👤 Tentang Saya", icon="👤")
+
+    st.markdown("---") # Garis pemisah setelah navigasi kustom
 
     """
     Fungsi ini berisi semua elemen UI kustom yang Anda inginkan di sidebar,
     yang akan muncul di bawah navigasi otomatis Streamlit.
     """
-    st.markdown("---") # Garis pemisah antara navigasi dan konten kustom Anda
+    # st.markdown("---") # Garis pemisah antara navigasi dan konten kustom Anda (bisa dihapus jika sudah ada di atas)
 
     st.header("Bagaimana Kami Membantu Anda? 🚀")
     st.markdown("""
@@ -30,5 +37,5 @@ def render_sidebar_expander_content():
         st.markdown("""
         Nusantara Story AI adalah proyek inovatif untuk menggali dan mempromosikan kekayaan budaya serta potensi pariwisata Indonesia menggunakan kecerdasan buatan Gemini.
         """)
-        st.markdown("[Pelajari Lebih Lanjut](link_ke_halaman_tentang_saya)") # Anda bisa arahkan ke halaman about_me_page
+        st.markdown("[Pelajari Lebih Lanjut](Tentang%20Saya)") # Mengarahkan ke halaman 'Tentang Saya'
     st.markdown("---")
