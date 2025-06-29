@@ -2,8 +2,6 @@ import streamlit as st
 
 def render_custom_sidebar_content():
     # Tambahkan navigasi kustom di sini
-    st.markdown("---") # Garis pemisah sebelum navigasi kustom
-
     st.markdown("#### Jelajahi Halaman Lain:") # Judul untuk bagian navigasi kustom
     st.page_link("app.py", label="Beranda Utama", icon="🏠")
     st.page_link("pages/2_Panduan & Tips.py", label="Panduan & Tips", icon="💡")
