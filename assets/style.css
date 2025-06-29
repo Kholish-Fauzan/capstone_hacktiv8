@@ -1,4 +1,4 @@
-/* assets/style.css - REVISI UNTUK MEMPERCANTIK SIDEBAR DAN MEMASTIKAN KONSISTENSI */
+/* assets/style.css - REVISI UNTUK MENGATASI JARAK ANTAR JUDUL DI SIDEBAR */
 
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -212,7 +212,7 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 [data-testid="stSidebar"] {
     background-color: #2C3E50; /* Dark Blue Gray - Warna utama sidebar */
     color: white; /* Default text color in sidebar */
-    padding-top: 2rem;
+    padding-top: 1rem; /* Mengurangi padding top keseluruhan sidebar */
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
@@ -237,22 +237,37 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
     text-align: left !important; /* Pastikan header di sidebar tidak center */
     border-bottom: none !important; /* Hapus border bawah untuk header di sidebar */
     padding-bottom: 0 !important; /* Hapus padding bawah untuk header di sidebar */
-    margin-bottom: 0.5rem !important; /* Sesuaikan margin bawah */
+    margin-top: 1rem !important; /* Mengurangi margin atas header */
+    margin-bottom: 0.5rem !important; /* Mengurangi margin bawah header */
 }
 
-/* Khusus untuk subheader "Jelajahi Halaman Lain" */
+/* Khusus untuk subheader "Jelajahi Halaman Lain" dan "Bagaimana Kami Membantu Anda?" */
 [data-testid="stSidebar"] h3 {
     font-size: 1.3rem; /* Sedikit lebih kecil dari h3 utama */
     font-weight: 700;
-    margin-top: 1.5rem !important;
-    margin-bottom: 0.8rem !important;
+    margin-top: 1.5rem !important; /* Margin atas untuk memisahkan dari elemen sebelumnya */
+    margin-bottom: 0.8rem !important; /* Margin bawah untuk memisahkan dari konten di bawahnya */
     color: #1ABC9C !important; /* Warna hijau turquoise untuk judul navigasi */
 }
 
+/* Styling untuk judul utama sidebar "Nusantara Story AI" (yang dirender sebagai h1) */
+[data-testid="stSidebar"] h1 {
+    font-size: 2rem !important; /* Ukuran font lebih kecil untuk judul utama di sidebar */
+    font-weight: 700 !important;
+    color: #ECF0F1 !important; /* Warna off-white untuk judul utama sidebar */
+    margin-bottom: 0.5rem !important; /* Mengurangi margin bawah h1 */
+}
+
+/* Styling untuk garis pemisah (horizontal rule) di sidebar */
+[data-testid="stSidebar"] hr {
+    margin-top: 0.75rem !important; /* Mengurangi margin atas garis */
+    margin-bottom: 0.75rem !important; /* Mengurangi margin bawah garis */
+    border-top: 1px solid #555555; /* Warna dan ketebalan garis */
+}
 
 /* Styling untuk st.page_link yang kita buat secara kustom */
 .stSidebar [data-testid="stPageLink-wrapper"] {
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem; /* Mengurangi jarak antar link navigasi */
 }
 
 .stSidebar [data-testid="stPageLink-wrapper"] a {
