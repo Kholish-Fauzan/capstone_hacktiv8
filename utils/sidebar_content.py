@@ -1,29 +1,29 @@
 import streamlit as st
 
 def render_custom_sidebar_content():
-    st.markdown("---") # Garis pemisah sebelum navigasi kustom agar lebih terstruktur
-    st.subheader("Jelajahi Halaman Lain") # Menggunakan st.subheader agar bisa diatur stylenya di CSS
+    st.markdown("---")
+    st.subheader("Jelajahi Halaman Lain")
     st.page_link("app.py", label="Beranda Utama", icon="🏠")
     st.page_link("pages/2_Panduan & Tips.py", label="Panduan & Tips", icon="💡")
     st.page_link("pages/3_Contoh & Inspirasi.py", label="Contoh & Inspirasi", icon="✨")
     st.page_link("pages/4_Tentang Saya.py", label="Tentang Saya", icon="👤")
 
-    st.markdown("---") # Garis pemisah setelah navigasi kustom
+    st.markdown("---")
 
-    st.subheader("Bagaimana Kami Membantu Anda?") # UX Writing lebih langsung
+    st.subheader("Bagaimana Kami Membantu Anda?")
     st.markdown("""
-    Nusantara Story AI hadir untuk memberdayakan Anda dalam merangkai dan membagikan kekayaan narasi Indonesia.
+    Nusantara Story AI adalah teman setia Anda dalam **mengungkap dan membagikan pesona narasi Indonesia**. Kami memandu Anda melalui empat langkah mudah:
 
-    **1. Masukkan Detail Objek**: Berikan informasi kunci tentang objek budaya atau destinasi wisata Anda.
-    **2. Rangkai Kisah Otentik**: AI kami akan menyusun cerita yang indah dan menarik. ✨
-    **3. Analisis Potensi Promosi**: Dapatkan wawasan tentang strategi promosi & pengembangan ekonomi lokal. 📈
-    **4. Unduh & Bagikan**: Hasil narasi dan analisis siap Anda gunakan! 📊
+    * **1. Masukkan Detail Objek**: Mulai dengan memberikan informasi kunci tentang objek budaya atau destinasi wisata Anda. Semakin detail, semakin kaya hasilnya!
+    * **2. Rangkai Kisah Otentik**: Biarkan AI kami menyusun narasi yang indah, memukau, dan relevan dengan esensi cerita Anda. ✨
+    * **3. Analisis Potensi Promosi**: Dapatkan wawasan cerdas tentang strategi promosi yang efektif dan ide pengembangan ekonomi lokal yang inovatif. 📈
+    * **4. Unduh & Bagikan**: Kisah dan analisis Anda siap untuk disebarluaskan, menginspirasi, dan menarik perhatian dunia! 📊
     """)
 
     st.info("💡 **Tips Cepat:** Semakin detail input Anda, semakin berkualitas hasil narasi dan analisis dari AI! Ayo berikan informasi selengkapnya.")
 
 def render_sidebar_expander_content():
-    with st.expander("Tentang Aplikasi Ini"): # Ganti judul expander agar lebih spesifik
+    with st.expander("Tentang Aplikasi Ini"):
         st.markdown("""
         **Nusantara Story AI** adalah proyek inovatif yang memanfaatkan teknologi AI Gemini untuk **menggali dan mempromosikan kekayaan budaya serta potensi pariwisata Indonesia**.
 
