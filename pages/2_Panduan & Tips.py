@@ -1,6 +1,13 @@
-# pages/2_Panduan & Tips.py
 import streamlit as st
 from datetime import datetime
+from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_expander_content
+
+# --- Sidebar (Ditambahkan Kembali): Pastikan ini ada di setiap halaman ---
+with st.sidebar:
+    st.header("Nusantara Story AI")
+    render_custom_sidebar_content()
+    render_sidebar_expander_content()
+
 
 # Konten utama halaman ini (TETAP SAMA)
 st.title("Tips & Panduan: Maksimalkan AI Anda! 🚀")

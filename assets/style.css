@@ -3,6 +3,11 @@
 /* Import Google Fonts (optional, but good for consistent typography) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+/* Sembunyikan navigasi multi-halaman bawaan Streamlit */
+div[data-testid="stSidebarNav"] {
+    display: none;
+}
+
 /* General Body Styling & Font */
 html, body {
     font-family: 'Poppins', sans-serif;
@@ -239,47 +244,32 @@ div[data-testid="stSelectbox"] .st-emotion-cache-1gcsa8n .st-emotion-cache-1d37g
 
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3 {
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] h4 { /* Tambahkan h4 di sini agar warna header di sidebar konsisten */
     color: #ECF0F1 !important; /* Ensure headers also use light color */
 }
 
-/* Streamlit's default navigation list in sidebar */
-.st-emotion-cache-vk330y { /* This is the div containing the actual page list */
-    background-color: #2C3E50; /* Match sidebar background */
-    color: #ECF0F1; /* Text color for nav items */
-}
-
-/* Individual navigation items (pages) */
-.st-emotion-cache-1p5i3j { /* Specific selector for default sidebar nav list items */
-    background-color: transparent !important; /* Ensure no residual background */
-    color: #ECF0F1 !important; /* Text color */
+/* Styling untuk st.page_link yang kita buat secara kustom */
+.stSidebar [data-testid="stPageLink"] {
+    background-color: transparent !important;
+    color: #ECF0F1 !important; /* Warna teks untuk link */
     border-radius: 0.5rem;
     margin-bottom: 0.2rem;
     padding: 0.75rem 1rem;
     transition: background-color 0.2s ease, color 0.2s ease;
+    text-decoration: none; /* Hilangkan garis bawah default */
+    display: block; /* Agar menempati lebar penuh */
 }
 
-/* Navigation item hover state */
-.st-emotion-cache-1p5i3j:hover {
-    background-color: #34495E !important; /* Slightly lighter blue gray on hover */
-    color: #1ABC9C !important; /* Highlight text on hover */
+.stSidebar [data-testid="stPageLink"]:hover {
+    background-color: #34495E !important; /* Warna latar belakang saat hover */
+    color: #1ABC9C !important; /* Warna teks saat hover */
 }
 
-/* Selected navigation item state */
-.st-emotion-cache-1p5i3j.st-emotion-cache-1oe58v3 { /* Add the specific class for selected state */
-    background-color: #1ABC9C !important; /* Teal green for selected item */
-    color: white !important; /* White text for selected item */
+.stSidebar [data-testid="stPageLink"][data-selected="true"] {
+    background-color: #1ABC9C !important; /* Warna latar belakang saat terpilih */
+    color: white !important; /* Warna teks saat terpilih */
     font-weight: 600;
-}
-
-
-/* Streamlit's default "Navigasi" label or similar group labels in sidebar */
-[data-testid="stSidebar"] .st-emotion-cache-1pxaz8s {
-    color: #1ABC9C !important; /* Teal for "Navigasi" header */
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    margin-top: 1rem; /* Add some space above */
 }
 
 

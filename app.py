@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 import json
 import pandas as pd
@@ -48,6 +47,8 @@ st.markdown("---")
 st.header("Ceritakan Kekayaan Budaya/Wisata Lokal Anda ✍️")
 
 # Custom HTML/CSS for input fields to control spacing and help text
+# Perhatikan bahwa bagian <style> ini bisa dihapus jika styling sudah di style.css
+# Aku membiarkannya jika ada styling yang sangat spesifik hanya untuk app.py
 st.markdown("""
 <style>
     .stTextInput, .stSelectbox, .stTextArea {

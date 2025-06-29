@@ -1,6 +1,13 @@
-# pages/4_Tentang Saya.py
 import streamlit as st
 from datetime import datetime
+from utils.sidebar_content import render_custom_sidebar_content, render_sidebar_expander_content
+
+# --- Tambahkan kembali Sidebar ini ---
+with st.sidebar:
+    st.header("Nusantara Story AI")
+    render_custom_sidebar_content()
+    render_sidebar_expander_content()
+
 
 # Konten utama halaman ini (TETAP SAMA)
 st.title("Tentang Saya & Kontak 👋")
