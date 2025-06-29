@@ -5,10 +5,10 @@ def render_custom_sidebar_content():
     st.markdown("---") # Garis pemisah sebelum navigasi kustom
 
     st.markdown("#### Jelajahi Halaman Lain:") # Judul untuk bagian navigasi kustom
-    st.page_link("app.py", label="🏠 Beranda Utama", icon="🏠")
-    st.page_link("pages/2_Panduan & Tips.py", label="💡 Panduan & Tips", icon="💡")
-    st.page_link("pages/3_Contoh & Inspirasi.py", label="✨ Contoh & Inspirasi", icon="✨")
-    st.page_link("pages/4_Tentang Saya.py", label="👤 Tentang Saya", icon="👤")
+    st.page_link("app.py", label="Beranda Utama", icon="🏠")
+    st.page_link("pages/2_Panduan & Tips.py", label="Panduan & Tips", icon="💡")
+    st.page_link("pages/3_Contoh & Inspirasi.py", label="Contoh & Inspirasi", icon="✨")
+    st.page_link("pages/4_Tentang Saya.py", label="Tentang Saya", icon="👤")
 
     st.markdown("---") # Garis pemisah setelah navigasi kustom
 
