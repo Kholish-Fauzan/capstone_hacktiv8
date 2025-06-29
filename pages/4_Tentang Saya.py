@@ -31,9 +31,9 @@ Semoga aplikasi sederhana ini dapat memberikan manfaat nyata bagi pelestarian bu
 st.subheader("Mari Terhubung! 📧")
 st.write("Saya sangat antusias untuk mendengar *feedback*, ide, atau pertanyaan dari Anda. Jangan ragu untuk terhubung!")
 st.markdown("""
--   **Email:** [kholishfauzan.personal@gmail.com](mailto:kholishfauzan.personal@gmail.com) 📧
--   **LinkedIn:** [linkedin.com/in/kholish-fauzan](https://www.linkedin.com/in/kholish-fauzan) 🔗
--   **GitHub:** [github.com/KholishFauzan](https://github.com/KholishFauzan) 💻
+-   **Email:** [fauzanshobi@gmail.com](mailto:fauzanshobi@gmail.com) 📧
+-   **LinkedIn:** [LinkedIn - Kholish Fauzan](https://www.linkedin.com/in/ahmadkholishfauzan/) 🔗
+-   **GitHub:** [Github - Kholish Fauzan](https://github.com/Kholish-Fauzan) 💻
 """)
 
 st.markdown("---")

@@ -46,6 +46,7 @@ st.write("""
 - **Wisatawan Internasional:** Bromo sudah dikenal luas di dunia.
 """)
 
+st.markdown("---")
 
 st.subheader("Narasi & Analisis Promosi - Kopi Gayo, Aceh ☕")
 st.markdown("#### Kisah Kopi Gayo: Aroma Warisan Dataran Tinggi")
